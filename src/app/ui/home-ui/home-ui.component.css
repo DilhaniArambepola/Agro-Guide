@@ -1,0 +1,61 @@
+@import url('https://fonts.googleapis.com/css?family=Roboto');
+
+.container-large {
+    margin-top: 0;
+    width: 100%;
+    background-color: #F6F8FA;
+}
+.customNavtabs{
+    font-family: 'Roboto', sans-serif;
+    color: black;
+}
+.head{
+    border: solid 1px  rgb(71, 141, 69);
+    /* border-radius: 5px; */
+    background-image: url("../../../assets/images/bg.jpg");
+}
+h1{
+    /* color: rgb(71, 141, 69); */
+    font-weight: bold;
+    width: 100%;
+    text-align: center;
+    font-family: "Lucida Sans Unicode", "Lucida Grande", sans-serif;
+}
+.card {
+    vertical-align: middle;
+    background-color:rgb(7, 77, 36); 
+    border:1px solid black; 
+    margin-top:10px;
+    margin-right: 14px; 
+    width:15%; 
+    height: 20%;
+    border-radius: 5px;
+    padding-bottom: 0px;
+    padding-top: 10px;
+    padding-left: 0px;
+    padding-right: 0px;
+}
+.info {
+    color: #F6F8FA;
+    vertical-align: middle;
+    background-color:rgb(52, 122, 50); 
+    border:1px solid black; 
+    margin-top:10px;
+    margin-right: 5px; 
+    width:30%; 
+    height: 20%;
+    border-radius: 5px;
+    padding-bottom: 25px;
+    padding-top: 25px;
+    padding-left: 0px;
+    padding-right: 0px;
+}
+.img-card {
+    width:50%; 
+    height:70px; 
+    margin:auto auto;
+}
+.txt{
+    color:aliceblue; 
+    text-align:center;
+}

@@ -1,0 +1,10 @@
+@import url('https://fonts.googleapis.com/css?family=Roboto');
+
+.container-large {
+    width: 100%;
+    background-color: #F6F8FA;
+}
+.customNavtabs{
+    font-family: 'Roboto', sans-serif;
+    color: black;
+}

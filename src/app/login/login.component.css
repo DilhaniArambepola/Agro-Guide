@@ -1,0 +1,9 @@
+.background{
+    background-color: rgb(238, 145, 145);
+    border-radius: 3px;
+    border: #8A8888;
+    padding: 2px;
+    background-position: center;
+    padding: 2px;
+    margin-left: 15px;
+}

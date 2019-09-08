@@ -1,0 +1,76 @@
+<!-- <nav class="navbar navbar-dark fixed-top bg-dark mb-5"> -->
+<!-- <div class="col">
+    <a class="navbar-brand" href="/"></a>
+  </div> -->
+<div class="container container-large">
+  <div class="row head">
+    <h1 style="margin:auto auto;">Agro Guide</h1>
+  </div>
+  <div class="row" style="background-color:rgb(51, 49, 49); width: 100%">
+    <nav class="navbar navbar-light" style="padding:0px 20px;">
+      <a class="navbar-brand" style="color:aliceblue;" [routerLink]="['/home']">Home</a>
+      <a class="navbar-brand" style="color:aliceblue;"  [routerLink]="['/aboutus']">About Us</a>
+      <a class="navbar-brand logout" style="color:aliceblue;" (click)="logout()">Logout</a>
+      <div class="navbar-brand">
+        <a class="navbar-brand" style="color:aliceblue; float: right;" [routerLink]="['/admindashboard']">
+          Admindashboard
+        </a>
+    </div>
+    </nav>
+  </div>
+ 
+</div>
+<!--
+  <div class="container">
+    <div class="col">
+      <a class="navbar-brand" href="/"></a>
+    </div>
+    <div class="btn-group" role="group">
+      <div class="dropdown">
+        <select class="selectpicker btn btn-secondary">
+          <option class="dropdown-item" value="0">Location</option>
+          <option class="dropdown-item" *ngFor="let location of locations" [value]="location.Id">
+            {{ location.locationName }}
+          </option>
+        </select>
+      </div>
+      <div class="dropdown">
+    <div type="button" class="btn btn-secondary fa fa-user" dropdown-toggle ng-disabled="disabled">
+     <span class="caret"></span>
+    </div>
+    <ul class="dropdown-menu" role="menu">
+      <li><a href="#">Logout</a></li>
+    </ul>
+  </div>
+      <div class="nav-item dropdown">
+        <a class="nav-link" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          <i class="fa fa-user"></i>
+        </a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+          <a class="dropdown-item" href="#">Logout</a>
+        </div>
+      </div>
+    </div>
+  </div>-->
+<!-- <div class="btn-group" role="group" aria-label="Button group with nested dropdown">
+    <div class="btn-group" role="group">
+      <div id="btnGroupDrop1" type="" class="btn commonbuttons" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        Colombo <i class="fa fa-angle-down"></i>
+      </div>
+      <div class="dropdown-menu commonmenu" aria-labelledby="btnGroupDrop1">
+        <a class="dropdown-item commonmenu" href="http://localhost:4200/admin">Colombo <i class="fa fa-check"></i> </a>
+        <a class="dropdown-item commonmenu" href="http://localhost:4200/admin">London</a>
+      </div>
+    </div>
+  
+    <div class="btn-group" role="group">
+      <div id="btnGroupDrop1" type="" class="btn commonbuttons" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        <i class="fa fa-user-circle"></i>
+      </div>
+      <div class="dropdown-menu commonmenu" aria-labelledby="btnGroupDrop1">
+       <a class="dropdown-item commonmenu" href="#"> Logout </a>
+      </div>
+    </div>
+  </div>
+</nav>
+ -->

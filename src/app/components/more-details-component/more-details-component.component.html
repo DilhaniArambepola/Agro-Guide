@@ -1,0 +1,89 @@
+<button style="float: right;" (click)="redirect()">Back</button>
+
+<div class="row">
+    <div class="col-auto coltxt" style="margin: 20px;">
+        <h5>More details about {{crops.cropName}}</h5>
+    </div>
+    <div class="container coltxt">
+        <div class="row">
+            <label for="crop">
+                <b>Crop :- </b>
+            </label>
+            <label for="crop"> {{crops.cropName}}</label>
+        </div>
+
+        <div class="row">
+            <label for="zone">
+                <b>Zone :- </b>
+            </label>
+            <label for="crop"> {{arrayZone}}</label>
+        </div>
+
+        <div class="row">
+            <div class="col-auto" style="width: 70%">
+                <label for="description">
+                    <b>Description :- </b>
+                </label>
+                <label *ngIf="!editD" for="crop"> {{crops.details}}</label>
+                <form *ngIf="editD" #form="ngForm" (ngSubmit)="updateDetails(form.value, user)" class="change">
+                    <textarea placeholder="Enter description" name="details" [(ngModel)]="crops.details" ngModel rows="8" cols="100"></textarea>
+                    <!-- <input class="coltxt" [(ngModel)]="crops.details" type="text" name="details" ngModel style="width:5rem;"> -->
+                    <input type="text" name="cropID" ngModel="{{crops.cropID}}" style="display: none;">
+                    <button class="btn btn-primary submitBtn coltxt" type="submit">Save</button>
+                </form>
+            </div>
+            <div class="col-auto" style="width: 30%">
+                <button (click)="editDetail()">Update</button>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-auto" style="width: 70%">
+                <div class="row">
+                        <div class="col-auto">
+                                <label for="disease">
+                                    <b>Disease :- </b>
+                                </label>
+                            </div>
+                            <div class="col-auto">
+                                <label *ngIf="!editDis" for="crop"> {{crops.disease}}</label>
+                                <form *ngIf="editDis" #form="ngForm" (ngSubmit)="updateDisease(form.value, user)" class="change">
+                                    <input class="coltxt" [(ngModel)]="crops.disease" type="text" name="disease" ngModel style="width:5rem;">
+                                    <input type="text" name="cropID" ngModel="{{crops.cropID}}" style="display: none;">
+                                    <button class="btn btn-primary submitBtn coltxt" style="display: none;" type="submit">Save</button>
+                                </form>
+                            </div>
+                </div>
+                
+            </div>
+            <div class="col-auto" style="width: 30%">
+                <button (click)="editDisease()">Update</button>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-auto" style="width: 70%">
+                <label for="diseaseDes">
+                    <b>Disease description:- </b>
+                </label>
+                <label *ngIf="!editDes" for="crop"> {{crops.description}}</label>
+                <form *ngIf="editDes" #form="ngForm" (ngSubmit)="updateDescription(form.value, user)" class="change">
+                    <textarea placeholder="Enter description" name="description" [(ngModel)]="crops.description" ngModel rows="8" cols="100"></textarea>
+                    <!-- <input class="coltxt" [(ngModel)]="crops.description" type="text" name="description" ngModel style="width:5rem;"> -->
+                    <input type="text" name="cropID" ngModel="{{crops.cropID}}" style="display: none;">
+                    <button class="btn btn-primary submitBtn coltxt" type="submit">Save</button>
+                </form>
+            </div>
+            <div class="col-auto" style="width: 30%">
+                <button (click)="editDescription()">Update</button>
+            </div>
+
+        </div>
+        <button style="float: right;" (click)="updateCrop()">Save changes</button>
+
+
+
+
+    </div>
+
+</div>

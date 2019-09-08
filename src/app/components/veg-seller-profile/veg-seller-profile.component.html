@@ -1,0 +1,152 @@
+<div class="row">
+
+  <div class="col-auto" style="width: 100%">
+    <div class="row coltxt" style="float: right; margin-right: 5px; margin-top: 5px;">
+      <p>
+        <b>Hi {{userDetails[0].userName}}</b>
+      </p>
+    </div>
+    <br>
+    <div class="row coltxt">
+      <label for="details" style="margin-left: 17px;">
+        <b>Contact details</b>
+      </label>
+    </div>
+    <div class="row">
+      <p class="coltxt" style="margin-left: 17px;">Address: {{userDetails[0].AddressLine1}}, {{userDetails[0].AddressLine2}}, {{userDetails[0].AddressLine3}}</p>
+    </div>
+    <div class="row">
+      <div class="col-auto coltxt">
+        <label>Tel: </label>
+      </div>
+      <div class="col-auto">
+        <label *ngIf="!edit" class="coltxt change">{{userDetails[0].contact}}</label>
+        <form *ngIf="edit" #form="ngForm" (ngSubmit)="updateTel(form.value)" class="change">
+          <input class="coltxt" [(ngModel)]="userDetails[0].contact" type="text" name="contact" ngModel style="width: 8rem;">
+          <input type="text" name="sellerID" ngModel="{{userDetails[0].sellerID}}" style="display: none;">
+          <button class="btn btn-primary submitBtn coltxt" type="submit" style="display: none;">Save</button>
+        </form>
+      </div>
+      <div class="col-auto">
+        <button type="button" (click)="onEdit()" class="btn btn-primary remove coltxt manage" style="margin-left:5px;">Update</button>
+      </div>
+
+    </div>
+
+    <div class="row">
+      <div class="col-auto">
+        <div class="card mb-1" style="width: 100%">
+          <div class="card-header bg-transparent">
+            <div class="table">
+              <div class="row">
+                <div class="col-auto" style="width: 9rem; margin-left:0px; text-align:left;">
+                  <div class="subheading">Vegetable/Fruit</div>
+                </div>
+                <div class="col-auto" style="width: 6rem; text-align:left;">
+                  <div class="subheading">Quantity
+                    <br>(kg)</div>
+                </div>
+                <div class="col-auto" style="width: 6rem; text-align:right; padding-right:10px;">
+                  <div class="subheading">Price(1kg)
+                    <br>Rs.</div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div *ngFor="let user of userDetails; let i = index;">
+
+            <div class="bg-transparent" style="width: 100%; margin: 0px; padding-left:10px; padding-right:100px;">
+              <div class="row">
+
+
+                <div class="col-auto" style="width: 10rem; text-align:left; padding-left:10px;">
+                  <label class="coltxt">{{user.itemName}}</label>
+                </div>
+                <div class="col-auto" style="width: 6rem; text-align:left; padding-left:5px;">
+                  <label *ngIf="!user.editQuantity" class="coltxt">{{user.Quantity}}</label>
+                  <form *ngIf="user.editQuantity" #form="ngForm" (ngSubmit)="updateQuantity(form.value, user)" class="change">
+                    <input class="coltxt" [(ngModel)]="user.Quantity" type="text" name="Quantity" ngModel style="width:5rem;">
+                    <input type="text" name="sellingVegetableID" ngModel="{{user.sellingVegetableID}}" style="display: none;">
+                    <button class="btn btn-primary submitBtn coltxt" type="submit" style="display: none;">Save</button>
+                  </form>
+                </div>
+                <div class="col-auto" style="width: 6rem; text-align:left; padding-left:15px;">
+                  <label *ngIf="!user.editPrice" class="coltxt">{{user.price}}</label>
+                  <form *ngIf="user.editPrice" #form="ngForm" (ngSubmit)="updatePrice(form.value, user)" class="change">
+                    <input class="coltxt" [(ngModel)]="user.price" type="text" name="price" ngModel style="width:4rem;">
+                    <input type="text" name="sellingVegetableID" ngModel="{{user.sellingVegetableID}}" style="display: none;">
+                    <button class="btn btn-primary submitBtn coltxt" type="submit" style="display: none;">Save</button>
+                  </form>
+                </div>
+
+                <div class="btn-group" style="width: 5rem; text-align:right; padding-left:10px;">
+                  <div class="btn-group" ngbDropdown role="group">
+                    <button type="button" class="btn btn-sm btn-primary" ngbDropdownToggle>Edit
+                      <!-- <i class="material-icons">more_vert</i> -->
+                    </button>
+                    <div class="dropdown-menu" ngbDropdownMenu style="width: 5px; height:5px; margin-top: 0px; padding-top: 0px;">
+                      <!-- Delete question -->
+                      <button (click)="editQuantityVal(user)" class="dropdown-item">Change quantity</button>
+                      <!-- Update question -->
+                      <button (click)="editPriceVal(user)" class="dropdown-item">Change price</button>
+                    </div>
+                    <button (click)="deleteItem(user.sellingVegetableID, user.userID)" class="btn btn-sm btn-danger" style="background-color: red; width:100px;">Delete</button>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <button onclick="document.getElementById('id01').style.display='block'" style="width:200px;">Add a new vegetable item</button>
+
+      <div id="id01" class="modal coltxt">
+
+        <form #form="ngForm" (ngSubmit)="addSellingVegetable(form.value);" class="modal-content animate" enctype="multipart/form-data">
+          <div class="imgcontainer">
+            <span onclick="document.getElementById('id01').style.display='none'" class="close" title="Close Modal">&times;</span>
+            <h4>Add a new vegetable</h4>
+          </div>
+          <!-- <alert type="success">hello</alert> -->
+
+          <div class="container">
+            <div class="row" style="margin: 10px;">
+              <label for="vegetable">
+                <b>Vegetable/Fruit :- </b>
+              </label>
+              <input type="text" placeholder="Enter name of the vegetable" name="vegetable" ngModel required>
+            </div>
+
+            <div class="row" style="margin: 10px;">
+              <label for="quantity">
+                <b>Available Quantity (kg) :- </b>
+              </label>
+              <input type="text" name="quantity" ngModel required>
+            </div>
+
+            <div class="row" style="margin: 10px;">
+              <label for="price">
+                <b>Price(1kg) Rs. :- </b>
+              </label>
+              <input type="text" name="price" ngModel required>
+            </div>
+
+
+          </div>
+
+          <div class="container" style="background-color:#f1f1f1">
+            <button type="button" onclick="document.getElementById('id01').style.display='none'" class="cancelbtn">Cancel</button>
+            <input onclick="document.getElementById('id01').style.display='none'" class="btn btn-primary submitBtn coltxt" type="submit">
+            <!-- <button onclick="document.getElementById('id01').style.display='block'" style="width:80px;  padding: 10px 18px; margin-left: 4px;">Save</button> -->
+          </div>
+        </form>
+      </div>
+    </div>
+
+  </div>
+
+</div>

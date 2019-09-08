@@ -1,0 +1,69 @@
+<!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css"> -->
+
+<div class="container container-large">
+  <div class="row" style="width:100%; height:40%;">
+    <div class="col-auto" style="margin:0; padding:0; width:50%;">
+      <ngb-carousel #carousel style="width:100%; height:100%">
+        <ng-template ngbSlide class="carousel-item">
+          <img src="../../../assets/images/slider/home2.jpg" style="width:100%; height:100%" alt="Random first slide">
+          <div class="carousel-caption">
+            <h3>We Help Gardens Thrive</h3>
+          </div>
+        </ng-template>
+        <ng-template ngbSlide class="carousel-item">
+          <img src="../../../assets/images/slider/home5.jpg" style="width:100%; height:100%;" alt="Random second slide">
+          <div class="carousel-caption">
+            <h3>Organic Fruites & Vegetables</h3>
+          </div>
+        </ng-template>
+        <ng-template ngbSlide class="carousel-item">
+          <img src="../../../assets/images/slider/home3.jpg" style="width:100%; height:100%" alt="Random third slide">
+          <div class="carousel-caption">
+            <h3>Find The Perfect Plant</h3>
+          </div>
+        </ng-template>
+      </ngb-carousel>
+    </div>
+    <div class="col-auto">
+      <a href="/cultivate">Cultivate</a>
+      <a href="/organicFood">Organic food sellers</a>
+    </div><br>
+    <div class="col-auto">
+        <a [routerLink]="['/admindashboard']">
+          Admindashboard
+        </a>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-auto info">
+      <p style="text-align:center;">Login into your profile
+        <br> &
+        <br> get customized cultvate solution for you</p>
+    </div>
+    <div class="col-auto">
+      <img src="../../../assets/images/icons/pointer.png" style="width:100px; height:60px; margin:50px;">
+    </div>
+    <div class="col-auto card" style="margin-left:7px;">
+      <img src="../../../assets/images/icons/farmerIcon.png" class="img-card">
+      <a class="txt" [routerLink]="['/farmer-home']">Farmer Profile
+        <br>
+        <span style="font-size:12px;">Organic Fruits & Vegetables</span>
+      </a>
+    </div>
+    <div class="col-auto card">
+      <img src="../../../assets/images/icons/tSeller.jpg" class="img-card">
+      <a class="txt" [routerLink]="['/veg-seller-home']">Seller Profile
+        <br>
+        <span style="font-size:12px;">Organic Fruits & Vegetables</span>
+      </a>
+    </div>
+    <div class="col-auto card">
+      <img src="../../../assets/images/icons/seedSeller.jpg" class="img-card">
+      <a class="txt" [routerLink]="['/seed-seller-home']">Seed Seller Profile
+        <br>
+        <span style="font-size:12px;">Seeds & Plants</span>
+      </a>
+    </div>
+  </div>
+
+</div>

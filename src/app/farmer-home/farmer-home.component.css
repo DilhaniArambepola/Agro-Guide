@@ -1,0 +1,11 @@
+@import url('https://fonts.googleapis.com/css?family=Roboto');
+
+.head{
+    border: solid 1px  rgb(71, 141, 69);
+    /* border-radius: 5px; */
+    background-image: url("../../assets/images/bg.jpg");
+}
+.container-large {
+    width: 100%;
+    background-color: #F6F8FA;
+}
