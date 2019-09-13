@@ -1,3 +1,122 @@
-<p>
-  farmer-home-component works!
-</p>
+<div class="row" style="margin: 0px;">
+
+  <div class="col-auto" style="width: 100%">
+    <div class="row coltxt" style="float: right; margin-right: 5px;">
+      <p>
+        <b>Hi {{userDetails[0].userName}}</b>
+      </p>
+    </div>
+  </div>
+
+  <div class="col-auto">
+    <div class="row coltxt">
+      <p>Here we provide a list of suitable crops according to your climate zone. We decide your climate zone according to the
+        district {{userDetails[0].districtName}} you provided when you registered.</p>
+      <p>Click on a crop name which you want to plant</p>
+    </div>
+    <div class="row coltxt">
+      <div class="col-auto" style="width: 18%;">
+        <label>
+          <b>Crops</b>
+        </label>
+        <div *ngFor="let crop of cropDetails; let i = index;">
+          <button (click)="selectCrop(crop.cropName)">{{crop.cropName}}</button>
+        </div>
+      </div>
+
+      <div class="col-auto" style="width: 20%;">
+        <label>
+          <b>Selected Crops</b>
+        </label>
+        <div *ngFor="let c of selectedCrops; let i = index;">
+          <label>
+            <button data-toggle="tooltip" title="More details" (click)="showDetails(c.crop)">{{c.crop}}</button>
+          </label>
+          <button class="remove" (click)="removeItem(c.crop)" onclick="document.getElementById('id01').style.display='block'">x</button>
+
+          <div id="id01" class="modal coltxt">
+
+            <div class="container modal-content animate" style="background-color:#f1f1f1">
+              <div class="imgcontainer">
+                <span onclick="document.getElementById('id01').style.display='none'" class="close" title="Close form">&times;</span>
+              </div>
+              <p class="coltxt">Are you sure you want to remove {{c.crop}} from your selected crops list?</p>
+              <div class="row">
+                <div class="col-auto">
+                  <button type="button" onclick="document.getElementById('id01').style.display='none'" class="cancelbtn">No</button>
+                </div>
+                <div class="col-auto">
+                  <button type="button" (click)="removeConfirmed(c.crop)">Yes</button>
+                </div>
+              </div>
+
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-auto" style="width: 62%;">
+        <div class="row">
+          <button style="width: 200px;" (click)="seedShops()">Check nearby seed shops</button>
+
+
+          
+        </div>
+        <div class="row">
+          <div *ngIf="show" class="col-auto container1">
+              <div class="row">
+                  <div class="col-auto">
+                    <label>
+                      <b>{{moreDetails.cropName}} cutivation</b>
+                    </label>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-auto">
+                    <div class="row">
+                      <label style="margin-left: 10px;">
+                        <b>Soil preparation</b>
+                      </label>
+                    </div>
+                    <label>{{moreDetails.step1}}</label>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-auto">
+                    <div class="row">
+                      <label style="margin: 10px;">
+                        <b>Planting</b>
+                      </label>
+                    </div>
+                    <label>{{moreDetails.step2}}</label>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-auto">
+                    <div class="row">
+                      <label style="margin: 10px;">
+                        <b>Watering</b>
+                      </label>
+                    </div>
+                    <label>{{moreDetails.step3}}</label>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-auto">
+                    <div class="row">
+                      <label style="margin: 10px;">
+                        <b>Harvesting</b>
+                      </label>
+                    </div>
+                    <label>{{moreDetails.step4}}</label>
+                  </div>
+                </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+
+</div>

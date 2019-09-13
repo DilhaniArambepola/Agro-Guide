@@ -6,6 +6,7 @@ const bodyParser = require('body-parser');
 const path = require('path');
 const http = require('http');
 const mysql = require('mysql');
+const nodemailer = require('nodemailer');
 // var session = require('express-session');
 // const cookieParser = require('cookie-parser');
 

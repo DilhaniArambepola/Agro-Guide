@@ -76,9 +76,9 @@ h5 {
   font-weight: bold;
 }
 
-.close:focus {
+.close:hover {
   color: red;
-  cursor: pointer;
+  cursor: context-menu;
 }
 
 /* Add Zoom Animation */

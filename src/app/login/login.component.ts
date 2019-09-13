@@ -94,7 +94,7 @@ export class LoginComponent implements OnInit {
       .subscribe(
         data => {
           this.user = data;
-          console.log('result: ' + this.user.code);
+          console.log('result: login component' + this.user.code);
           console.log('user: ' + this.user.loggedIn.userID);
           if (this.user.code == 200) {
             console.log("success:" + this.user.success);

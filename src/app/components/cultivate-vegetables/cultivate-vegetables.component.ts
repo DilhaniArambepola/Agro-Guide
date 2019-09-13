@@ -4,6 +4,7 @@ import { FormsModule, FormControl, NgForm } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
 import { Http, Headers, RequestOptions } from '@angular/http';
 import { Observable } from 'rxjs';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-cultivate-vegetables',
@@ -21,20 +22,33 @@ export class CultivateVegetablesComponent implements OnInit {
   districts: any;
   zones: any;
   crops: any[];
+  showBtn = false;
 
   mapZone = new Map();
+  mapSeeds = new Map();
 
   crop: Array<string> = [];
   arrayZone: Array<any> = [];
+  arraySeeds: Array<any> = [];
+
   zoneList: Array<any> = [];
   errorMsg: string;
 
-  constructor(private http: HttpClient,
+  constructor(private activatedRoute: ActivatedRoute, private router: Router,
+    private http: HttpClient,
     private _cropsService: CropsService,
     private _locationService: LocationsService,
     private _seedsService: SeedsService) { }
 
   ngOnInit() {
+
+    this.activatedRoute.queryParams.subscribe(params => {
+      const userId = params['userID'];
+      if(userId > 0){
+        this.showBtn = true;
+      }
+    });
+
     this.getCrops();
     this.getZones();
     this.getDistricts();
@@ -106,16 +120,20 @@ export class CultivateVegetablesComponent implements OnInit {
   }
 
   getSeedShops() {
+    console.log("Seedshops: ");
     this._seedsService.getSeedSellers()
       .subscribe(resData => {
         this.seedShops = resData;
+        this.mapSeeds.set(this.seedShops[0].districtName, this.seedShops[0]);
+        console.log("seeds : " + this.seedShops[0].districtName);
       },
         resError => this.errorMsg = resError);
   }
 
   // get list of questions according to the label entered
   labelZone(zone: any) {
-    if (zone !== 0) {
+    if (zone != 0) {
+      console.log("zone val1 : " + zone);
       this._cropsService.getZoneCrops(zone)
         .subscribe(resNewSellers => {
           this.crops = resNewSellers;
@@ -127,6 +145,7 @@ export class CultivateVegetablesComponent implements OnInit {
         );
 
     } if (zone == 0) {
+      console.log("zone val2 : " + zone);
       this.getCrops();
     }
   }
@@ -147,6 +166,7 @@ export class CultivateVegetablesComponent implements OnInit {
   }
 
   getPlnats(userID: number) {
+    console.log("call plants : " + userID);
     this._seedsService.getPlants(userID)
       .subscribe(resData => {
         this.plants = resData;
@@ -156,7 +176,6 @@ export class CultivateVegetablesComponent implements OnInit {
 
   getSeeds(userID: number) {
     console.log("user : " + userID);
-    this.getPlnats(userID);
     this._seedsService.getSeeds(userID)
       .subscribe(resData => {
         this.seeds = resData;
@@ -164,16 +183,24 @@ export class CultivateVegetablesComponent implements OnInit {
         resError => this.errorMsg = resError);
   }
 
+  getSeedDetails(user: number) {
+    this.getSeeds(user);
+    this.getPlnats(user);
+  }
+
   getDetails(cropID: any) {
+    console.log("crop: " + cropID);
     this._cropsService.getCropDetails(cropID)
       .subscribe(resData => {
         this.cropDetails = resData;
+        console.log("cropDetails : " + this.cropDetails[0].details);
       },
         resError => this.errorMsg = resError);
   }
 
   labelDistrict(district: any) {
-    if (district !== 0) {
+    if (district != 0) {
+      console.log("d1 " + district);
       this._seedsService.getDistrictSeedSellers(district)
         .subscribe(resData => {
           this.seedShops = resData;
@@ -181,6 +208,7 @@ export class CultivateVegetablesComponent implements OnInit {
           resError => this.errorMsg = resError);
 
     } else if (district == 0) {
+      console.log("d2 " + district);
       this.getSeedShops();
     }
   }
@@ -188,6 +216,14 @@ export class CultivateVegetablesComponent implements OnInit {
   getSelectedLabelDistrict(selected_district: any) {
     this.choose_district = selected_district;
     this.labelDistrict(this.choose_district);
+  }
+
+  redirect() {
+    this.activatedRoute.queryParams.subscribe(params => {
+      const redirectFrom = params['redirectFrom'];
+      const userId = params['userID'];
+      this.router.navigate([redirectFrom],  {queryParams: { userID: userId }});
+    });
   }
 
 }

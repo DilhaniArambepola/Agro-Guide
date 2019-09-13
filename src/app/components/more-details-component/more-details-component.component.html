@@ -2,14 +2,14 @@
 
 <div class="row">
     <div class="col-auto coltxt" style="margin: 20px;">
-        <h5>More details about {{crops.cropName}}</h5>
+        <h5>More details about {{crops[0].cropName}}</h5>
     </div>
     <div class="container coltxt">
         <div class="row">
             <label for="crop">
                 <b>Crop :- </b>
             </label>
-            <label for="crop"> {{crops.cropName}}</label>
+            <label for="crop"> {{crops[0].cropName}}</label>
         </div>
 
         <div class="row">
@@ -24,11 +24,11 @@
                 <label for="description">
                     <b>Description :- </b>
                 </label>
-                <label *ngIf="!editD" for="crop"> {{crops.details}}</label>
+                <label *ngIf="!editD" for="crop"> {{crops[0].details}}</label>
                 <form *ngIf="editD" #form="ngForm" (ngSubmit)="updateDetails(form.value, user)" class="change">
-                    <textarea placeholder="Enter description" name="details" [(ngModel)]="crops.details" ngModel rows="8" cols="100"></textarea>
+                    <textarea placeholder="Enter description" name="details" [(ngModel)]="crops[0].details" ngModel rows="8" cols="100"></textarea>
                     <!-- <input class="coltxt" [(ngModel)]="crops.details" type="text" name="details" ngModel style="width:5rem;"> -->
-                    <input type="text" name="cropID" ngModel="{{crops.cropID}}" style="display: none;">
+                    <input type="text" name="cropID" ngModel="{{crops[0].cropID}}" style="display: none;">
                     <button class="btn btn-primary submitBtn coltxt" type="submit">Save</button>
                 </form>
             </div>
@@ -46,10 +46,10 @@
                                 </label>
                             </div>
                             <div class="col-auto">
-                                <label *ngIf="!editDis" for="crop"> {{crops.disease}}</label>
+                                <label *ngIf="!editDis" for="crop"> {{crops[0].disease}}</label>
                                 <form *ngIf="editDis" #form="ngForm" (ngSubmit)="updateDisease(form.value, user)" class="change">
-                                    <input class="coltxt" [(ngModel)]="crops.disease" type="text" name="disease" ngModel style="width:5rem;">
-                                    <input type="text" name="cropID" ngModel="{{crops.cropID}}" style="display: none;">
+                                    <input class="coltxt" [(ngModel)]="crops[0].disease" type="text" name="disease" ngModel style="width:5rem;">
+                                    <input type="text" name="cropID" ngModel="{{crops[0].cropID}}" style="display: none;">
                                     <button class="btn btn-primary submitBtn coltxt" style="display: none;" type="submit">Save</button>
                                 </form>
                             </div>
@@ -66,11 +66,11 @@
                 <label for="diseaseDes">
                     <b>Disease description:- </b>
                 </label>
-                <label *ngIf="!editDes" for="crop"> {{crops.description}}</label>
+                <label *ngIf="!editDes" for="crop"> {{crops[0].description}}</label>
                 <form *ngIf="editDes" #form="ngForm" (ngSubmit)="updateDescription(form.value, user)" class="change">
-                    <textarea placeholder="Enter description" name="description" [(ngModel)]="crops.description" ngModel rows="8" cols="100"></textarea>
+                    <textarea placeholder="Enter description" name="description" [(ngModel)]="crops[0].description" ngModel rows="8" cols="100"></textarea>
                     <!-- <input class="coltxt" [(ngModel)]="crops.description" type="text" name="description" ngModel style="width:5rem;"> -->
-                    <input type="text" name="cropID" ngModel="{{crops.cropID}}" style="display: none;">
+                    <input type="text" name="cropID" ngModel="{{crops[0].cropID}}" style="display: none;">
                     <button class="btn btn-primary submitBtn coltxt" type="submit">Save</button>
                 </form>
             </div>

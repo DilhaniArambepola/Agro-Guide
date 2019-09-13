@@ -90,10 +90,9 @@ button:hover {
   font-weight: bold;
 }
 
-.close:hover,
-.close:focus {
+.close:hover {
   color: red;
-  cursor: pointer;
+  cursor: context-menu;
 }
 
 /* Add Zoom Animation */

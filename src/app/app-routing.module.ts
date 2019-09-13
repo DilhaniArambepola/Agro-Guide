@@ -30,7 +30,6 @@ const routes: Routes = [
   { path: '', component: HomeComponent },
   { path: 'login', component: LoginComponent },
   { path: 'register', component: RegisterComponent },
-  // { path: 'veg-seller-home', component: VegSellerComponent, canActivate: [AuthGuard] },
   { path: 'veg-seller-home', component: VegSellerComponent, canActivate: [RoleGuardsService], data: {role: 'Food seller'}  },
   { path: 'seed-seller-home', component: SeedSellerComponent, canActivate: [RoleGuardsService], data: {role: 'Seed seller'}  },
 

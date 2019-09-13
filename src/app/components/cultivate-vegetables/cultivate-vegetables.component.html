@@ -86,6 +86,9 @@
 
   <div class="col-auto" style="width:50%;">
     <div class="row">
+        <button *ngIf="showBtn" style="float: right; width: 200px;" (click)="redirect()">Back to profile</button>
+    </div>
+    <div class="row">
       <h5>Places to buy seeds and plants</h5>
     </div>
     <!-- <div class="row">
@@ -110,14 +113,14 @@
             <div class="col-auto">
               <p class="coltxt">Select Seed</p>
             </div>
-            <div class="col-auto">
+            <!-- <div class="col-auto">
               <select class="dropdown coltxt" (change)="getSelectedLabelDistrict($event.target.value)">
                 <option value="0">All</option>
                 <option *ngFor="let d of districts" value={{d.districtName}}>
                   {{d.districtName}}
                 </option>
               </select>
-            </div>
+            </div> -->
           </div>
 
         <div class="row">
@@ -139,7 +142,7 @@
                     <label class="coltxt" style="width: auto; text-align:left; padding-left:10px;">{{shop.AddressLine1}}</label>
                     <label class="coltxt" style="width: auto; text-align:left; padding-left:10px;">{{shop.AddressLine2}}</label>
                     <label class="coltxt" style="width: auto; text-align:left; padding-left:10px;">{{shop.AddressLine3}}</label>
-                    <button onclick="document.getElementById('id02').style.display='block'" style="width:100px; float: right;" (click)="getSeeds(shop.userID)">More...</button>
+                    <button onclick="document.getElementById('id02').style.display='block'" style="width:100px; float: right;" (click)="getSeedDetails(shop.userID)">More...</button>
                     <div id="id02" class="modal coltxt">
 
                       <form #form="ngForm" class="modal-content animate">

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { OrganicSellerService, UserService } from '../../services';
-import { Router, ActivatedRoute, Data } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { NgForm } from '@angular/forms';
 import { ViewChild } from '@angular/core';
 
@@ -50,10 +50,6 @@ export class VegSellerProfileComponent implements OnInit {
       this.userDetails = resData;
       this.sellerID = this.userDetails[0].sellerID;
       this.userId = this.userDetails[0].userID;
-      console.log("sellerID : " + this.sellerID );
-      console.log("contact : " + this.userDetails[0].contact );
-      console.log("sellerID : " + this.userDetails[0].AddressLine2 );
-      console.log("sellerID : " + this.sellerID );
     },
       resError => this.errorMsg = resError);
   }

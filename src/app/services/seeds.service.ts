@@ -20,12 +20,14 @@ export class SeedsService {
 
   // Get seed shops
   getSeedSellers(): Observable<any> {
+    console.log("came this");
    return this._http.get(this._url)
      .map((response: Response) => response.json())
      .catch((error: any) => Observable.throw(error.json().error || 'Server error'));
  }
 
  getDistrictSeedSellers(district: any): Observable<any> {
+   console.log(" serivice : " + district);
   return this._http.get(`${this._URL}/${district}`)
     .map((response: Response) => response.json())
     .catch((error: any) => Observable.throw(error.json().error || 'Server error'));

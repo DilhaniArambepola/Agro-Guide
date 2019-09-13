@@ -5,3 +5,4 @@ export * from './locations.service';
 export * from './organic-seller.service';
 export * from './seeds.service';
 export * from './user.service';
+export * from './farmer.service';

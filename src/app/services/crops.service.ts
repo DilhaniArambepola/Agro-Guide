@@ -25,7 +25,6 @@ export class CropsService {
   }
 
   getZoneCrops(zone: any): Observable<any> {
-    console.log("call the zone service");
     return this._http.get(`${this.URL}/${zone}`)
       .map((response: Response) => response.json())
       .catch((error: any) => Observable.throw(error.json().error || 'Server error'));
@@ -44,7 +43,6 @@ export class CropsService {
 
   // Delete a question
   removeCrop(cropName: any): Observable<any> {
-    console.log("crop: " + cropName);
     return this._http.delete(`${this._url}/${cropName}`) // ...using put request
       .map((res: Response) => res.json()) // ...and calling .json() on the response to return data
       .catch((error: any) => Observable.throw(error.json().error || 'Server error')); // ...errors if any
@@ -52,7 +50,6 @@ export class CropsService {
 
   //   Update ceops
   updateCropDetails(body: any): Observable<any[]> {
-    console.log("came to service  "+body[0].cropID);
     // const bodyString = JSON.stringify(body); // Stringify payload
     const headers = new Headers({ 'Content-Type': 'application/json' }); // ... Set content type to JSON
     const options = new RequestOptions({ headers: headers, body: body }); // Create a request option

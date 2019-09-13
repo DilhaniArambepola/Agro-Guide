@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const jwt = require('jsonwebtoken');
+const nodemailer = require('nodemailer');
 // const mysql = require('mysql');
 // var path = require('path');
 // var multer = require('multer');
@@ -39,6 +40,7 @@ router.get('/selectedCrop/:zone', function (req, res) {
     let sql = 'SELECT * FROM crops c INNER JOIN diseases d ON c.cropName = d.cropName INNER JOIN crops_has_zones z ON c.cropName = z.cropName where z.' + zone + '=1';
     db.query(sql, (err, result) => {
         if (err) throw err;
+        
         res.send(result);
     });
 });
@@ -57,20 +59,20 @@ router.delete('/crops/:cropName', function (req, res) {
             val = results[0].num2;
         }
     }),
-    db.query(sql, function (error, results, fields) {
-        if (error) {
-            res.send("Error deleting crops");
-        } else {
-            if (results[0].number > 0) {
-                let sql1 = "DELETE from diseases where cropName='" + req.params.cropName + "'";
-                db.query(sql1, function (error, results, fields) {
-                    if (error) {
-                        res.send("Error deleting crops");
-                    } else {
-                      //  consoel.log("diseases deleted");
-                    }
-                });
-            } if (val > 0) {
+        db.query(sql, function (error, results, fields) {
+            if (error) {
+                res.send("Error deleting crops");
+            } else {
+                if (results[0].number > 0) {
+                    let sql1 = "DELETE from diseases where cropName='" + req.params.cropName + "'";
+                    db.query(sql1, function (error, results, fields) {
+                        if (error) {
+                            res.send("Error deleting crops");
+                        } else {
+                            //  consoel.log("diseases deleted");
+                        }
+                    });
+                } if (val > 0) {
                     let sql1 = "DELETE from crops_has_zones where cropName='" + req.params.cropName + "'";
                     db.query(sql1, function (error, results, fields) {
                         if (error) {
@@ -79,18 +81,18 @@ router.delete('/crops/:cropName', function (req, res) {
                             console.log("diseases deleted");
                         }
                     });
-            
-            let sql2 = "DELETE from crops where cropName='" + req.params.cropName + "'";
-            db.query(sql2, function (error, results, fields) {
-                if (error) {
-                    res.send("Error deleting crops");
-                } else {
-                    res.send(results);
+
+                    let sql2 = "DELETE from crops where cropName='" + req.params.cropName + "'";
+                    db.query(sql2, function (error, results, fields) {
+                        if (error) {
+                            res.send("Error deleting crops");
+                        } else {
+                            res.send(results);
+                        }
+                    })
                 }
-            })
-        }
-    }
-    });
+            }
+        });
 });
 
 // const Storage = multer.diskStorage({
@@ -203,6 +205,16 @@ router.get('/cutivate/:cropID', function (req, res) {
     db.query(sql, [req.params.cropID], (err, result) => {
         if (err) throw err;
         console.log("result: " + result[0].cropName);
+        res.send(result);
+    });
+});
+
+router.get('/getCropDetails/:cropName', function (req, res) {
+    console.log("call this with: " + req.params.cropName);
+    let sql = "SELECT * FROM crops c INNER JOIN diseases d ON c.cropName = d.cropName WHERE c.cropName='"+[req.params.cropName]+"'";
+    db.query(sql, (err, result) => {
+        if (err) throw err;
+        console.log("result: " + result[0].step1);
         res.send(result[0]);
     });
 });
@@ -216,7 +228,8 @@ router.get('/district', function (req, res) {
 });
 
 router.get('/seedShops', function (req, res) {
-    let sql = "SELECT * FROM seedShop ss INNER JOIN users u on ss.userID = u.userID INNER JOIN seeds s on ss.shopID = s.shopID where u.userRole='Seedseller'";
+    let sql = "SELECT * FROM seedShop ss INNER JOIN users u on ss.userID = u.userID where u.userRole='Seed seller'";
+    // let sql = "SELECT * FROM seedShop ss INNER JOIN users u on ss.userID = u.userID INNER JOIN seeds s on ss.shopID = s.shopID where u.userRole='Seed seller'";
     db.query(sql, (err, result) => {
         if (err) throw err;
         res.send(result);
@@ -227,22 +240,24 @@ router.post('/seedShops', function (req, res) {
     console.log("details : " + req.body[0].item);
     console.log("details : " + req.body[0].quantity);
     let sql = 'INSERT INTO seeds(seedName, shopID, quantity, price, seedPlant) VALUES(?,?,?,?,?);';
-    db.query(sql,[req.body[0].item, req.body[0].shop, req.body[0].quantity, req.body[0].price, req.body[0].seedPlant], (err, result) => {
+    db.query(sql, [req.body[0].item, req.body[0].shop, req.body[0].quantity, req.body[0].price, req.body[0].seedPlant], (err, result) => {
         if (err) throw err;
         res.send(result);
     });
 });
 
 router.get('/districtSeedShops/:district', function (req, res) {
-    let sql = "SELECT * FROM seedShop ss INNER JOIN users u on ss.userID = u.userID INNER JOIN seeds s on ss.shopID = s.shopID where u.userRole='Seedseller' AND u.districtName=?";
-    db.query(sql, [req.params.district], (err, result) => {
+    let sql = "SELECT * FROM seedShop ss INNER JOIN users u on ss.userID = u.userID where u.userRole='Seed seller' AND u.districtName='"+[req.params.district]+"'";
+    // let sql = "SELECT * FROM seedShop ss INNER JOIN users u on ss.userID = u.userID INNER JOIN seeds s on ss.shopID = s.shopID where u.userRole='Seed seller' AND u.districtName='"+[req.params.district]+"'";
+    db.query(sql, (err, result) => {
         if (err) throw err;
+        console.log(result);
         res.send(result);
     });
 });
 
 router.get('/seeds/:userId', function (req, res) {
-    let sql = "SELECT * FROM seeds s INNER JOIN seedshop ss where s.seedPlant='seed' AND ss.userID=?";
+    let sql = "SELECT * FROM seeds s INNER JOIN seedshop ss ON s.shopID=ss.shopID where s.seedPlant='seed' AND ss.userID=?";
     db.query(sql, [req.params.userId], (err, result) => {
         if (err) throw err;
         res.send(result);
@@ -284,7 +299,7 @@ router.put('/seedShops/:price/:seedID', function (req, res) {
 
 
 router.get('/plants/:userId', function (req, res) {
-    let sql = "SELECT * FROM seeds s INNER JOIN seedshop ss where s.seedPlant='plant' AND ss.userID=?";
+    let sql = "SELECT * FROM seeds s INNER JOIN seedshop ss ON s.shopID=ss.shopID where s.seedPlant='plant' AND ss.userID=?";
     db.query(sql, [req.params.userId], (err, result) => {
         if (err) throw err;
         res.send(result);
@@ -322,7 +337,7 @@ router.post('/sellerDetails', function (req, res) {
     console.log("details : " + req.body[0].item);
     console.log("details : " + req.body[0].seller);
     let sql = 'INSERT INTO sellingvegetable(itemName, Quantity, price, sellerID) VALUES(?,?,?,?);';
-    db.query(sql,[req.body[0].item, req.body[0].quantity, req.body[0].price, req.body[0].seller], (err, result) => {
+    db.query(sql, [req.body[0].item, req.body[0].quantity, req.body[0].price, req.body[0].seller], (err, result) => {
         if (err) throw err;
         res.send(result);
     });
@@ -376,6 +391,75 @@ router.put('/organicSellers/:price/:vegID', function (req, res) {
         res.send(result);
     });
 });
+
+router.get('/userDetails/:userID', function (req, res) {
+    console.log("userID : " + req.params.userID);
+    let sql = "SELECT * FROM users where userID = ?";
+    db.query(sql, [req.params.userID], (err, result) => {
+        if (err) throw err;
+        console.log("User : " + result[0].userName);
+        res.send(result);
+    });
+});
+
+router.get('/cropDetails/:district', function (req, res) {
+    console.log("d : " + req.params.district);
+    let sql = "SELECT * FROM zone_has_district where districtName = '" + [req.params.district] + "'";
+    db.query(sql, (err, result) => {
+        if (err) throw err;
+        console.log("Zone : " + result[0].zoneID);
+        var zone;
+
+        if (result[0].zoneID == 1) {
+            zone = 'DryZone'
+        } else if (result[0].zoneID == 2) {
+            zone = 'Intermediate'
+        } else if (result[0].zoneID == 3) {
+            zone = 'LowCountryWet'
+        } else if (result[0].zoneID == 4) {
+            zone = 'UpCountryWet'
+        }
+
+        let sql = "SELECT * FROM crops c INNER JOIN crops_has_zones z on c.cropName = z.cropName where " + zone + " = 1 AND NOT EXISTS(SELECT * FROM farmergardening f WHERE f.crop = c.cropName)"
+        //SELECT * FROM employees WHERE NOT EXISTS (SELECT * FROM eotm_dyn WHERE eotm_dyn.name = employees.name)
+        db.query(sql, zone, (err, result) => {
+            if (err) throw err;
+            // console.log("final : " + result);
+            // console.log("getZone Name : " + result[0].cropName);
+            res.send(result);
+        });
+    });
+});
+
+router.post('/cropDetails', function (req, res) {
+    console.log("details : " + req.body[0].cropName);
+    console.log("details : " + req.body[0].userID);
+    let sql = 'INSERT INTO farmergardening(user, crop) VALUES(?,?);';
+    db.query(sql, [req.body[0].userID, req.body[0].cropName], (err, result) => {
+        if (err) throw err;
+        res.send(result);
+    });
+});
+
+router.get('/selectedCropDetails/:userID', function (req, res) {
+    console.log("userID : " + req.params.userID);
+    let sql = "SELECT * FROM farmergardening where user = ?";
+    db.query(sql, [req.params.userID], (err, result) => {
+        if (err) throw err;
+      //  console.log("SelectedCrop here : " + result[0].crop);
+        res.send(result);
+    });
+});
+
+router.delete('/selectedCropDetails/:cropName', function (req, res) {
+    let sql = 'DELETE from farmergardening where crop=?';
+    db.query(sql, [req.params.cropName], (err, result) => {
+        if (err) throw err;
+        console.log("deleted crop");
+        res.send(result);
+    });
+});
+
 
 router.put('/register/:contact/:sellerID', function (req, res) {
     db.query('UPDATE `organicfoodseller` SET `contact`=? where `sellerID`=?', [req.params.contact, req.params.sellerID], function (err, result, fields) {
@@ -532,6 +616,55 @@ router.post('/logout', function (req, res) {
     }
     res.json({ 'success': true, "message": "user logout successfully" });
 });
+
+router.get('/selectedEmails/:cropName', function (req, res) {
+    let sql = "SELECT email FROM farmergardening f INNER JOIN users u ON f.user = u.userID where crop = '"+[req.params.cropName]+"'";
+    db.query(sql, (err, result) => {
+        if (err) throw err;
+        res.send(result);
+    });
+});
+
+router.post('/sendMail', function (req, res) {
+    console.log("mail request came");
+    let user = req.body;
+console.log("email: " + user.email);
+    sendMail(user, info => {
+        console.log('The mail has been send and the id is');
+        res.send(info)
+    });
+});
+
+async function sendMail(user, callback) {
+    let transporter = nodemailer.createTransport({
+        host: "smtp.gmail.com",
+        port: 587,
+        secure: false,
+        auth: {
+            user: 'nimdilhani21@gmail.com',
+            pass: '72snmndk@K'
+        }
+    });
+
+    // let mailOptions = {
+    //     from: "nimdilhani21@gmail.com",
+    //     to: user.email,
+    //     subject: "Welcome to fun of Heuristics",
+    //     html: '<h1>Hi </h1><hr><h4>Thanks for joining us</h4>'
+    // };
+
+    let mailOptions = {
+        from: "nimdilhani21@gmail.com",
+        to: user.email,
+        subject: user.subject,
+        html: '<h1>Hi </h1><br>' + user.body
+    };
+
+    let info = await transporter.sendMail(mailOptions);
+
+    callback(info);
+
+}
 
 
 module.exports = router;

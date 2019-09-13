@@ -3,9 +3,9 @@ import { CommonModule } from '@angular/common';
 import { CropsComponent } from './crops/crops.component';
 import { AdminManageCropsComponent } from './admin-manage-crops/admin-manage-crops.component';
 import { CropDiseaseComponent } from './crop-disease/crop-disease.component';
-import {FormsModule, ReactiveFormsModule} from '@angular/forms';
+import { FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { RouterModule } from '@angular/router';
-import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { CultivateVegetablesComponent } from './cultivate-vegetables/cultivate-vegetables.component';
 import { OrganicFoodSellerComponent } from './organic-food-seller/organic-food-seller.component';
 import { AlertComponent } from './alert/alert.component';
@@ -49,7 +49,8 @@ import { MoreDetailsComponentComponent } from './more-details-component/more-det
         VegSellerProfileComponent,
         SeedSellerProfileComponent,
         AdminDashboardComponent,
-        MoreDetailsComponentComponent
+        MoreDetailsComponentComponent,
+        FarmerHomeComponentComponent
     ]
   })
   export class ComponentsModule { }
