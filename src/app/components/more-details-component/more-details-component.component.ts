@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { CropsService, UserService, FarmerService } from '../../services';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs/internal/Observable';
+import { Subject } from 'rxjs';
+import { debounceTime } from 'rxjs/operators';
 
 @Component({
   selector: 'app-more-details-component',
@@ -27,6 +29,9 @@ export class MoreDetailsComponentComponent implements OnInit {
   arrayZone: Array<any> = [];
   emailArray: Array<any> = [];
 
+  private _success = new Subject<string>();
+  successMessage: string;
+
   constructor(private activatedRoute: ActivatedRoute,
     private router: Router,
     private _cropsService: CropsService,
@@ -34,10 +39,20 @@ export class MoreDetailsComponentComponent implements OnInit {
     private _userService: UserService) { }
 
   ngOnInit() {
+
+    this._success.subscribe((msg) => this.successMessage = msg);
+    this._success.pipe(
+      debounceTime(5000)
+    ).subscribe(() => this.successMessage = null);
+
     this.activatedRoute.queryParams.subscribe(params => {
       const cropID = params['crop'];
       this.getCrops(cropID);
     });
+  }
+
+  CropUpdateMsg() {
+    this._success.next(`Successfully updated crop`);
   }
 
   getCrops(cropID) {
@@ -73,7 +88,6 @@ export class MoreDetailsComponentComponent implements OnInit {
     this.editD = false;
     this.detail = val.details;
     this.cropId = val.cropID;
-    console.log("update : " + val.details);
   }
 
   editDisease() {
@@ -83,12 +97,10 @@ export class MoreDetailsComponentComponent implements OnInit {
     this.message = 1;
 
     this.getEmails(this.crops[0].cropName);
-    console.log("crop: " + this.crops[0].cropName);
 
     this.editDis = false;
     this.disease = val.disease;
     this.cropId = val.cropID;
-    console.log("update : " + val.disease);
   }
 
   editDescription() {
@@ -99,11 +111,9 @@ export class MoreDetailsComponentComponent implements OnInit {
     this.editDes = false;
     this.description = val.description;
     this.cropId = val.cropID;
-    console.log("update : " + val.description);
   }
 
   checkMail(emailAddresses) {
-    console.log("email array : " + emailAddresses);
     // const user = {
     //   name: 'Dilhani',
     //   // email: 'nimashandk94@gmail.com'
@@ -117,16 +127,14 @@ export class MoreDetailsComponentComponent implements OnInit {
     };
     this._userService.sendMail(user)
       .subscribe(resDeleteQuestion => {
-        console.log('successfully registered');
+        console.log('successfully sent');
       }, error => {
-        console.log("error");
         return Observable.throw(error);
       });
 
   }
 
   getEmails(cropName: any) {
-    console.log("crop: " + cropName);
     this._farmerService.getEmailAddresses(cropName)
       .subscribe(resData => {
         this.emails = resData;
@@ -145,10 +153,6 @@ export class MoreDetailsComponentComponent implements OnInit {
   }
 
   updateCrop() {
-    console.log("details : " + this.cropId);
-    console.log("details : " + this.detail);
-    console.log("disease : " + this.disease);
-    console.log("description : " + this.description);
     this.editCrop = [
       {
         'cropID': this.cropId,
@@ -159,15 +163,13 @@ export class MoreDetailsComponentComponent implements OnInit {
     ];
     this._cropsService.updateCropDetails(this.editCrop)
       .subscribe(resData => {
-        // this.sellers = resData;
-        if (this.message == 1) {
-          console.log("this message");
+        this.CropUpdateMsg();
+        if (this.message == 1 && this.emails != []) {
           console.log("Emails: back " + this.count + this.emails);
-          for(var i = 0; i < this.count; i++) {
+          for (let i = 0; i < this.count; i++) {
             console.log("emails: " + this.emails[0].email);
             this.emailArray.push(this.emails[i].email);
           }
-          console.log("Array1");
           console.log("Array: " + this.emailArray);
           this.checkMail(this.emailArray);
         }

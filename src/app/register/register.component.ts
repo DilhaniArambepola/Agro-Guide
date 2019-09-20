@@ -48,8 +48,6 @@ export class RegisterComponent implements OnInit {
         this.getDistricts();
 
         this.registerForm = this.formBuilder.group({
-            firstName: ['', Validators.required],
-            lastName: ['', Validators.required],
             username: ['', Validators.required],
             password: ['', [Validators.required, Validators.minLength(6)]],
             confirmPassword: ['', Validators.required],
@@ -91,8 +89,6 @@ export class RegisterComponent implements OnInit {
 
         this.sendVal = [
             {
-                'fname': this.registerForm.value.firstName,
-                'lname': this.registerForm.value.lastName,
                 'userName': this.registerForm.value.username,
                 'password': this.registerForm.value.password,
                 'email': this.registerForm.value.email,
@@ -110,13 +106,25 @@ export class RegisterComponent implements OnInit {
             // .pipe(first())
             .subscribe(resData => {
                     this.status = resData;
-                    console.log("successfully regsitered" + status);
-                    this.router.navigate(['/login']);
+                    console.log("role: " + this.selectedRole);
+                    console.log("successfully regsitered" + this.status);
+
+                    if (this.selectedRole == 'Farmer') {
+                        this.router.navigate(['/farmer-home']);
+                    } else if (this.selectedRole == 'Seed seller') {
+                        console.log("seed seller");
+                        this.router.navigate(['/seed-seller-home']);
+                    } else if (this.selectedRole == 'Food seller') {
+                        console.log("veg seller seller");
+                        this.router.navigate(['/veg-seller-home']);
+                    }
+                    console.log("No option");
+                   // this.router.navigate(['/login']);
                     // this.alertService.success('Registration successful', true);
                     // this.router.navigate(['/login']);
                 },
                 error => {
-                    this.alertService.error(error);
+                   // this.alertService.error(error);
                     this.loading = false;
                 });
     }

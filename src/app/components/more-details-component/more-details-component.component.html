@@ -1,6 +1,10 @@
 <button style="float: right;" (click)="redirect()">Back</button>
 
 <div class="row">
+    <ngb-alert style="margin-top: 5px; margin-left: 50px;" class="coltxt" *ngIf="successMessage" type="success" (close)="successMessage = null">{{ successMessage }}</ngb-alert>
+</div>
+
+<div class="row">
     <div class="col-auto coltxt" style="margin: 20px;">
         <h5>More details about {{crops[0].cropName}}</h5>
     </div>

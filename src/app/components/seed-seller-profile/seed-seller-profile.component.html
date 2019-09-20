@@ -11,6 +11,10 @@
       <label for="details" style="margin-left: 17px;">
         <b>Contact details</b>
       </label>
+      <div class="col-auto">
+          <ngb-alert style="margin-top: 5px; margin-left: 50px;" class="coltxt" *ngIf="successMessage" type="success" (close)="successMessage = null">{{ successMessage }}</ngb-alert>
+          <ngb-alert class="background coltxt" *ngIf="deleteMessage" type="delete" (close)="deleteMessage = null">{{ deleteMessage }}</ngb-alert>
+        </div>
     </div>
     <div class="row">
       <p class="coltxt" style="margin-left: 17px;">Address: {{userDetails[0].AddressLine1}}, {{userDetails[0].AddressLine2}}, {{userDetails[0].AddressLine3}}</p>
@@ -112,7 +116,7 @@
 
             <form #form="ngForm" (ngSubmit)="addSellingSeed(form.value);" class="modal-content animate" enctype="multipart/form-data">
               <div class="imgcontainer">
-                <span onclick="document.getElementById('id01').style.display='none'" class="close" title="Close Modal">&times;</span>
+                <span (click)="cancel()" onclick="document.getElementById('id01').style.display='none'" class="close" title="Close Modal">&times;</span>
                 <h4>Add a new Seed</h4>
               </div>
               <!-- <alert type="success">hello</alert> -->
@@ -227,7 +231,7 @@
 
             <form #form1="ngForm" (ngSubmit)="addSellingPlant(form1.value);" class="modal-content animate" enctype="multipart/form1-data">
               <div class="imgcontainer">
-                <span onclick="document.getElementById('id02').style.display='none'" class="close" title="Close Modal">&times;</span>
+                <span (click)="cancel()" onclick="document.getElementById('id02').style.display='none'" class="close" title="Close Modal">&times;</span>
                 <h4>Add a new Seed</h4>
               </div>
               <!-- <alert type="success">hello</alert> -->

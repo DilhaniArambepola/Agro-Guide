@@ -325,10 +325,21 @@ router.get('/organicSellers/:district', function (req, res) {
 
 router.get('/sellerDetails/:userID', function (req, res) {
     console.log("userID : " + req.params.userID);
-    let sql = "SELECT * FROM users u INNER JOIN organicfoodseller o ON u.userID = o.userID INNER JOIN sellingvegetable s ON o.sellerID = s.sellerID where u.userID = ?";
+    // let sql = "SELECT * FROM users u INNER JOIN organicfoodseller o ON u.userID = o.userID INNER JOIN sellingvegetable s ON o.sellerID = s.sellerID where u.userID = ?";
+    let sql = "SELECT * FROM users u INNER JOIN organicfoodseller o ON u.userID = o.userID where u.userID = ?";
     db.query(sql, [req.params.userID], (err, result) => {
         if (err) throw err;
         console.log("Seller" + result[0].sellerID);
+        res.send(result[0]);
+    });
+});
+
+router.get('/sales/:sellerID', function (req, res) {
+    console.log("sellerIId : " + req.params.sellerID);
+    let sql = "SELECT * FROM sellingvegetable where sellerID = ?";
+    db.query(sql, [req.params.sellerID], (err, result) => {
+        if (err) throw err;
+     //   console.log("Seller new" + result[0].sellerID);
         res.send(result);
     });
 });
@@ -345,7 +356,7 @@ router.post('/sellerDetails', function (req, res) {
 
 router.get('/seedSellerDetails/:userID', function (req, res) {
     console.log(req.params.userID);
-    let sql = "SELECT * FROM users u INNER JOIN seedshop ss ON u.userID = ss.userID INNER JOIN seeds s ON ss.shopID = s.shopID where u.userID = ?";
+    let sql = "SELECT * FROM users u INNER JOIN seedshop ss ON u.userID = ss.userID where u.userID = ?";
     db.query(sql, [req.params.userID], (err, result) => {
         if (err) throw err;
         res.send(result);
@@ -493,8 +504,6 @@ router.post('/register', function (req, res) {
     var c = encrypt(data[0].password);
 
     var users = {
-        "fname": data[0].fname,
-        "lname": data[0].lname,
         "userName": data[0].userName,
         "password": c,
         "email": data[0].email,
@@ -533,7 +542,10 @@ router.post('/register', function (req, res) {
                         db.query('INSERT INTO seedshop SET ?', details, (err, result) => {
                             if (err) throw err;
                             console.log("registered successfully" + result);
-                            res.send("success");
+                            res.send({
+                                "code": 200,
+                                "success": "user registered sucessfully"
+                            });
                         });
                     }
                     else if (data[0].userRole == 'Food seller') {

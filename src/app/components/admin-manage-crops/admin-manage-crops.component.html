@@ -2,6 +2,10 @@
   <div class="col-auto">
     <div class="heading">Manage Crops</div>
   </div>
+  <div class="col-auto">
+    <ngb-alert style="margin-top: 5px; margin-left: 50px;" class="coltxt" *ngIf="successMessage" type="success" (close)="successMessage = null">{{ successMessage }}</ngb-alert>
+    <ngb-alert class="background coltxt" *ngIf="deleteMessage" type="delete" (close)="deleteMessage = null">{{ deleteMessage }}</ngb-alert>
+  </div>
 </div>
 
 <div class="container">
@@ -53,7 +57,7 @@
               </label>
               <input type="text" placeholder="Enter Crop name" name="crop" ngModel required>
               <br>
-              <div class="col-sm-2">
+              <div class="col-sm-5">
                 <div class="form-check" *ngFor="let zone of zones">
                   <p style="display: none;">{{checkZone(crop, zone.name)}}</p>
                   <input [checked]="zoneSelect" (change)="onZoneChange(zone.name, $event.target.checked)" name="{{ zone.name }}" type="checkbox"
@@ -76,13 +80,14 @@
               <label for="diseases">
                 <b>Diseases description</b>
               </label>
+              <br>
               <textarea placeholder="Enter description" name="diseaseDes" ngModel rows="8" cols="100"></textarea>
               <br>
             </div>
 
             <div class="container" style="background-color:#f1f1f1">
               <button type="button" (click)="cancel()" onclick="document.getElementById('id01').style.display='none'" class="cancelbtn">Cancel</button>
-              <input onclick="document.getElementById('id01').style.display='none'" class="btn btn-primary submitBtn coltxt" type="submit">
+              <input onclick="document.getElementById('id01').style.display='none'" class="btn btn-primary coltxt" type="submit">
               <!-- <button onclick="document.getElementById('id01').style.display='block'" style="width:80px;  padding: 10px 18px; margin-left: 4px;">Save</button> -->
             </div>
           </form>

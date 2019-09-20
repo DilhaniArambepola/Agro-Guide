@@ -1,4 +1,4 @@
-import { NgModule, NO_ERRORS_SCHEMA } from '@angular/core';
+import { NgModule, NO_ERRORS_SCHEMA, CUSTOM_ELEMENTS_SCHEMA  } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { CropsComponent } from './crops/crops.component';
 import { AdminManageCropsComponent } from './admin-manage-crops/admin-manage-crops.component';
@@ -23,7 +23,7 @@ import { MoreDetailsComponentComponent } from './more-details-component/more-det
       RouterModule,
       NgbModule.forRoot()
     ],
-    schemas: [ NO_ERRORS_SCHEMA],
+    schemas: [ NO_ERRORS_SCHEMA, CUSTOM_ELEMENTS_SCHEMA],
     providers: [],
     // tslint:disable-next-line:max-line-length
     declarations: [

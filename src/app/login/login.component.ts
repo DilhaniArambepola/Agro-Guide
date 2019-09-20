@@ -63,11 +63,13 @@ export class LoginComponent implements OnInit {
   }
 
   public NotMatch() {
+    console.log("call to not match");
     this._success.next(`Email and password does not match`);
   }
   public NotExist() {
+    console.log("call to not exist");
     this._success.next(`Email does not exits`);
-    this.router.navigate(['/login']);
+   // this.router.navigate(['/login']);
   }
 
   // convenience getter for easy access to form fields
@@ -91,9 +93,8 @@ export class LoginComponent implements OnInit {
     this.loading = true;
     this.authenticationService.login(this.sendVal)
       .pipe(first())
-      .subscribe(
-        data => {
-          this.user = data;
+      .subscribe(data => { this.user = data;
+        console.log("user came");
           console.log('result: login component' + this.user.code);
           console.log('user: ' + this.user.loggedIn.userID);
           if (this.user.code == 200) {
@@ -103,20 +104,30 @@ export class LoginComponent implements OnInit {
             this.router.navigate([this.returnUrl], { queryParams: { userID: this.user.loggedIn.userID } });
             // this.router.navigate(['/home']);
           } else if (this.user.code == 204) {
-            this.alertService.error(this.user.error);
-            this.router.navigate(['/login']);
+            console.log("erorrrrrrrrrrr");
+           // this.alertService.error(this.user.error);
+           // this.errorText = 'Email and password does not match';
+            console.log("Here : "+this.user.error);
+           // this.router.navigate(['/login']);
             this.NotMatch();
-          } else {
+          } else if (this.user.code == 208) {
             this.NotExist();
-            this.errorText = 'Please give valid data';
+           // this.errorText = 'Email does not exist';
+            console.log("Here : "+this.user.error);
             return;
           }
 
         },
         error => {
-          this.alertService.error(error);
+          console.log("here print: : " + error);
+        //  this.alertService.error(error);
           this.loading = false;
         });
+  }
+
+  Register() {
+    console.log("register");
+    this.router.navigate(['/register']);
   }
 
 }

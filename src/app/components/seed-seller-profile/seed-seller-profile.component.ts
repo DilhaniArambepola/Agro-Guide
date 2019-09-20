@@ -3,6 +3,8 @@ import { SeedsService, UserService } from '../../services';
 import { Router, ActivatedRoute } from '@angular/router';
 import { ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
+import { Subject } from 'rxjs';
+import { debounceTime } from 'rxjs/operators';
 
 @Component({
   selector: 'app-seed-seller-profile',
@@ -23,6 +25,12 @@ export class SeedSellerProfileComponent implements OnInit {
   sendSeed: any[];
   errorMsg: string;
 
+  successMessage: string;
+  deleteMessage: string;
+
+  private _success = new Subject<string>();
+  private _delete = new Subject<string>();
+
   constructor(private activatedRoute: ActivatedRoute,
     private _seedService: SeedsService,
     private _userService: UserService) { }
@@ -34,6 +42,16 @@ export class SeedSellerProfileComponent implements OnInit {
       this.getSeedSales(userID);
       this.getPlantSales(userID);
     });
+
+    this._success.subscribe((message) => this.successMessage = message);
+    this._success.pipe(
+      debounceTime(5000)
+    ).subscribe(() => this.successMessage = null);
+
+    this._delete.subscribe((message) => this.deleteMessage = message);
+    this._delete.pipe(
+      debounceTime(5000)
+    ).subscribe(() => this.deleteMessage = null);
 
      // tslint:disable-next-line:prefer-const
      let modal = document.getElementById('id01');
@@ -47,6 +65,14 @@ export class SeedSellerProfileComponent implements OnInit {
         modal1.style.display = 'none';
       }
      };
+  }
+
+  CropAddedMsg() {
+    this._success.next(`Successfully added an item to selling list`);
+  }
+
+  removeMsg() {
+    this._delete.next(`Removed an selling item from the list`);
   }
 
   getSales(userID: any) {
@@ -120,6 +146,7 @@ export class SeedSellerProfileComponent implements OnInit {
  deleteItem(vegID: number, shopID: number) {
    this._seedService.removeItem(vegID)
      .subscribe(resData => {
+       this.removeMsg();
        this.getPlantSales(shopID);
       this.getSeedSales(shopID);
      },
@@ -141,6 +168,7 @@ export class SeedSellerProfileComponent implements OnInit {
 
     this._seedService.addItem(this.sendSeed)
       .subscribe(resData => {
+        this.CropAddedMsg();
         this.mytemplateForm.reset();
         this.getSeedSales(this.userId);
       },
@@ -162,6 +190,7 @@ export class SeedSellerProfileComponent implements OnInit {
 
     this._seedService.addItem(this.sendSeed)
       .subscribe(resData => {
+        this.CropAddedMsg();
         this.mytemplateForm1.reset();
         this.getPlantSales(this.userId);
       },

@@ -14,6 +14,7 @@ export class OrganicSellerService {
   private _URL = 'http://localhost:3000/api/organicSellers';
   private URL = 'http://localhost:3000/api/sellerDetails';
   private url = 'http://localhost:3000/api/foodItems';
+  private _Url = 'http://localhost:3000/api/sales';
 
   constructor(private _http: Http) { }
 
@@ -37,8 +38,14 @@ export class OrganicSellerService {
       .catch((error: any) => Observable.throw(error.json().error || 'Server error'));
   }
 
-  getSellerDetails(userID) {
+  getSellerDetails(userID: number) {
     return this._http.get(`${this.URL}/${userID}`)
+      .map((response: Response) => response.json())
+      .catch((error: any) => Observable.throw(error.json().error || 'Server error'));
+  }
+
+  getSales(sellerID: number) {
+    return this._http.get(`${this._Url}/${sellerID}`)
       .map((response: Response) => response.json())
       .catch((error: any) => Observable.throw(error.json().error || 'Server error'));
   }

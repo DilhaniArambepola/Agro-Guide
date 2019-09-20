@@ -6,3 +6,4 @@ export * from './organic-seller.service';
 export * from './seeds.service';
 export * from './user.service';
 export * from './farmer.service';
+export * from './veg-seler.service';

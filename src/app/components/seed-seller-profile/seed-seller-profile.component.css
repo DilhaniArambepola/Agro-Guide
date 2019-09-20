@@ -69,6 +69,20 @@ button {
     color: red;
     cursor: context-menu;
   }
+
+  .cancelbtn {
+    background-color: red;
+    width: 60px;
+    border-radius: 5px;
+    padding: 7px;
+
+ }
+
+ .background {
+  background-color: rgb(238, 145, 145);
+  margin-top: 5px; 
+  margin-left: 50px;
+}
   
   /* Add Zoom Animation */
   .animate {
@@ -91,9 +105,6 @@ button {
     span.psw {
        display: block;
        float: none;
-    }
-    .cancelbtn {
-       width: 100px;
     }
   }
  

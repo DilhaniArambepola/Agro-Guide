@@ -5,6 +5,8 @@ import { FormsModule, FormControl, NgForm } from '@angular/forms';
 // import { Http, Headers, RequestOptions } from '@angular/http';
 import { Observable } from 'rxjs/internal/Observable';
 import { Router } from '@angular/router';
+import { Subject } from 'rxjs';
+import { debounceTime } from 'rxjs/operators';
 
 @Component({
   selector: 'app-admin-manage-crops',
@@ -32,6 +34,13 @@ export class AdminManageCropsComponent implements OnInit {
   crop: Array<string> = [];
   data: Array<string> = [];
 
+  private _success = new Subject<string>();
+  private _delete = new Subject<string>();
+
+  staticAlertClosed = false;
+  successMessage: string;
+  deleteMessage: string;
+
   zones = [
     { id: 1, name: 'DryZone' },
     { id: 2, name: 'Intermediate' },
@@ -42,6 +51,16 @@ export class AdminManageCropsComponent implements OnInit {
   constructor(private router: Router, private _cropsService: CropsService) { }
 
   ngOnInit() {
+
+    this._success.subscribe((message) => this.successMessage = message);
+    this._success.pipe(
+      debounceTime(5000)
+    ).subscribe(() => this.successMessage = null);
+
+    this._delete.subscribe((message) => this.deleteMessage = message);
+    this._delete.pipe(
+      debounceTime(5000)
+    ).subscribe(() => this.deleteMessage = null);
 
     this.getCrops();
     // Get the modal
@@ -59,6 +78,14 @@ export class AdminManageCropsComponent implements OnInit {
         modal1.style.display = 'none';
       }
     };
+  }
+
+  CropAddedMsg() {
+    this._success.next(`Successfully added a new crop`);
+  }
+
+  removeMsg() {
+    this._delete.next(`Removed a crop`);
   }
 
   onZoneChangeUpdate(cropName: any, zone: string, isChecked: boolean) {
@@ -140,8 +167,10 @@ export class AdminManageCropsComponent implements OnInit {
       .subscribe(resData => {
        // console.log('res data : ' + resData);
         // this.crops = resData;
+
         this.mytemplateForm.reset();
         this.getCrops();
+        this.CropAddedMsg();
       },
         resError => this.errorMsg = resError);
   }
@@ -163,7 +192,7 @@ export class AdminManageCropsComponent implements OnInit {
       this._cropsService.updateCropDetails(this.editCrop)
         .subscribe(resUpdateEmployee => {
 
-          this.mytemplateForm.reset();
+          this.myUpdateForm.reset();
           this.getCrops();
           // this.zoneArray = [];
 
@@ -200,8 +229,8 @@ export class AdminManageCropsComponent implements OnInit {
     this._cropsService.removeCrop(cropName)
       .subscribe(resDeleteQuestion => {
         this.getCrops();
+        this.removeMsg();
       }, error => {
-         this.getCrops();
          return Observable.throw(error);
       });
   }

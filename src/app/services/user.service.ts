@@ -37,7 +37,9 @@ export class UserService {
 
         return this.http.post(this.url, body) // ...using post request
             // tslint:disable-next-line:max-line-length
-            .map((res: Response) => res.json(), console.log('successfully registered' + Response)) // ...and calling .json() on the response to return data
+            // .map((res: Response) => res.json(), console.log('successfully registered' + Response)) // ...and calling .json() on the response to return data
+            // tslint:disable-next-line:max-line-length
+            .map((res: Response) => res.json()) // ...and calling .json() on the response to return data
             .catch((error: any) => Observable.throw(error.json().error || 'Server error')); // ...errors if any
     }
 

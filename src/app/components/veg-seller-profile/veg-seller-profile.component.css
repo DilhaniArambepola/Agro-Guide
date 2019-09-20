@@ -85,14 +85,24 @@ button {
     from {transform: scale(0)} 
     to {transform: scale(1)}
   }
+  .cancelbtn {
+    background-color: red;
+    width: 70px;
+    border-radius: 5px;
+    padding: 8px;
+ }
   
+ .background{
+  background-color: rgb(238, 145, 145);
+  margin-top: 5px; 
+  margin-left: 50px;
+}
+
   /* Change styles for span and cancel button on extra small screens */
   @media screen and (max-width: 300px) {
     span.psw {
        display: block;
        float: none;
     }
-    .cancelbtn {
-       width: 100px;
-    }
+  
   }
