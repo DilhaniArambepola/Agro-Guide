@@ -57,9 +57,11 @@ export class FarmerHomeComponentComponent implements OnInit {
 
   // get the list of crops according to the climatezone
   getCrops(district: number) {
+    console.log("district: " + district);
     this._farmerService.getCropDetails(district)
       .subscribe(resData => {
         this.cropDetails = resData;
+        console.log("crops: " + this.cropDetails);
       },
         resError => this.errorMsg = resError);
   }
@@ -101,30 +103,15 @@ export class FarmerHomeComponentComponent implements OnInit {
   }
 
   showDetails(cropName) {
-    console.log("crop: " + cropName);
     this._farmerService.getMoreDetails(cropName)
     .subscribe(resData => {
       this.moreDetails = resData;
       this.show = true;
-      console.log("more : " + this.moreDetails.details);
-      console.log("more : " + this.moreDetails.step1);
-      console.log("more : " + this.moreDetails.step2);
     },
       resError => this.errorMsg = resError);
   }
 
-  // getSeedShops() {
-  //   console.log("district: " + this.userDetails[0].districtName);
-  //   this._seedService.getDistrictSeedSellers(this.userDetails[0].districtName)
-  //   .subscribe(resData => {
-  //     this.seedShops = resData;
-  //     console.log("more : " + this.seedShops[0].AddressLine1);
-  //   },
-  //     resError => this.errorMsg = resError);
-  // }
-
   seedShops() {
-    console.log("crop: ");
     // tslint:disable-next-line:max-line-length
     this.router.navigate(['/cultivate'], {queryParams: { redirectFrom: '/farmer-home', district: this.userDetails[0].districtName, userID: this.userId }});
   }

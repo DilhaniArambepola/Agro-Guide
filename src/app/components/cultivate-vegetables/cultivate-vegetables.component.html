@@ -40,13 +40,14 @@
                 <div id="id01" class="modal coltxt">
 
                   <form #form="ngForm" class="modal-content animate" enctype="multipart/form-data">
+                    <div *ngFor="let crop of cropDetails; let i = index;">
                     <div class="imgcontainer">
                       <span onclick="document.getElementById('id01').style.display='none'" class="close" title="Close Modal">&times;</span>
-                      <h4>More details about {{c.cropName}} cultivation</h4>
+                      <h4>More details about {{crop.cropName}} cultivation</h4>
                     </div>
 
                     <div class="container">
-                      <div *ngFor="let crop of cropDetails; let i = index;">
+                      
                         <label for="details">
                           <b>Climate Zones</b>
                         </label>
@@ -130,7 +131,7 @@
                 <div class="table">
                   <div class="row">
                      <div class="subheading" style="width: auto; text-align:left;">District</div>
-                    <div class="subheading" style="width: auto; text-align:left;">Address</div>
+                    <div class="subheading" style="width: 10rem; text-align:center;">Address</div>
                     <div class="subheading" style="width: auto; margin-left:100px; text-align:right; padding-right:10px;">More details</div>
                   </div>
                 </div>

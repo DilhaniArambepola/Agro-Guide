@@ -1,20 +1,7 @@
 @import url('https://fonts.googleapis.com/css?family=Roboto');
 
-/* .commonbuttons{
-    background-color: #363C43;
-    color: #FFFFFF;
-}
-.commonmenu{
-    background: #363C43;
-    color: #FFFFFF !important;
-} */
-
-/* .navbar {
-    z-index: 1;
-} */
 .head{
     border: solid 1px  rgb(71, 141, 69);
-    /* border-radius: 5px; */
     background-image: url("../../../assets/images/bg.jpg");
 }
 .container-large {
@@ -23,9 +10,12 @@
 }
 .logout {
     cursor: pointer;
+    text-align: right; 
+    display:block;
+    width: 30%;
+    margin-top: 10px;
 }
 a:hover {
     background-color: rgb(103, 107, 107);
-    padding-left: 5px;
-    padding-right: 5px;
+    text-decoration: none;
 }

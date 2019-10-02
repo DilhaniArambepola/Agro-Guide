@@ -1,0 +1,107 @@
+<div class="main-container">
+  <div class="row">
+    <div class="col-auto coltxt">
+      <div class="heading" style="text-align:center;">
+        About US
+      </div>
+      <div class="row">
+        <div class="col-auto" style="width: 70%;">
+
+          <p style="text-align:justify;">Nowadays people like to save time using instances with their busy lives. As the part of that people buy fruits,
+            vegetables and other food items from supermarkets. But the problem is they are contained large amount of chemicals
+            which affect to the human health. Other thing is cost of everything seems to be higher these days, especially
+            at grocery shops. If people can grow their own food at home, there can be lots of benefits like save money, increase
+            the health level of their family members, get outdoor exercise and reduce the environmental impact. Farming is
+            the most important way when making a country with self-sustaining economy. </p>
+
+          <marquee behavior="scroll" direction="left">
+            <img src="../../../assets/images/a6.jpg" width="200" height="150" alt="Flying Bat">
+            <img src="../../../assets/images/a3.jpg" width="200" height="150" alt="Flying Bat">
+            <img src="../../../assets/images/a2.jpg" width="200" height="150" alt="Flying Bat">
+            <img src="../../../assets/images/images.jpg" width="200" height="150" alt="Flying Bat">
+            <img src="../../../assets/images/a5.jpg" width="200" height="150" alt="Flying Bat">
+            <img src="../../../assets/images/a4.jpg" width="200" height="150" alt="Flying Bat">
+          </marquee>
+
+        </div>
+        <div class="col-auto" style="width: 30%; margin: auto;">
+
+          <img src="../../../assets/images/crops/climate.png" style="width:230px; height: 300px;">
+          <p>
+            <b>
+              <i>Main agro-climatic zones in Sri Lanka</i>
+            </b>
+          </p>
+
+        </div>
+      </div>
+
+      <ul>
+        <b>You will be provided,</b>
+        <li>
+          <a href="/cultivate">Information to find suitable crops according to the user’s area/clime.</a>
+          <p>Example: Climatically cool conditions in the country’s central hill country are ideal for temperate crops such
+            as carrot, beet, cabbage, etc. Dry areas are suitable for tropical fruits and vegetable like red onion, pumpkin,
+            melon etc.
+          </p>
+        </li>
+        <li>
+          <a href="/farmer-home">Step by step guidance for small scale plantation; specially for organic home gardening.</a>
+        </li>
+        <li>
+          <a href="/organicFertilizer"> Information to make organic fertilizers at home </a>
+        </li>
+        <li>
+          <a href="/organicFood">Details about the places where they can buy organic fertilizers and seeds nearby according to their current location
+            which they entered.</a>
+        </li>
+        <li>Inform the user to treat crops when it needs by sending alert emails </li>
+        <li>Pre-emptive information on pests and animal diseases so farmers can respond accordingly to the level of risk.
+        </li>
+        <li>Details about harvest seasons and agricultural safety and health.</li>
+        <li>We Provide information which are collected from Govijana Sewa Department. If you need further details, you can contact
+          us through an inquiry </li>
+      </ul>
+
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-auto container coltxt">
+      <div class="heading">
+        Contact Us
+      </div>
+
+      <p style="text-align:center;">Have any question? We'd love to hear from you</p>
+
+      <div>
+        <ngb-alert style="margin-top: 5px; margin-left: 50px;" *ngIf="successMessage" type="success" (close)="successMessage = null">{{ successMessage }}</ngb-alert>
+        <form #form="ngForm" (ngSubmit)="submitInquiry(form.value);" class="coltxt" enctype="multipart/form-data">
+          <div>
+
+            What can we help with you?
+            <br>
+            <input style="margin-bottom: 10px; width: 500px;" type="text" placeholder="Enter the title of your inquiry" name="title"
+              ngModel required>
+            <br> Your name:
+            <br>
+            <input style="margin-bottom: 10px; width: 500px;" type="text" name="name" ngModel required>
+            <br> Email address that you prefer to be contacted at:
+            <br>
+            <input style="margin-bottom: 10px; width: 500px;" type="text" name="email" ngModel required>
+            <br> Description
+            <br>
+            <textarea placeholder="Please write your question or description of your inquiry" name="description" rows="8" cols="100"
+              ngModel></textarea>
+            <br>
+          </div>
+
+          <div>
+            <button type="button" (click)="cancel()" class="cancelbtn">Cancel</button>
+            <input class="btn btn-primary coltxt" type="submit">
+            <!-- <button onclick="document.getElementById('id01').style.display='block'" style="width:80px;  padding: 10px 18px; margin-left: 4px;">Save</button> -->
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

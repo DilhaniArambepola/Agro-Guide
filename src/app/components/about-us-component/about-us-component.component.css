@@ -1,0 +1,47 @@
+@import url('https://fonts.googleapis.com/css?family=Roboto');
+
+.subheading{
+    font-family: 'Roboto', sans-serif;
+    font-size: 14px;
+    font-weight: bold;
+}
+.heading{
+    font-family: 'Roboto', sans-serif;
+    font-size: 16px;
+    font-weight: bold;
+    text-align:center;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+.coltxt{
+    font-family: 'Roboto', sans-serif;
+    font-size: 13px;
+}
+.cancelbtn {
+    width: auto;
+    padding: 7px 15px;
+    border-radius: 5px;
+    color: white;
+    background-color: #f44336;
+  }
+.cancelbtn :hover {
+    background-color: red;
+}
+.container {
+    margin-top: 10px;
+    background-color: rgb(170, 221, 163);
+    width: 80%; 
+    margin: auto;
+    border: 1px solid rgb(207, 223, 207);
+    border-radius: 5px;
+}
+.main-container {
+    width: 100%;
+    margin-bottom:20px; 
+}
+a {
+    color: rgb(53, 53, 202);
+}
+a :hover {
+    color: rgba(38, 37, 43, 0.267);
+}

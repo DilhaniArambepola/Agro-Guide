@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { OrganicSellerService, UserService, VegSelerService } from '../../services';
+import { OrganicSellerService, UserService } from '../../services';
 import { Router, ActivatedRoute } from '@angular/router';
 import { NgForm } from '@angular/forms';
 import { ViewChild } from '@angular/core';
@@ -34,12 +34,12 @@ export class VegSellerProfileComponent implements OnInit {
 
   constructor(private activatedRoute: ActivatedRoute,
     private _organicSellerService: OrganicSellerService,
-    private _userService: UserService,
-    private _vegService: VegSelerService) { }
+    private _userService: UserService) { }
 
   ngOnInit() {
     this.activatedRoute.queryParams.subscribe(params => {
       const userID = params['userID'];
+      console.log("UserID : " + userID);
       this.getSellerDetails(userID);
     });
 
@@ -72,23 +72,27 @@ export class VegSellerProfileComponent implements OnInit {
     this._delete.next(`Removed an selling item from the list`);
   }
 
+  contactUpdated() {
+    this._success.next(`Successfully updated the contact number`);
+  }
+
 
   getSellerDetails(userID) {
     this._organicSellerService.getSellerDetails(userID)
     .subscribe(resData => {
       this.userDetails = resData;
-      this.sellerID = this.userDetails.sellerID;
+      this.sellerID = this.userDetails[0].sellerID;
       this.getSales(this.sellerID);
-      this.userId = this.userDetails.userID;
+      this.userId = this.userDetails[0].userID;
     },
       resError => this.errorMsg = resError);
   }
 
   getSales(sellerID) {
+    console.log("sellerID: " + sellerID);
     this._organicSellerService.getSales(sellerID)
     .subscribe(resData => {
       this.salesDetails = resData;
-      console.log("sellerID new:" + this.salesDetails[0].sellerID);
     },
       resError => this.errorMsg = resError);
   }
@@ -99,10 +103,10 @@ export class VegSellerProfileComponent implements OnInit {
   }
 
   updateTel(tel: any) {
-    
     this.edit = false;
     this._userService.updateSellerDetails(this.sellerID, tel.contact)
       .subscribe(resData => {
+        this.contactUpdated();
         this.sellers = resData;
       },
         resError => this.errorMsg = resError);
@@ -150,7 +154,6 @@ export class VegSellerProfileComponent implements OnInit {
   // tslint:disable-next-line:member-ordering
   @ViewChild('form') mytemplateForm: NgForm;
   addSellingVegetable(val: any) {
-    console.log("seller: " + this.sellerID);
     this.sendVegetable = [
       {
         'seller': this.sellerID,
@@ -162,12 +165,9 @@ export class VegSellerProfileComponent implements OnInit {
 
     this._organicSellerService.addVeg(this.sendVegetable)
       .subscribe(resData => {
-       // console.log('res data : ' + resData);
-        // this.crops = resData;
         this.mytemplateForm.reset();
         this.CropAddedMsg();
         this.getSales(this.sellerID);
-      //  this.getSellers();
       },
         resError => this.errorMsg = resError);
    }

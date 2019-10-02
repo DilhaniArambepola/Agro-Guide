@@ -40,7 +40,7 @@ router.get('/selectedCrop/:zone', function (req, res) {
     let sql = 'SELECT * FROM crops c INNER JOIN diseases d ON c.cropName = d.cropName INNER JOIN crops_has_zones z ON c.cropName = z.cropName where z.' + zone + '=1';
     db.query(sql, (err, result) => {
         if (err) throw err;
-        
+
         res.send(result);
     });
 });
@@ -204,14 +204,14 @@ router.get('/cutivate/:cropID', function (req, res) {
     let sql = "SELECT * FROM crops c INNER JOIN diseases d ON c.cropName = d.cropName INNER JOIN crops_has_zones z ON c.cropName = z.cropName WHERE c.cropID=?";
     db.query(sql, [req.params.cropID], (err, result) => {
         if (err) throw err;
-        console.log("result: " + result[0].cropName);
+        //  console.log("result: " + result[0].cropName);
         res.send(result);
     });
 });
 
 router.get('/getCropDetails/:cropName', function (req, res) {
     console.log("call this with: " + req.params.cropName);
-    let sql = "SELECT * FROM crops c INNER JOIN diseases d ON c.cropName = d.cropName WHERE c.cropName='"+[req.params.cropName]+"'";
+    let sql = "SELECT * FROM crops c INNER JOIN diseases d ON c.cropName = d.cropName WHERE c.cropName='" + [req.params.cropName] + "'";
     db.query(sql, (err, result) => {
         if (err) throw err;
         console.log("result: " + result[0].step1);
@@ -236,6 +236,131 @@ router.get('/seedShops', function (req, res) {
     });
 });
 
+router.get('/farmers', function (req, res) {
+    let sql = "SELECT * from users where userRole='Farmer'";
+    db.query(sql, (err, result) => {
+        if (err) throw err;
+        res.send(result);
+    });
+});
+
+router.delete('/farmers/:id', function (req, res) {
+    console.log("api: " + req.params.id);
+    let sql = "SELECT count(*) AS number from farmergardening where user=?";
+    db.query(sql, [req.params.id], (err, result) => {
+        if (err) throw err;
+        // res.send(result);
+        console.log("number: " + result[0].number);
+        if (result[0].number > 0) {
+            let sql1 = 'DELETE from farmergardening where user=?';
+            db.query(sql1, [req.params.id], (err, result) => {
+                if (err) throw err;
+
+                let sql2 = 'DELETE from users where userID=?';
+                db.query(sql2, [req.params.id], (err, result) => {
+                    if (err) throw err;
+                    res.send(result);
+                });
+            });
+        } else {
+            let sql3 = 'DELETE from users where userID=?';
+            db.query(sql3, [req.params.id], (err, result) => {
+                if (err) throw err;
+                res.send(result);
+            });
+        }
+    });
+});
+
+router.delete('/rvegSeller/:seller/:user', function (req, res) {
+    console.log("seller: " + req.params.seller);
+    console.log("user: " + req.params.user);
+    let sql = "SELECT count(*) AS number from sellingvegetable where sellerID=?";
+    db.query(sql, [req.params.seller], (err, result) => {
+        if (err) throw err;
+        // res.send(result);
+        console.log("number: " + result[0].number);
+        if (result[0].number > 0) {
+            let sql1 = 'DELETE from sellingvegetable where sellerID=?';
+            db.query(sql1, [req.params.seller], (err, result) => {
+                if (err) throw err;
+                let sql2 = 'DELETE from organicfoodseller where userID=?';
+                db.query(sql2, [req.params.user], (err, result) => {
+                    if (err) throw err;
+
+                    let sql3 = 'DELETE from users where userID=?';
+                    db.query(sql3, [req.params.user], (err, result) => {
+                        if (err) throw err;
+                        res.send(result);
+                    });
+                });
+
+            });
+        } else {
+            let sql2 = 'DELETE from organicfoodseller where userID=?';
+            db.query(sql2, [req.params.user], (err, result) => {
+                if (err) throw err;
+
+                let sql3 = 'DELETE from users where userID=?';
+                db.query(sql3, [req.params.user], (err, result) => {
+                    if (err) throw err;
+                    res.send(result);
+                });
+            });
+        }
+    });
+});
+
+router.delete('/rSeedSeller/:seller/:user', function (req, res) {
+    console.log("seller: " + req.params.seller);
+    console.log("user: " + req.params.user);
+    let sql = "SELECT count(*) AS number from seeds where shopID=?";
+    db.query(sql, [req.params.seller], (err, result) => {
+        if (err) throw err;
+        // res.send(result);
+        console.log("number: " + result[0].number);
+        if (result[0].number > 0) {
+            let sql1 = 'DELETE from seeds where shopID=?';
+            db.query(sql1, [req.params.seller], (err, result) => {
+                if (err) throw err;
+                let sql2 = 'DELETE from seedshop where userID=?';
+                db.query(sql2, [req.params.user], (err, result) => {
+                    if (err) throw err;
+
+                    let sql3 = 'DELETE from users where userID=?';
+                    db.query(sql3, [req.params.user], (err, result) => {
+                        if (err) throw err;
+                        res.send(result);
+                    });
+                });
+
+            });
+        } else {
+            let sql2 = 'DELETE from seedshop where userID=?';
+            db.query(sql2, [req.params.user], (err, result) => {
+                if (err) throw err;
+
+                let sql3 = 'DELETE from users where userID=?';
+                db.query(sql3, [req.params.user], (err, result) => {
+                    if (err) throw err;
+                    res.send(result);
+                });
+            });
+        }
+    });
+});
+
+
+router.get('/farmerCount', function (req, res) {
+    let number;
+    let sql = "SELECT count(*) AS number from users where userRole='Farmer'";
+    db.query(sql, (err, result) => {
+        if (err) throw err;
+        console.log("count: " + result[0].number);
+        res.send(result[0]);
+    });
+});
+
 router.post('/seedShops', function (req, res) {
     console.log("details : " + req.body[0].item);
     console.log("details : " + req.body[0].quantity);
@@ -247,7 +372,7 @@ router.post('/seedShops', function (req, res) {
 });
 
 router.get('/districtSeedShops/:district', function (req, res) {
-    let sql = "SELECT * FROM seedShop ss INNER JOIN users u on ss.userID = u.userID where u.userRole='Seed seller' AND u.districtName='"+[req.params.district]+"'";
+    let sql = "SELECT * FROM seedShop ss INNER JOIN users u on ss.userID = u.userID where u.userRole='Seed seller' AND u.districtName='" + [req.params.district] + "'";
     // let sql = "SELECT * FROM seedShop ss INNER JOIN users u on ss.userID = u.userID INNER JOIN seeds s on ss.shopID = s.shopID where u.userRole='Seed seller' AND u.districtName='"+[req.params.district]+"'";
     db.query(sql, (err, result) => {
         if (err) throw err;
@@ -307,7 +432,7 @@ router.get('/plants/:userId', function (req, res) {
 });
 
 router.get('/vegetableSellers', function (req, res) {
-    let sql = "SELECT * FROM users u INNER JOIN organicfoodseller o ON u.userID = o.userID where u.userRole = 'Organic food seller'";
+    let sql = "SELECT * FROM users u INNER JOIN organicfoodseller o ON u.userID = o.userID where u.userRole = 'Food seller'";
     db.query(sql, (err, result) => {
         if (err) throw err;
         res.send(result);
@@ -315,7 +440,7 @@ router.get('/vegetableSellers', function (req, res) {
 });
 
 router.get('/organicSellers/:district', function (req, res) {
-    let sql = "SELECT * FROM users u INNER JOIN organicfoodseller o ON u.userID = o.userID where u.userRole = 'Organic food seller' AND u.districtName=?";
+    let sql = "SELECT * FROM users u INNER JOIN organicfoodseller o ON u.userID = o.userID where u.userRole = 'Food seller' AND u.districtName=?";
     db.query(sql, [req.params.district], (err, result) => {
         if (err) throw err;
         res.send(result);
@@ -329,8 +454,10 @@ router.get('/sellerDetails/:userID', function (req, res) {
     let sql = "SELECT * FROM users u INNER JOIN organicfoodseller o ON u.userID = o.userID where u.userID = ?";
     db.query(sql, [req.params.userID], (err, result) => {
         if (err) throw err;
-        console.log("Seller" + result[0].sellerID);
-        res.send(result[0]);
+        console.log("Seller" + result[0].userID);
+        console.log("Seller" + result[0].userName);
+        // res.send(result[0]);
+          res.send(result);
     });
 });
 
@@ -339,7 +466,7 @@ router.get('/sales/:sellerID', function (req, res) {
     let sql = "SELECT * FROM sellingvegetable where sellerID = ?";
     db.query(sql, [req.params.sellerID], (err, result) => {
         if (err) throw err;
-     //   console.log("Seller new" + result[0].sellerID);
+        //   console.log("Seller new" + result[0].sellerID);
         res.send(result);
     });
 });
@@ -435,7 +562,7 @@ router.get('/cropDetails/:district', function (req, res) {
         //SELECT * FROM employees WHERE NOT EXISTS (SELECT * FROM eotm_dyn WHERE eotm_dyn.name = employees.name)
         db.query(sql, zone, (err, result) => {
             if (err) throw err;
-            // console.log("final : " + result);
+            console.log("final : " + result);
             // console.log("getZone Name : " + result[0].cropName);
             res.send(result);
         });
@@ -445,8 +572,21 @@ router.get('/cropDetails/:district', function (req, res) {
 router.post('/cropDetails', function (req, res) {
     console.log("details : " + req.body[0].cropName);
     console.log("details : " + req.body[0].userID);
-    let sql = 'INSERT INTO farmergardening(user, crop) VALUES(?,?);';
-    db.query(sql, [req.body[0].userID, req.body[0].cropName], (err, result) => {
+    var today = new Date();
+    let sql = 'INSERT INTO farmergardening(user, crop, created) VALUES(?,?,?);';
+    db.query(sql, [req.body[0].userID, req.body[0].cropName, today], (err, result) => {
+        if (err) throw err;
+        res.send(result);
+    });
+});
+
+router.post('/inquiry', function (req, res) {
+    console.log("details : " + req.body[0].email);
+    console.log("details : " + req.body[0].title);
+    var today = new Date();
+    console.log("date: " + today);
+    let sql = 'INSERT INTO inquiry(email, name, title, description, created_date) VALUES(?,?,?,?,?);';
+    db.query(sql, [req.body[0].email, req.body[0].name, req.body[0].title, req.body[0].description, today], (err, result) => {
         if (err) throw err;
         res.send(result);
     });
@@ -457,7 +597,7 @@ router.get('/selectedCropDetails/:userID', function (req, res) {
     let sql = "SELECT * FROM farmergardening where user = ?";
     db.query(sql, [req.params.userID], (err, result) => {
         if (err) throw err;
-      //  console.log("SelectedCrop here : " + result[0].crop);
+        //  console.log("SelectedCrop here : " + result[0].crop);
         res.send(result);
     });
 });
@@ -566,6 +706,7 @@ router.post('/register', function (req, res) {
 });
 
 router.post('/users/authenticate', function (req, res) {
+    console.log("Came to authenticate");
     data = req.body;
     var email = data[0].email;
     var password = data[0].password;
@@ -630,7 +771,7 @@ router.post('/logout', function (req, res) {
 });
 
 router.get('/selectedEmails/:cropName', function (req, res) {
-    let sql = "SELECT email FROM farmergardening f INNER JOIN users u ON f.user = u.userID where crop = '"+[req.params.cropName]+"'";
+    let sql = "SELECT email FROM farmergardening f INNER JOIN users u ON f.user = u.userID where crop = '" + [req.params.cropName] + "'";
     db.query(sql, (err, result) => {
         if (err) throw err;
         res.send(result);
@@ -640,7 +781,7 @@ router.get('/selectedEmails/:cropName', function (req, res) {
 router.post('/sendMail', function (req, res) {
     console.log("mail request came");
     let user = req.body;
-console.log("email: " + user.email);
+    console.log("email: " + user.email);
     sendMail(user, info => {
         console.log('The mail has been send and the id is');
         res.send(info)
@@ -669,7 +810,7 @@ async function sendMail(user, callback) {
         from: "nimdilhani21@gmail.com",
         to: user.email,
         subject: user.subject,
-        html: '<h1>Hi </h1><br>' + user.body
+        html: '<h1>Hi, </h1><br>' + user.body
     };
 
     let info = await transporter.sendMail(mailOptions);

@@ -21,31 +21,31 @@ export class SeedsService {
   // Get seed shops
   getSeedSellers(): Observable<any> {
     console.log("came this");
-   return this._http.get(this._url)
-     .map((response: Response) => response.json())
-     .catch((error: any) => Observable.throw(error.json().error || 'Server error'));
- }
+    return this._http.get(this._url)
+      .map((response: Response) => response.json())
+      .catch((error: any) => Observable.throw(error.json().error || 'Server error'));
+  }
 
- getDistrictSeedSellers(district: any): Observable<any> {
-   console.log(" serivice : " + district);
-  return this._http.get(`${this._URL}/${district}`)
-    .map((response: Response) => response.json())
-    .catch((error: any) => Observable.throw(error.json().error || 'Server error'));
-}
+  getDistrictSeedSellers(district: any): Observable<any> {
+    console.log(" serivice : " + district);
+    return this._http.get(`${this._URL}/${district}`)
+      .map((response: Response) => response.json())
+      .catch((error: any) => Observable.throw(error.json().error || 'Server error'));
+  }
 
   // Get seeds
   getSeeds(userId: number): Observable<any> {
-   return this._http.get(`${this.url}/${userId}`)
-     .map((response: Response) => response.json())
-     .catch((error: any) => Observable.throw(error.json().error || 'Server error'));
- }
+    return this._http.get(`${this.url}/${userId}`)
+      .map((response: Response) => response.json())
+      .catch((error: any) => Observable.throw(error.json().error || 'Server error'));
+  }
 
- getSeedSellerById(userID) {
-   console.log("call new method : " + userID);
-  return this._http.get(`${this._Url}/${userID}`)
-    .map((response: Response) => response.json())
-    .catch((error: any) => Observable.throw(error.json().error || 'Server error'));
-}
+  getSeedSellerById(userID) {
+    console.log("call new method : " + userID);
+    return this._http.get(`${this._Url}/${userID}`)
+      .map((response: Response) => response.json())
+      .catch((error: any) => Observable.throw(error.json().error || 'Server error'));
+  }
 
   // Get seeds
   getPlants(userId: number): Observable<any> {
@@ -74,8 +74,6 @@ export class SeedsService {
   }
 
   updatePrice(p: any, seedID: number) {
-    console.log("p service: " + p);
-    console.log("veg : " + seedID);
     const headers = new Headers({ 'Content-Type': 'application/json' }); // ... Set content type to JSON
     const options = new RequestOptions({ headers: headers }); // Create a request option
 
@@ -86,7 +84,6 @@ export class SeedsService {
 
   // Delete a question
   removeItem(id: any): Observable<any[]> {
-    console.log("veg: " + id);
     return this._http.delete(`${this.url}/${id}`) // ...using put request
       .map((res: Response) => res.json()) // ...and calling .json() on the response to return data
       .catch((error: any) => Observable.throw(error.json().error || 'Server error')); // ...errors if any

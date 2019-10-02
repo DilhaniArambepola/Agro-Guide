@@ -32,6 +32,9 @@ export class RoleGuardsService implements CanActivate {
     if (user != 1) {
       if (user.loggedIn.userRole === next.data.role) {
         console.log("expected rule : " + true);
+        console.log("can authenticate: " + state.url);
+        console.log("return url from guard : " + state.url);
+     //   this._router.navigate([state.url], { queryParams: { userID: user.loggedIn.userID } });
         return true;
       }
       console.log("expected rule : " + user);

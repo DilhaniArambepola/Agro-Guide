@@ -1,0 +1,392 @@
+<div class="row subheading" style="margin: 10px;">
+  Registered users
+</div>
+<div class="row">
+  <ngb-alert class="background coltxt" *ngIf="successMessage" type="success" (close)="successMessage = null">{{ successMessage }}</ngb-alert>
+</div>
+
+<div class="row">
+  <div class="col-auto coltxt" style="width: 30%;">
+    <div class="row" style="margin-left: 10px;">
+      <b>Farmers</b>
+    </div>
+    <div class="row">
+      <div class="col-auto" style="width: 10rem; text-align:left; padding-left:10px;">
+        <div *ngFor="let farmer of farmerDetails; let i = index;">
+          <div class="row">
+            <div class="col-auto">
+              <button data-toggle="tooltip" title="More details" (click)="getFarmerDetails(farmer.userID)" onclick="document.getElementById('id04').style.display='block'">{{farmer.userName}}</button>
+            </div>
+            <div class="col-auto">
+              <button class="remove" (click)="deleteUser(farmer.userID, farmer.userRole, farmer.email)" onclick="document.getElementById('id01').style.display='block'">x</button>
+            </div>
+          </div>
+
+          <div id="id01" class="modal coltxt">
+            <form #form="ngForm" (ngSubmit)="removeUser(form.value);" class="modal-content animate" enctype="multipart/form-data">
+              <div class="imgcontainer">
+                <span (click)="cancel()" onclick="document.getElementById('id01').style.display='none'" class="close" title="Close Modal">&times;</span>
+              </div>
+              <div class="container">
+                <div class="row" style="margin: 10px;">
+                  <label for="vegetable">
+                    <b>Reason to remove this user: </b>
+                  </label>
+                  <textarea placeholder="Type here" name="reason" ngModel required></textarea>
+                </div>
+              </div>
+
+              <div class="container" style="background-color:#f1f1f1">
+                <button type="button" style="width: 100px;" (click)="cancel()" onclick="document.getElementById('id01').style.display='none'"
+                  class="cancelbtn">Cancel</button>
+                <input onclick="document.getElementById('id01').style.display='none'" class="btn btn-primary submitBtn coltxt" type="submit">
+              </div>
+            </form>
+          </div>
+
+          <div id="id04" class="modal coltxt">
+            <form #form="ngForm" class="modal-content animate" enctype="multipart/form-data">
+              <div *ngFor="let farmer of selectedFarmerDetails">
+                <div class="imgcontainer">
+                  <span onclick="document.getElementById('id04').style.display='none'" class="close" title="Close Modal">&times;</span>
+                </div>
+                <div class="container">
+                  <div class="row" style="margin: 8px;">
+                    <label>
+                      <b>User ID:</b> {{farmer.userID}}</label>
+                  </div>
+                  <div class="row" style="margin: 8px;">
+                    <label>
+                      <b>Profile created date:</b> {{farmer.created}}</label>
+                  </div>
+                  <div class="row" style="margin: 8px;">
+                    <label>
+                      <b>Profile modified date:</b> {{farmer.modified}}</label>
+                  </div>
+                  <div class="row" style="margin: 8px;">
+                    <label>
+                      <b>Username:</b> {{farmer.userName}}</label>
+                  </div>
+                  <div class="row" style="margin: 8px;">
+                    <label>
+                      <b>Role:</b> {{farmer.userRole}}</label>
+                  </div>
+                  <div class="row" style="margin: 8px;">
+                    <label>
+                      <b>Email:</b> {{farmer.email}}</label>
+                  </div>
+                  <div class="row" style="margin: 8px;">
+                    <label>
+                      <b>District:</b> {{farmer.districtName}}</label>
+                  </div>
+                  <hr>
+                  <label>
+                    <b>Farming vegetables</b>
+                  </label>
+                  <div *ngIf="available">
+                    <div *ngFor="let crop of selectedFarmerMoreDetails">
+                      <label>{{crop.crop}}</label>
+                    </div>
+                  </div>
+                  <div *ngIf="!available">
+                    <label>Not yet selected</label>
+                  </div>
+                </div>
+              </div>
+            </form>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-auto coltxt" style="width: 30%;">
+    <div class="row" style="margin-left: 10px;">
+      <b>Vegetable sellers</b>
+    </div>
+    <div class="row">
+      <div class="col-auto" style="width: 10rem; text-align:left; padding-left:10px;">
+        <div *ngFor="let vegSeller of foodSellerDetails; let i = index;">
+          <div class="row">
+            <div class="col-auto">
+              <button data-toggle="tooltip" onclick="document.getElementById('id05').style.display='block'" title="More details" (click)="getSelectedFoodSellers(vegSeller.userID)">{{vegSeller.userName}}</button>
+            </div>
+            <div class="col-auto">
+              <button class="remove" (click)="deleteSeller(vegSeller.userID, vegSeller.sellerID, vegSeller.userRole, vegSeller.email)"
+                onclick="document.getElementById('id02').style.display='block'">x</button>
+            </div>
+          </div>
+
+          <div id="id02" class="modal coltxt">
+
+            <form #form="ngForm" (ngSubmit)="removeUser(form.value);" class="modal-content animate" enctype="multipart/form-data">
+              <div class="imgcontainer">
+                <span (click)="cancel()" onclick="document.getElementById('id02').style.display='none'" class="close" title="Close Modal">&times;</span>
+              </div>
+              <!-- <alert type="success">hello</alert> -->
+
+              <div class="container">
+                <div class="row" style="margin: 10px;">
+                  <label for="vegetable">
+                    <b>Reason to remove this seller: </b>
+                  </label>
+                  <textarea placeholder="Type here" name="reason" ngModel required></textarea>
+                </div>
+              </div>
+
+              <div class="container" style="background-color:#f1f1f1">
+                <button type="button" style="width: 100px;" (click)="cancel()" onclick="document.getElementById('id02').style.display='none'"
+                  class="cancelbtn">Cancel</button>
+                <input onclick="document.getElementById('id02').style.display='none'" class="btn btn-primary submitBtn coltxt" type="submit">
+                <!-- <button onclick="document.getElementById('id01').style.display='block'" style="width:80px;  padding: 10px 18px; margin-left: 4px;">Save</button> -->
+              </div>
+            </form>
+          </div>
+
+          <div id="id05" class="modal coltxt">
+            <form #form="ngForm" class="modal-content animate" enctype="multipart/form-data">
+              <div *ngFor="let seller of selectedfoodSellerDetails">
+                <div class="imgcontainer">
+                  <span onclick="document.getElementById('id05').style.display='none'" class="close" title="Close Modal">&times;</span>
+                </div>
+                <div class="container"> 
+                  <div class="col-auto">
+                    <div class="row" style="margin: 5px;">
+                      <label>
+                        <b>User ID:</b> {{seller.userID}}</label>
+                    </div>
+                    <div class="row" style="margin: 5px;">
+                      <label>
+                        <b>Profile created date:</b> {{seller.created}}</label>
+                    </div>
+                    <div class="row" style="margin: 5px;">
+                      <label>
+                        <b>Profile modified date:</b> {{seller.modified}}</label>
+                    </div>
+                    <div class="row" style="margin: 5px;">
+                      <label>
+                        <b>Username:</b> {{seller.userName}}</label>
+                    </div>
+                    <div class="row" style="margin: 5px;">
+                      <label>
+                        <b>Role:</b> {{seller.userRole}}</label>
+                    </div>
+                    <div class="row" style="margin: 5px;">
+                      <label>
+                        <b>Email:</b> {{seller.email}}</label>
+                    </div>
+                  </div>
+                  <div class="col-auto">
+                    <div class="row" style="margin: 5px;">
+                      <label>
+                        <b>Tel:</b> {{seller.contact}}</label>
+                    </div>
+                    <div class="row" style="margin: 5px;">
+                      <label>
+                        <b>Address:</b> {{seller.AddressLine1}}, {{seller.AddressLine2}}, {{seller.AddressLine3}}</label>
+                    </div>
+                    <div class="row" style="margin: 5px;">
+                      <label>
+                        <b>District:</b> {{seller.districtName}}</label>
+                    </div>
+                  </div>
+
+                  <hr>
+                  
+                  <div *ngIf="available">
+                    <table>
+                      <div class="row">
+                        <div class="col-auto" style="width: 9rem; margin-left:0px; text-align:left;">
+                          <div class="subheading">Vegetable/Fruit</div>
+                        </div>
+                        <div class="col-auto" style="width: 6rem; text-align:left;">
+                          <div class="subheading">Quantity
+                            <br>(kg)</div>
+                        </div>
+                        <div class="col-auto" style="width: 6rem; text-align:right; padding-right:10px;">
+                          <div class="subheading">Price(1kg)
+                            <br>Rs.</div>
+                        </div>
+                      </div>
+                 
+                  </table>
+                  <div *ngFor="let food of foodSales">
+                    <div class="row">
+                      <div class="col-auto" style="width: 9rem; text-align:left; padding-left:10px;">
+                        <label class="coltxt">{{food.itemName}}</label>
+                      </div>
+                      <div class="col-auto" style="width: 6rem; text-align:left; padding-left:10px;">
+                        <label class="coltxt">{{food.Quantity}}</label>
+                      </div>
+                      <div class="col-auto" style="width: 6rem; text-align:left; padding-left:10px;">
+                        <label class="coltxt">{{food.price}}</label>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div *ngIf="!available">
+                  <label>Not yet selected</label>
+                </div>
+              </div>
+          </div>
+          </form>
+        </div>
+
+
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="col-auto coltxt" style="width: 30%;">
+  <div class="row" style="margin-left: 10px;">
+    <b>Seed sellers</b>
+  </div>
+  <div class="row">
+    <div class="col-auto" style="width: 10rem; text-align:left; padding-left:10px;">
+      <div *ngFor="let seedSeller of seedSellerDetails; let i = index;">
+        <div class="row">
+          <div class="col-auto">
+            <button onclick="document.getElementById('id06').style.display='block'" data-toggle="tooltip" title="More details" (click)="getSelectedSeedSellers(seedSeller.userID)">{{seedSeller.userName}}</button>
+          </div>
+          <div class="col-auto">
+            <button class="remove" (click)="deleteSeller(seedSeller.userID, seedSeller.shopID, seedSeller.userRole, seedSeller.email)"
+              onclick="document.getElementById('id03').style.display='block'">x</button>
+          </div>
+        </div>
+
+        <div id="id03" class="modal coltxt">
+
+          <form #form="ngForm" (ngSubmit)="removeUser(form.value);" class="modal-content animate" enctype="multipart/form-data">
+            <div class="imgcontainer">
+              <span (click)="cancel()" onclick="document.getElementById('id03').style.display='none'" class="close" title="Close Modal">&times;</span>
+            </div>
+            <!-- <alert type="success">hello</alert> -->
+
+            <div class="container">
+              <div class="row" style="margin: 10px;">
+                <label for="vegetable">
+                  <b>Reason to remove this seller: </b>
+                </label>
+                <textarea placeholder="Type here" name="reason" ngModel required></textarea>
+              </div>
+            </div>
+
+            <div class="container" style="background-color:#f1f1f1">
+              <button type="button" style="width: 100px;" (click)="cancel()" onclick="document.getElementById('id03').style.display='none'"
+                class="cancelbtn">Cancel</button>
+              <input onclick="document.getElementById('id03').style.display='none'" class="btn btn-primary submitBtn coltxt" type="submit">
+              <!-- <button onclick="document.getElementById('id01').style.display='block'" style="width:80px;  padding: 10px 18px; margin-left: 4px;">Save</button> -->
+            </div>
+          </form>
+        </div>
+
+        <div id="id06" class="modal coltxt">
+            <form #form="ngForm" class="modal-content animate" enctype="multipart/form-data">
+              <div *ngFor="let seller of selectedfoodSellerDetails">
+                <div class="imgcontainer">
+                  <span onclick="document.getElementById('id06').style.display='none'" class="close" title="Close Modal">&times;</span>
+                </div>
+                <div class="container">
+                  <div class="col-auto">
+                    <div class="row" style="margin: 5px;">
+                      <label>
+                        <b>User ID:</b> {{seller.userID}}</label>
+                    </div>
+                    <div class="row" style="margin: 5px;">
+                      <label>
+                        <b>Profile created date:</b> {{seller.created}}</label>
+                    </div>
+                    <div class="row" style="margin: 5px;">
+                      <label>
+                        <b>Profile modified date:</b> {{seller.modified}}</label>
+                    </div>
+                    <div class="row" style="margin: 5px;">
+                      <label>
+                        <b>Username:</b> {{seller.userName}}</label>
+                    </div>
+                    <div class="row" style="margin: 5px;">
+                      <label>
+                        <b>Role:</b> {{seller.userRole}}</label>
+                    </div>
+                    <div class="row" style="margin: 5px;">
+                      <label>
+                        <b>Email:</b> {{seller.email}}</label>
+                    </div>
+                  </div>
+                  <div class="col-auto">
+                    <div class="row" style="margin: 5px;">
+                      <label>
+                        <b>Tel:</b> {{seller.contact}}</label>
+                    </div>
+                    <div class="row" style="margin: 5px;">
+                      <label>
+                        <b>Address:</b> {{seller.AddressLine1}}, {{seller.AddressLine2}}, {{seller.AddressLine3}}</label>
+                    </div>
+                    <div class="row" style="margin: 5px;">
+                      <label>
+                        <b>District:</b> {{seller.districtName}}</label>
+                    </div>
+                  </div>
+
+                  <hr>
+                  
+                  <div *ngIf="available">
+                    <table>
+                      <div class="row">
+                        <div class="col-auto" style="width: 9rem; margin-left:0px; text-align:left;">
+                          <div class="subheading">Vegetable/Fruit</div>
+                        </div>
+                        <div class="col-auto" style="width: 6rem; text-align:left;">
+                          <div class="subheading">Quantity
+                            <br>(kg)</div>
+                        </div>
+                        <div class="col-auto" style="width: 6rem; text-align:right; padding-right:10px;">
+                          <div class="subheading">Price(1kg)
+                            <br>Rs.</div>
+                        </div>
+                      </div>
+                 
+                  </table>
+                  <div *ngFor="let seed of seedSales">
+                    <div class="row">
+                      <div class="col-auto" style="width: 9rem; text-align:left; padding-left:10px;">
+                        <label class="coltxt">{{seed.seedName}}</label>
+                      </div>
+                      <div class="col-auto" style="width: 6rem; text-align:left; padding-left:10px;">
+                        <label class="coltxt">{{seed.quantity}}</label>
+                      </div>
+                      <div class="col-auto" style="width: 6rem; text-align:left; padding-left:10px;">
+                        <label class="coltxt">{{seed.price}}</label>
+                      </div>
+                    </div>
+                  </div>
+                  <div *ngFor="let plant of plantSales">
+                    <div class="row">
+                      <div class="col-auto" style="width: 9rem; text-align:left; padding-left:10px;">
+                        <label class="coltxt">{{plant.itemName}}</label>
+                      </div>
+                      <div class="col-auto" style="width: 6rem; text-align:left; padding-left:10px;">
+                        <label class="coltxt">{{plant.Quantity}}</label>
+                      </div>
+                      <div class="col-auto" style="width: 6rem; text-align:left; padding-left:10px;">
+                        <label class="coltxt">{{plant.price}}</label>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div *ngIf="!available">
+                  <label>Not yet selected</label>
+                </div>
+              </div>
+          </div>
+          </form>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>
+
+</div>

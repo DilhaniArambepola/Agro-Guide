@@ -1,0 +1,85 @@
+<div class="container">
+
+  <div class="row">
+    <div class= "col-12">
+      <!--Nav bar heading-->
+      <div class="navbar-heading">
+          <div class="navbar-inner">
+            <!--hamburger icon-->
+            <img src="../../../assets/image/hamburgermenu2.png" alt="" class="hamburger navbar-toggle d-sm-none p-0" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">     
+            <a href class="nav-link">
+                <!--Side navigation logo-->
+                <i class="">
+                    <img src="../../../assets/image/zaiziLogo.png" alt="" class="d-none d-sm-inline">     
+                </i>
+            
+            </a>   
+          </div>
+      </div> 
+    </div>
+  </div>
+
+  <div class="row collapse" id="collapseExample" >
+      <div class= "col-12">
+          <nav class="nav navbar-vertical-left">
+            <ul class="nav navbar-nav">
+              
+              <li > 
+                <a href ="{{domain}}/admindashboard" class="d-invisible d-sm-block nav-link">
+                  <i class="invisible fa fa-fw fa-lg fa-line-chart">
+                    <span class="invisible">11</span>
+                  </i>
+                  <span>Agro Guide</span>
+                </a>
+              </li>
+
+                <li > 
+                  <a [routerLink]="['/admindashboard']" class="nav-link">
+                    <i class="fa fa-fw fa-lg fas fa-home"></i>
+                    <img src="../../../assets/images/icons/dashboard-b.png" style="width: 30px; height: 30px; margin-right: 5px;"/>
+                    <!--<span class="badge badge-danger d-none d-sm-block">11</span>-->
+                    <span>Admindashboard</span>
+                  </a>
+                </li>
+            
+                <li>
+                  <a [routerLink]="['/admindashboard/manageCrops']" class="nav-link">
+                    <i class="fa fa-fw fa-lg far fa-calendar"></i>
+                    <img src="../../../assets/images/icons/manageCrops.png" style="width: 30px; height: 30px; margin-right: 5px;"/>
+                     <!--<span class="badge badge-danger d-none d-sm-block">11</span>-->
+                    <span>Manage Crops</span>
+                  </a>
+                </li>
+
+                <li>
+                  <a [routerLink]="['/admindashboard/users']" class="nav-link">
+                    <i class="fa fa-fw fa-lg fas fa-cog"></i>
+                    <img src="../../../assets/images/icons/user.png" style="width: 30px; height: 30px; margin-right: 5px;"/>
+                     <!--<span class="badge badge-danger d-none d-sm-block">11</span>-->
+                    <span>User Profiles</span>
+                  </a>
+                </li>
+
+                
+
+                <li>
+                  <a (click)="logout()" href class="nav-link">
+                    <i class="fa fa-fw fa-lg fa-users"></i>
+                    <img src="../../../assets/images/icons/logout.png" style="width: 30px; height: 30px; margin-right: 5px;"/>
+                    <!-- <span class="badge badge-danger d-none d-sm-block">11</span> -->
+                    <span>Logout</span>
+                  </a>
+                </li>
+
+               
+              
+      
+            </ul>
+          </nav>
+
+      </div>
+    </div>
+</div>
+
+
+

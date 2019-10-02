@@ -1,13 +1,20 @@
 @import url('https://fonts.googleapis.com/css?family=Roboto');
 
+.coltxt{
+    font-family: 'Roboto', sans-serif;
+    font-size: 13px;
+}
 .container-large {
-    margin-top: 0;
     width: 100%;
     background-color: #F6F8FA;
+    overflow: scroll;
 }
 .customNavtabs{
     font-family: 'Roboto', sans-serif;
     color: black;
+}
+a {
+    font-size: 14px;
 }
 .head{
     border: solid 1px  rgb(71, 141, 69);
@@ -20,20 +27,6 @@ h1{
     width: 100%;
     text-align: center;
     font-family: "Lucida Sans Unicode", "Lucida Grande", sans-serif;
-}
-.card {
-    vertical-align: middle;
-    background-color:rgb(7, 77, 36); 
-    border:1px solid black; 
-    margin-top:10px;
-    margin-right: 14px; 
-    width:15%; 
-    height: 20%;
-    border-radius: 5px;
-    padding-bottom: 0px;
-    padding-top: 10px;
-    padding-left: 0px;
-    padding-right: 0px;
 }
 .info {
     color: #F6F8FA;
@@ -50,12 +43,62 @@ h1{
     padding-left: 0px;
     padding-right: 0px;
 }
-.img-card {
-    width:50%; 
-    height:70px; 
-    margin:auto auto;
-}
+
 .txt{
     color:aliceblue; 
     text-align:center;
 }
+.container1 {
+    position: relative;
+    margin-right: 10px;
+  }
+  
+  .image {
+    display: block;
+    width:150px; 
+    height:150px; 
+    margin:auto auto;
+    /* width: 100%;
+    height: auto; */
+  }
+  
+  .overlay {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 100%;
+    width: 100%;
+    opacity: 0;
+    transition: .5s ease;
+    background-color:rgb(52, 122, 50); 
+  }
+  
+  .container1:hover .overlay {
+    opacity: 1;
+  }
+  
+  .text {
+    font-family: 'Roboto', sans-serif;
+    color: white;
+    font-size: 20px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    -webkit-transform: translate(-50%, -50%);
+    -ms-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+    text-align: center;
+  }
+  a {
+      text-decoration: none;
+  }
+  .hand {
+    width:100px; 
+    height:60px; 
+    margin:60px;
+  }
+  .hand: hover{
+    background-color: black;
+  }

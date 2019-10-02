@@ -32,6 +32,11 @@ import { RouterModule } from '@angular/router';
 import { SeedSellerComponent } from './seed-seller/seed-seller.component';
 import { AdminDashboardComponent } from './admin-dashboard/admin-dashboard.component';
 import { MoreDetailsComponent } from './more-details/more-details.component';
+import { UserProfilesComponent } from './user-profiles/user-profiles.component';
+
+import { JwtHelperService, JWT_OPTIONS  } from '@auth0/angular-jwt';
+import { AboutUsComponent } from './about-us/about-us.component';
+import { FertilizerComponent } from './fertilizer/fertilizer.component';
 
 
 @NgModule({
@@ -49,7 +54,10 @@ import { MoreDetailsComponent } from './more-details/more-details.component';
     RegisterComponent,
     SeedSellerComponent,
     AdminDashboardComponent,
-    MoreDetailsComponent
+    MoreDetailsComponent,
+    UserProfilesComponent,
+    AboutUsComponent,
+    FertilizerComponent
   ],
   imports: [
     BrowserModule,
@@ -60,9 +68,13 @@ import { MoreDetailsComponent } from './more-details/more-details.component';
     FormsModule,
     ReactiveFormsModule,
     RouterModule,
-    NgbModule.forRoot()
+    NgbModule.forRoot(),
   ],
-  providers: [AuthGuard],
+  providers: [
+    AuthGuard,
+    { provide: JWT_OPTIONS, useValue: JWT_OPTIONS },
+        JwtHelperService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

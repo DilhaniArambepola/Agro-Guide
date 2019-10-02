@@ -74,7 +74,7 @@ export class UserService {
 
         return this.http.put(`${this._url}/${body}/${shopId}`, options) // ...using put request
             .map((res: Response) => res.json()) // ...and calling .json() on the response to return data
-            .catch((error: any) => Observable.throw(error.json().error || 'Server error')); // ...errors if any
+             // ...errors if any
     }
 
     delete(id: number) {

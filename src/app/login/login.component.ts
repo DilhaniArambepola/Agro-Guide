@@ -82,6 +82,8 @@ export class LoginComponent implements OnInit {
     if (this.loginForm.invalid) {
       return;
     }
+    console.log("pwd: " + this.f.password.value);
+    console.log("email: " + this.f.email.value);
 
     this.sendVal = [
       {
@@ -96,7 +98,7 @@ export class LoginComponent implements OnInit {
       .subscribe(data => { this.user = data;
         console.log("user came");
           console.log('result: login component' + this.user.code);
-          console.log('user: ' + this.user.loggedIn.userID);
+        console.log('user: ' + this.user.loggedIn.userID);
           if (this.user.code == 200) {
             console.log("success:" + this.user.success);
             console.log("token:" + this.user.accessToken);
@@ -113,7 +115,7 @@ export class LoginComponent implements OnInit {
           } else if (this.user.code == 208) {
             this.NotExist();
            // this.errorText = 'Email does not exist';
-            console.log("Here : "+this.user.error);
+            console.log("Here : " + this.user.error);
             return;
           }
 

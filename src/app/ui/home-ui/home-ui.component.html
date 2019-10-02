@@ -1,36 +1,63 @@
-<!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css"> -->
-
 <div class="container container-large">
-  <div class="row" style="width:100%; height:40%;">
+  <div class="row">
     <div class="col-auto" style="margin:0; padding:0; width:50%;">
       <ngb-carousel #carousel style="width:100%; height:100%">
         <ng-template ngbSlide class="carousel-item">
-          <img src="../../../assets/images/slider/home2.jpg" style="width:100%; height:100%" alt="Random first slide">
+          <img src="../../../assets/images/slider/home2.jpg" style="width:600px; height:380px; margin:0; padding:0;" alt="Random first slide">
           <div class="carousel-caption">
             <h3>We Help Gardens Thrive</h3>
           </div>
         </ng-template>
         <ng-template ngbSlide class="carousel-item">
-          <img src="../../../assets/images/slider/home5.jpg" style="width:100%; height:100%;" alt="Random second slide">
+          <img src="../../../assets/images/slider/home5.jpg" style="width:600px; height:380px; margin:0; padding:0;" alt="Random second slide">
           <div class="carousel-caption">
             <h3>Organic Fruites & Vegetables</h3>
           </div>
         </ng-template>
         <ng-template ngbSlide class="carousel-item">
-          <img src="../../../assets/images/slider/home3.jpg" style="width:100%; height:100%" alt="Random third slide">
+          <img src="../../../assets/images/slider/home3.jpg" style="width:600px; height:380px; margin:0; padding:0;" alt="Random third slide">
           <div class="carousel-caption">
             <h3>Find The Perfect Plant</h3>
           </div>
         </ng-template>
       </ngb-carousel>
     </div>
-    <div class="col-auto">
-      <a href="/cultivate">Cultivate</a>
-      <a href="/organicFood">Organic food sellers</a>
-    </div><br>
-    <div class="col-auto">
-        
+    <div class="col-auto coltxt" style="width:48%;">
+      <div style="text-align: justify; margin-top:30; margin-left:10;">
+        <p>With ‘climate change’, ‘global warming’, ‘the greenhouse effect’, ‘sustainability’, ‘carbon footprint’ and ‘environmentally
+          friendly’ fast becoming the buzzwords of this century. What we need is more of natural/organic food products, to
+          have a healthy life. </p>
+        <p>In this rich land, anything can be grown with a very little effort. What you need is your enthusiasm and we provide
+          you the guidance.</p>
+          <p>Learn the best organic methods of fruit and vegetable gardening. </p>
+          <p>Find the best places to buy organic fruits and vegetables</p>
+      </div>
+
+      <div style="margin-left: 40px;">
+        <div class="row">
+          <img src="../../../assets/images/icons/pointer.png" style="width:50px; height:30px;">
+          <a href="/cultivate">Cultivate</a>
+        </div>
+        <div class="row">
+          <img src="../../../assets/images/icons/pointer.png" style="width:50px; height:30px;">
+          <a href="/organicFood">Organic sellers</a>
+        </div>
+        <div class="row">
+          <img src="../../../assets/images/icons/pointer.png" style="width:50px; height:30px;">
+          <a href="/organicFertilizer">Make organic fertilizer</a>
+        </div>
+      </div>
+      <marquee behavior="scroll" direction="left">
+        <img src="../../../assets/images/a6.jpg" width="120" height="90" style="margin-right: 5px;">
+        <img src="../../../assets/images/a3.jpg" width="120" height="90" style="margin-right: 5px;">
+        <img src="../../../assets/images/a2.jpg" width="120" height="90" style="margin-right: 5px;">
+        <img src="../../../assets/images/images.jpg" width="120" height="90" style="margin-right: 5px;">
+        <img src="../../../assets/images/a5.jpg" width="120" height="90" style="margin-right: 5px;">
+        <img src="../../../assets/images/a4.jpg" width="120" height="90" >
+        </marquee>
+
     </div>
+
   </div>
   <div class="row">
     <div class="col-auto info">
@@ -39,28 +66,34 @@
         <br> get customized cultvate solution for you</p>
     </div>
     <div class="col-auto">
-      <img src="../../../assets/images/icons/pointer.png" style="width:100px; height:60px; margin:50px;">
+      <img class="hand" src="../../../assets/images/icons/pointer.png">
     </div>
-    <div class="col-auto card" style="margin-left:7px;">
-      <img src="../../../assets/images/icons/farmerIcon.png" class="img-card">
-      <a class="txt" [routerLink]="['/farmer-home']">Farmer Profile
-        <br>
-        <span style="font-size:12px;">Organic Fruits & Vegetables</span>
-      </a>
+    <div class="container1">
+      <img src="../../../assets/images/icons/farmerIcon.png" alt="Avatar" class="image img-card">
+      <div class="overlay">
+        <a class="text" [routerLink]="['/farmer-home']">Farmer Profile
+          <br>
+          <span style="font-size:12px;">Organic Fruits & Vegetables</span>
+        </a>
+      </div>
     </div>
-    <div class="col-auto card">
-      <img src="../../../assets/images/icons/tSeller.jpg" class="img-card">
-      <a class="txt" [routerLink]="['/veg-seller-home']">Seller Profile
-        <br>
-        <span style="font-size:12px;">Organic Fruits & Vegetables</span>
-      </a>
+    <div class="container1">
+      <img src="../../../assets/images/icons/tSeller.jpg" alt="Avatar" class="image img-card">
+      <div class="overlay">
+        <a class="text" [routerLink]="['/veg-seller-home']">Seller Profile
+          <br>
+          <span style="font-size:12px;">Organic Fruits & Vegetables</span>
+        </a>
+      </div>
     </div>
-    <div class="col-auto card">
-      <img src="../../../assets/images/icons/seedSeller.jpg" class="img-card">
-      <a class="txt" [routerLink]="['/seed-seller-home']">Seed Seller Profile
-        <br>
-        <span style="font-size:12px;">Seeds & Plants</span>
-      </a>
+    <div class="container1">
+      <img src="../../../assets/images/icons/seedSeller.jpg" alt="Avatar" class="image img-card">
+      <div class="overlay">
+        <a class="text" [routerLink]="['/seed-seller-home']">Seed Seller Profile
+          <br>
+          <span style="font-size:12px;">Seeds & Plants</span>
+        </a>
+      </div>
     </div>
   </div>
 

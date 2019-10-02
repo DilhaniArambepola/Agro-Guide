@@ -41,6 +41,7 @@ export class OrganicSellerService {
   getSellerDetails(userID: number) {
     return this._http.get(`${this.URL}/${userID}`)
       .map((response: Response) => response.json())
+      // .map((response: Response) => {response.json(), console.log("Response from service: "+response.json())})
       .catch((error: any) => Observable.throw(error.json().error || 'Server error'));
   }
 

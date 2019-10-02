@@ -75,6 +75,10 @@ export class SeedSellerProfileComponent implements OnInit {
     this._delete.next(`Removed an selling item from the list`);
   }
 
+  contactUpdated() {
+    this._success.next(`Successfully updated the contact number`);
+  }
+
   getSales(userID: any) {
     this._seedService.getSeedSellerById(userID)
     .subscribe(resData => {
@@ -112,6 +116,7 @@ export class SeedSellerProfileComponent implements OnInit {
    this.edit = false;
    this._userService.updateShopDetails(tel.shopID, tel.contact)
      .subscribe(resData => {
+       this.contactUpdated();
        // this.sellers = resData;
      },
        resError => this.errorMsg = resError);

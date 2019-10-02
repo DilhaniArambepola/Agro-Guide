@@ -17,6 +17,10 @@ import { RouterModule } from '@angular/router';
 import { SeedSellerUiComponent } from './seed-seller-ui/seed-seller-ui.component';
 import { AdminDashboardUiComponent } from './admin-dashboard-ui/admin-dashboard-ui.component';
 import { MoreDetailsUiComponent } from './more-details-ui/more-details-ui.component';
+import { UserProfileUiComponent } from './user-profile-ui/user-profile-ui.component';
+import { SideNavComponent } from './side-nav/side-nav.component';
+import { UiAboutComponent } from './ui-about/ui-about.component';
+import { UiFertilizerComponent } from './ui-fertilizer/ui-fertilizer.component';
 
 @NgModule({
     imports: [
@@ -39,7 +43,11 @@ import { MoreDetailsUiComponent } from './more-details-ui/more-details-ui.compon
       FarmerUIHomeComponent,
       SeedSellerUiComponent,
       AdminDashboardUiComponent,
-      MoreDetailsUiComponent],
+      MoreDetailsUiComponent,
+      UserProfileUiComponent,
+      SideNavComponent,
+      UiAboutComponent,
+      UiFertilizerComponent],
     exports: [HeaderComponent,
       FooterComponent,
       AllCropsLayoutComponent,
@@ -52,6 +60,10 @@ import { MoreDetailsUiComponent } from './more-details-ui/more-details-ui.compon
       VegSellerUiComponent,
       SeedSellerUiComponent,
       AdminDashboardUiComponent,
-      MoreDetailsUiComponent]
+      MoreDetailsUiComponent,
+      UserProfileUiComponent,
+      SideNavComponent,
+      UiAboutComponent,
+      UiFertilizerComponent]
   })
   export class UiModule { }

@@ -15,16 +15,22 @@ import { AuthGuard } from './guards/auth.guard';
 import { RoleGuardsService } from './guards/role-guards.service';
 import { AdminDashboardComponent } from './admin-dashboard/admin-dashboard.component';
 import { MoreDetailsComponent } from './more-details/more-details.component';
+import { UserProfilesComponent } from './user-profiles/user-profiles.component';
+import { AboutUsComponent } from './about-us/about-us.component';
+import { FertilizerComponent } from './fertilizer/fertilizer.component';
 
 const routes: Routes = [
   { path: 'cropdetails', component: AllCropsComponent },
   { path: 'cultivate', component: CultivateComponent },
   { path: 'organicFood', component: OrganicFoodComponent},
   { path: 'home', component: HomeComponent },
+  { path: 'aboutus', component: AboutUsComponent },
+  { path: 'organicFertilizer', component: FertilizerComponent },
   { path: 'admindashboard', component: AdminDashboardComponent, canActivate: [RoleGuardsService], data: {role: 'Admin'} },
   { path: 'farmer-home', component: FarmerHomeComponent, canActivate: [RoleGuardsService], data: {role: 'Farmer'}},
   { path: 'admindashboard/manageCrops', component: AdminAddCropsComponent, canActivate: [RoleGuardsService], data: {role: 'Admin'} },
-  { path: 'admindashboard/moreDetails', component: MoreDetailsComponent },
+  { path: 'admindashboard/moreDetails', component: MoreDetailsComponent, canActivate: [RoleGuardsService], data: {role: 'Admin'} },
+  { path: 'admindashboard/users', component: UserProfilesComponent, canActivate: [RoleGuardsService], data: {role: 'Admin'} },
   // tslint:disable-next-line:max-line-length
   { path: 'admindashboard/manageCropDisease', component: AdminCropDiseaseComponent, canActivate: [RoleGuardsService], data: {role: 'Admin'} },
   { path: '', component: HomeComponent },

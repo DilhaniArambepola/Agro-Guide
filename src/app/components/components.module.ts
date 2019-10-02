@@ -14,6 +14,9 @@ import { VegSellerProfileComponent } from './veg-seller-profile/veg-seller-profi
 import { SeedSellerProfileComponent } from './seed-seller-profile/seed-seller-profile.component';
 import { AdminDashboardComponent } from './admin-dashboard/admin-dashboard.component';
 import { MoreDetailsComponentComponent } from './more-details-component/more-details-component.component';
+import { UsersComponent } from './users/users.component';
+import { AboutUsComponentComponent } from './about-us-component/about-us-component.component';
+import { MakeFertilizerComponent } from './make-fertilizer/make-fertilizer.component';
 
 @NgModule({
     imports: [
@@ -37,7 +40,10 @@ import { MoreDetailsComponentComponent } from './more-details-component/more-det
         VegSellerProfileComponent,
         SeedSellerProfileComponent,
         AdminDashboardComponent,
-        MoreDetailsComponentComponent
+        MoreDetailsComponentComponent,
+        UsersComponent,
+        AboutUsComponentComponent,
+        MakeFertilizerComponent
     ],
     exports: [
         CropsComponent,
@@ -50,7 +56,10 @@ import { MoreDetailsComponentComponent } from './more-details-component/more-det
         SeedSellerProfileComponent,
         AdminDashboardComponent,
         MoreDetailsComponentComponent,
-        FarmerHomeComponentComponent
+        FarmerHomeComponentComponent,
+        UsersComponent,
+        AboutUsComponentComponent,
+        MakeFertilizerComponent
     ]
   })
   export class ComponentsModule { }
