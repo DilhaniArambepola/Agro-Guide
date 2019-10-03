@@ -715,7 +715,7 @@ router.post('/users/authenticate', function (req, res) {
     console.log(c);
     db.query('SELECT * FROM users WHERE email = ?', [email], function (error, results, fields) {
         if (error) {
-            // console.log("error ocurred",error);
+             console.log("error ocurred",error);
             res.send({
                 "code": 400,
                 "failed": "error ocurred"

@@ -107,3 +107,8 @@ h5 {
      width: 100%;
   }
 }
+.container-large {
+  overflow-y: auto;
+  overflow-x: hidden;
+
+}

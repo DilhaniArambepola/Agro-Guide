@@ -1,15 +1,16 @@
-<a class="txt" [routerLink]="['/admindashboard/manageCrops']">
-  Manage crops
+<div class="container">
+  <a class="txt" [routerLink]="['/admindashboard/manageCrops']">
+    Manage crops
 
-</a>
-<br>
-<a class="txt" [routerLink]="['/admindashboard/users']">User Profiles
   </a>
-<br>
-<a class="txt" [routerLink]="['/admindashboard/manageCropDisease']">Seller Profile
-Manage Crop Diseases
-</a>
-<div class="col-auto">
-  <h2>Send mail</h2>
-  <button (click)="checkMail()">Check mail</button>
+  <br>
+  <a class="txt" [routerLink]="['/admindashboard/users']">User Profiles
+  </a>
+  <br>
+  <a class="txt" [routerLink]="['/admindashboard/manageCropDisease']">Seller Profile Manage Crop Diseases
+  </a>
+  <div class="col-auto">
+    <h2>Send mail</h2>
+    <button (click)="checkMail()">Check mail</button>
+  </div>
 </div>

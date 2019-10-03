@@ -5,6 +5,8 @@ import { first } from 'rxjs/operators';
 import { AlertServiceService, AuthenticationService } from '../services';
 import { Observable, Subject } from 'rxjs';
 import { debounceTime } from 'rxjs/operators';
+import { NgForm } from '@angular/forms';
+import { ViewChild } from '@angular/core';
 
 @Component({
   selector: 'app-login',
@@ -68,13 +70,15 @@ export class LoginComponent implements OnInit {
   }
   public NotExist() {
     console.log("call to not exist");
-    this._success.next(`Email does not exits`);
+    this._success.next(`Email does not exist`);
    // this.router.navigate(['/login']);
   }
 
   // convenience getter for easy access to form fields
   get f() { return this.loginForm.controls; }
 
+  // tslint:disable-next-line:member-ordering
+  // @ViewChild('form') mytemplateForm: NgForm;
   onSubmit() {
     this.submitted = true;
 
@@ -98,7 +102,7 @@ export class LoginComponent implements OnInit {
       .subscribe(data => { this.user = data;
         console.log("user came");
           console.log('result: login component' + this.user.code);
-        console.log('user: ' + this.user.loggedIn.userID);
+        
           if (this.user.code == 200) {
             console.log("success:" + this.user.success);
             console.log("token:" + this.user.accessToken);
@@ -110,6 +114,7 @@ export class LoginComponent implements OnInit {
            // this.alertService.error(this.user.error);
            // this.errorText = 'Email and password does not match';
             console.log("Here : "+this.user.error);
+            // this.mytemplateForm.reset();
            // this.router.navigate(['/login']);
             this.NotMatch();
           } else if (this.user.code == 208) {

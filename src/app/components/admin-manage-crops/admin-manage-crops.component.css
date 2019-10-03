@@ -16,6 +16,10 @@
 }
 body {font-family: Arial, Helvetica, sans-serif;}
 
+.container-large {
+  overflow-y: auto;
+}
+
 /* Full-width input fields */
 input[type=text], input[type=file] {
   width: 50%;

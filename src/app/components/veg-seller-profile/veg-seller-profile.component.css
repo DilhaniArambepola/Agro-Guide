@@ -97,6 +97,10 @@ button {
   margin-top: 5px; 
   margin-left: 50px;
 }
+.container-large {
+  overflow-y: auto;
+  overflow-x: hidden;
+}
 
   /* Change styles for span and cancel button on extra small screens */
   @media screen and (max-width: 300px) {

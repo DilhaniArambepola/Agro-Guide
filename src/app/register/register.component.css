@@ -1,0 +1,22 @@
+@import url('https://fonts.googleapis.com/css?family=Roboto');
+
+.container {
+    width: 80%;
+    height: 100%;
+    margin: 10px auto;
+    opacity: 0.9;
+    /* border: 1px solid rgb(9, 80, 38);
+    border-radius: 5px; */
+    background-color: rgb(161, 190, 171);
+}
+.container-large {
+    width: 80%;
+    height: 100%;
+    margin: auto;
+    background-color: rgb(244, 247, 244);
+    overflow-x: hidden;
+}
+.coltxt{
+    font-family: 'Roboto', sans-serif;
+    font-size: 13px;
+}

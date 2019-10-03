@@ -4,6 +4,7 @@
     margin-top: 0vh;
     width: 100%;
     background-color: #F6F8FA;
+    overflow-y: auto;
 }
 .customNavtabs{
     font-family: 'Roboto', sans-serif;

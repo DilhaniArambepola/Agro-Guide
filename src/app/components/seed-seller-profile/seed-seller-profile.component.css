@@ -106,4 +106,8 @@ button {
        float: none;
     }
   }
+
+  .container-large {
+    overflow-y: auto;
+  }
  

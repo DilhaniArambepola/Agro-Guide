@@ -108,3 +108,6 @@ button {
     margin: 10px;
     background-color: rgb(190, 231, 178);
   }
+  .container-large {
+    overflow-y: auto;
+  }

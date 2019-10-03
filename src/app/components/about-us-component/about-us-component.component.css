@@ -38,6 +38,7 @@
 .main-container {
     width: 100%;
     margin-bottom:20px; 
+    overflow-y: auto;
 }
 a {
     color: rgb(53, 53, 202);

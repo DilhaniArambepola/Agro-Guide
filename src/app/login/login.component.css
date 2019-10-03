@@ -1,9 +1,27 @@
+@import url('https://fonts.googleapis.com/css?family=Roboto');
+
 .background{
     background-color: rgb(238, 145, 145);
-    border-radius: 3px;
-    border: #8A8888;
-    padding: 2px;
-    background-position: center;
-    padding: 2px;
-    margin-left: 15px;
+    margin-top: 5px; 
+    margin-left: 20px;
+}
+.container {
+    width: 30%;
+    height: 60%;
+    margin: 80px auto;
+    opacity: 0.9;
+    /* border: 1px solid rgb(9, 80, 38);
+    border-radius: 5px; */
+    background-color: rgb(95, 158, 116);
+}
+.container-large {
+    width: 80%;
+    height: 550px;
+    margin: auto;
+    background-image: url("../../assets/images/background.jpg");
+    overflow-x: hidden;
+}
+.coltxt{
+    font-family: 'Roboto', sans-serif;
+    font-size: 13px;
 }
