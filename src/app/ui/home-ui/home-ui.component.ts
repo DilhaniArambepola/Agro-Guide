@@ -1,5 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import {NgbCarouselConfig} from '@ng-bootstrap/ng-bootstrap';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-home-ui',
@@ -9,7 +10,7 @@ import {NgbCarouselConfig} from '@ng-bootstrap/ng-bootstrap';
 })
 export class HomeUIComponent implements OnInit {
 
-  constructor(config: NgbCarouselConfig) {
+  constructor(config: NgbCarouselConfig, private router: Router) {
       config.interval = 3000;
       config.keyboard = false;
    }
@@ -18,6 +19,11 @@ export class HomeUIComponent implements OnInit {
 
   ngOnInit() {
 
+  }
+
+  Register() {
+    console.log("register");
+    this.router.navigate(['/register']);
   }
 
 }

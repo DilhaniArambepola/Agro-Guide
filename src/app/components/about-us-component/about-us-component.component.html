@@ -23,6 +23,10 @@
             <img src="../../../assets/images/a4.jpg" width="200" height="150" alt="Flying Bat">
           </marquee>
 
+          <marquee>
+           | Contact us through below form for more details |
+          </marquee>
+
         </div>
         <div class="col-auto" style="width: 30%; margin: auto;">
 
@@ -65,7 +69,7 @@
 
     </div>
   </div>
-  <div class="row">
+  <div class="row" id="contact">
     <div class="col-auto container coltxt">
       <div class="heading">
         Contact Us
@@ -77,7 +81,18 @@
         <ngb-alert style="margin-top: 5px; margin-left: 50px;" *ngIf="successMessage" type="success" (close)="successMessage = null">{{ successMessage }}</ngb-alert>
         <form #form="ngForm" (ngSubmit)="submitInquiry(form.value);" class="coltxt" enctype="multipart/form-data">
           <div>
-
+            
+              <select class="dropdown coltxt" (change)="getSelectedTopic($event.target.value)" required>
+                <option value="All">Select a topic related to your inquiry</option>
+                <option value="Cultivate">Cultivate</option>
+                <option value="Sellings">Sellings</option>
+                <option value="Sellers">Sellers</option>
+                <!-- <option *ngFor="let zone of zones" value={{zone.zoneID}}>
+                  {{zone.zone}}
+                </option> -->
+              </select>
+       
+            <br>
             What can we help with you?
             <br>
             <input style="margin-bottom: 10px; width: 500px;" type="text" placeholder="Enter the title of your inquiry" name="title"

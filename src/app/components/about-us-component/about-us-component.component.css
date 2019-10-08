@@ -46,3 +46,9 @@ a {
 a :hover {
     color: rgba(38, 37, 43, 0.267);
 }
+.dropdown {
+    width: 150px;
+    height: 30px;
+    margin-left: 0px;
+    margin-bottom: 10px;
+  }

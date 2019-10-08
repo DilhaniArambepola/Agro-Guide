@@ -17,6 +17,7 @@ import { MoreDetailsComponentComponent } from './more-details-component/more-det
 import { UsersComponent } from './users/users.component';
 import { AboutUsComponentComponent } from './about-us-component/about-us-component.component';
 import { MakeFertilizerComponent } from './make-fertilizer/make-fertilizer.component';
+import { AdminContactComponent } from './admin-contact/admin-contact.component';
 
 @NgModule({
     imports: [
@@ -43,7 +44,8 @@ import { MakeFertilizerComponent } from './make-fertilizer/make-fertilizer.compo
         MoreDetailsComponentComponent,
         UsersComponent,
         AboutUsComponentComponent,
-        MakeFertilizerComponent
+        MakeFertilizerComponent,
+        AdminContactComponent
     ],
     exports: [
         CropsComponent,
@@ -59,7 +61,8 @@ import { MakeFertilizerComponent } from './make-fertilizer/make-fertilizer.compo
         FarmerHomeComponentComponent,
         UsersComponent,
         AboutUsComponentComponent,
-        MakeFertilizerComponent
+        MakeFertilizerComponent,
+        AdminContactComponent
     ]
   })
   export class ComponentsModule { }

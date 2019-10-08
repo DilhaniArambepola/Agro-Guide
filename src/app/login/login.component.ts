@@ -55,13 +55,24 @@ export class LoginComponent implements OnInit {
     });
 
      // reset login status
-     this.authenticationService.logout();
+  //   this.authenticationService.logout();
 
     //  this.activatedRoute.queryParams.subscribe(params => {
     //   this.returnUrl = params['returnUrl'];
     //  });
     // get return url from route parameters or default to '/'
     this.returnUrl = this.route.snapshot.queryParams['returnUrl'];
+    if (this.returnUrl == '/farmer-home') {
+      this.title = 'Farmer';
+    } else if (this.returnUrl == '/admindashboard') {
+      this.title = 'Admin';
+    } else if (this.returnUrl == '/veg-seller-home') {
+      this.title = 'Vegeable seller';
+    } else if (this.returnUrl == '/seed-seller-home') {
+      this.title = 'Seed seller';
+    }
+    
+    console.log("returnURL : " + this.returnUrl);
   }
 
   public NotMatch() {
@@ -81,6 +92,7 @@ export class LoginComponent implements OnInit {
   // @ViewChild('form') mytemplateForm: NgForm;
   onSubmit() {
     this.submitted = true;
+    this.authenticationService.logout();
 
     // stop here if form is invalid
     if (this.loginForm.invalid) {
@@ -107,6 +119,7 @@ export class LoginComponent implements OnInit {
             console.log("success:" + this.user.success);
             console.log("token:" + this.user.accessToken);
             console.log("return url : " + this.returnUrl);
+           
             this.router.navigate([this.returnUrl], { queryParams: { userID: this.user.loggedIn.userID } });
             // this.router.navigate(['/home']);
           } else if (this.user.code == 204) {

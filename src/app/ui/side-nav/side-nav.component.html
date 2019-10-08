@@ -7,13 +7,7 @@
           <div class="navbar-inner">
             <!--hamburger icon-->
             <img src="../../../assets/image/hamburgermenu2.png" alt="" class="hamburger navbar-toggle d-sm-none p-0" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">     
-            <a href class="nav-link">
-                <!--Side navigation logo-->
-                <i class="">
-                    <img src="../../../assets/image/zaiziLogo.png" alt="" class="d-none d-sm-inline">     
-                </i>
-            
-            </a>   
+             
           </div>
       </div> 
     </div>
@@ -33,10 +27,23 @@
                 </a>
               </li>
 
+              <li > 
+                <a [routerLink]="['/home']" class="nav-link">
+                  <i class="fa fa-fw fa-lg fas fa-home"></i>
+                  <i class="material-icons">
+                    account_balance
+                    </i>
+                  <!--<span class="badge badge-danger d-none d-sm-block">11</span>-->
+                  <span>Home</span>
+                </a>
+              </li>
+
                 <li > 
                   <a [routerLink]="['/admindashboard']" class="nav-link">
                     <i class="fa fa-fw fa-lg fas fa-home"></i>
-                    <img src="../../../assets/images/icons/dashboard-b.png" style="width: 30px; height: 30px; margin-right: 5px;"/>
+                    <i class="material-icons">
+                      assessment
+                      </i>
                     <!--<span class="badge badge-danger d-none d-sm-block">11</span>-->
                     <span>Admindashboard</span>
                   </a>
@@ -45,7 +52,9 @@
                 <li>
                   <a [routerLink]="['/admindashboard/manageCrops']" class="nav-link">
                     <i class="fa fa-fw fa-lg far fa-calendar"></i>
-                    <img src="../../../assets/images/icons/manageCrops.png" style="width: 30px; height: 30px; margin-right: 5px;"/>
+                    <i class="material-icons">
+                      eco
+                      </i>
                      <!--<span class="badge badge-danger d-none d-sm-block">11</span>-->
                     <span>Manage Crops</span>
                   </a>
@@ -54,7 +63,9 @@
                 <li>
                   <a [routerLink]="['/admindashboard/users']" class="nav-link">
                     <i class="fa fa-fw fa-lg fas fa-cog"></i>
-                    <img src="../../../assets/images/icons/user.png" style="width: 30px; height: 30px; margin-right: 5px;"/>
+                    <i class="material-icons">
+                      supervisor_account
+                      </i>
                      <!--<span class="badge badge-danger d-none d-sm-block">11</span>-->
                     <span>User Profiles</span>
                   </a>
@@ -65,7 +76,9 @@
                 <li>
                   <a (click)="logout()" href class="nav-link">
                     <i class="fa fa-fw fa-lg fa-users"></i>
-                    <img src="../../../assets/images/icons/logout.png" style="width: 30px; height: 30px; margin-right: 5px;"/>
+                    <i class="material-icons">
+                      power_settings_new
+                      </i>
                     <!-- <span class="badge badge-danger d-none d-sm-block">11</span> -->
                     <span>Logout</span>
                   </a>

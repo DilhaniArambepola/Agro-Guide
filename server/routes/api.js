@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router();
 const jwt = require('jsonwebtoken');
 const nodemailer = require('nodemailer');
+const session = require('express-session');
 // const mysql = require('mysql');
 // var path = require('path');
 // var multer = require('multer');
@@ -535,7 +536,7 @@ router.get('/userDetails/:userID', function (req, res) {
     let sql = "SELECT * FROM users where userID = ?";
     db.query(sql, [req.params.userID], (err, result) => {
         if (err) throw err;
-        console.log("User : " + result[0].userName);
+        // console.log("User : " + result[0].userName);
         res.send(result);
     });
 });
@@ -585,8 +586,36 @@ router.post('/inquiry', function (req, res) {
     console.log("details : " + req.body[0].title);
     var today = new Date();
     console.log("date: " + today);
-    let sql = 'INSERT INTO inquiry(email, name, title, description, created_date) VALUES(?,?,?,?,?);';
-    db.query(sql, [req.body[0].email, req.body[0].name, req.body[0].title, req.body[0].description, today], (err, result) => {
+    let sql = 'INSERT INTO inquiry(email, name, title, topic, description, created_date) VALUES(?,?,?,?,?,?);';
+    db.query(sql, [req.body[0].email, req.body[0].name, req.body[0].title, req.body[0].topic, req.body[0].description, today], (err, result) => {
+        if (err) throw err;
+        res.send(result);
+    });
+});
+
+router.put('/inquiry', function (req, res) {
+    console.log("details : " + req.body.response);
+    console.log("details : " + req.body.id);
+    let sql = 'UPDATE inquiry set respond=? where inquiryId=?';
+    db.query(sql, [req.body.response, req.body.id], (err, result) => {
+        if (err) throw err;
+        res.send(result);
+    });
+});
+
+router.delete('/inquiry/:id', function (req, res) {
+    console.log("delete: " + req.params.id);
+    let sql = 'DELETE from inquiry where inquiryID=?';
+    db.query(sql, [req.params.id], (err, result) => {
+        if (err) throw err;
+        console.log("deleted: " + result);
+        res.send(result);
+    });
+});
+
+router.get('/inquiry', function (req, res) {
+    let sql = "SELECT * FROM inquiry";
+    db.query(sql, [req.params.userID], (err, result) => {
         if (err) throw err;
         res.send(result);
     });
@@ -705,6 +734,7 @@ router.post('/register', function (req, res) {
     });
 });
 
+var val;
 router.post('/users/authenticate', function (req, res) {
     console.log("Came to authenticate");
     data = req.body;
@@ -729,6 +759,9 @@ router.post('/users/authenticate', function (req, res) {
                     var token = jwt.sign({ id: results[0].id }, 'grokonez-super-secret-key', {
                         expiresIn: 86400 // expires in 24 hours
                     });
+                    // val = req.session;
+                    // val.userid = results[0].userID;
+                    // console.log("session: " +req.session.userid);
                     console.log('token' + token);
                     console.log('userID' + results[0].userID);
 

@@ -1,6 +1,9 @@
 .nav-link {
     text-decoration: none;
   }
+  .container {
+    width: 20px;
+  }
   
   .navbar-vertical-left {
     position: fixed;
@@ -54,7 +57,7 @@
     position: relative;
     margin-right:1em;
     top: 1px;
-    width:30px;
+    width:10px;
     height:30px;
   }
   
@@ -96,17 +99,17 @@
   .navbar-heading > .navbar-inner > img {
     position: relative;
     margin:1em;
-    width:30px;
+    width:10px;
     height:30px;
-    z-index: 3;
+    z-index: 1;
   }
   
   .navbar-heading > .navbar-inner > img.hamburger {
     position: relative;
     margin:0.75em;
-    width:30px;
+    width:10px;
     height:30px;
-    z-index: 3;
+    z-index: 1;
   }
   
   .navbar-toggle{

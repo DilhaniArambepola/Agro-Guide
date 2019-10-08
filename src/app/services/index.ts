@@ -7,3 +7,4 @@ export * from './seeds.service';
 export * from './user.service';
 export * from './farmer.service';
 export * from './profiles.service';
+export * from './general.service';

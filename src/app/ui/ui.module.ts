@@ -21,6 +21,7 @@ import { UserProfileUiComponent } from './user-profile-ui/user-profile-ui.compon
 import { SideNavComponent } from './side-nav/side-nav.component';
 import { UiAboutComponent } from './ui-about/ui-about.component';
 import { UiFertilizerComponent } from './ui-fertilizer/ui-fertilizer.component';
+import { UiAdminContactComponent } from './ui-admin-contact/ui-admin-contact.component';
 
 @NgModule({
     imports: [
@@ -47,7 +48,8 @@ import { UiFertilizerComponent } from './ui-fertilizer/ui-fertilizer.component';
       UserProfileUiComponent,
       SideNavComponent,
       UiAboutComponent,
-      UiFertilizerComponent],
+      UiFertilizerComponent,
+      UiAdminContactComponent],
     exports: [HeaderComponent,
       FooterComponent,
       AllCropsLayoutComponent,
@@ -64,6 +66,7 @@ import { UiFertilizerComponent } from './ui-fertilizer/ui-fertilizer.component';
       UserProfileUiComponent,
       SideNavComponent,
       UiAboutComponent,
-      UiFertilizerComponent]
+      UiFertilizerComponent,
+      UiAdminContactComponent]
   })
   export class UiModule { }

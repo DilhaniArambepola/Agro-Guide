@@ -23,6 +23,7 @@ export class VegSellerProfileComponent implements OnInit {
   salesDetails: any[];
 
   sendVegetable: any[];
+  val: any[];
 
   successMessage: string;
   deleteMessage: string;
@@ -38,9 +39,14 @@ export class VegSellerProfileComponent implements OnInit {
 
   ngOnInit() {
     this.activatedRoute.queryParams.subscribe(params => {
-      const userID = params['userID'];
+      // const userID = params['userID'];
+      const userID: any = localStorage.getItem('currentUser');
       console.log("UserID : " + userID);
       this.getSellerDetails(userID);
+      console.log("session: " + localStorage.getItem('currentUser'));
+   
+      console.log("val1: " + userID);
+      // console.log("val: cannot" + val.userID);
     });
 
     this._success.subscribe((message) => this.successMessage = message);

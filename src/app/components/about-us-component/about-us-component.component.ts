@@ -13,7 +13,8 @@ import {NgbCarouselConfig} from '@ng-bootstrap/ng-bootstrap';
 })
 export class AboutUsComponentComponent implements OnInit {
 
-  sendValue: { 'title': any; 'description': any; 'email': any; 'name': any; }[];
+  topic: any;
+  sendValue: { 'topic': any, 'title': any; 'description': any; 'email': any; 'name': any; }[];
   errorMsg: string;
   private _success = new Subject<string>();
   successMessage: string;
@@ -31,12 +32,17 @@ export class AboutUsComponentComponent implements OnInit {
     this._success.next(`We received your inquiry. We'll respond you soon`);
   }
 
+  getSelectedTopic(topic) {
+    console.log("topic: " + topic);
+    this.topic = topic;
+  }
+
   // tslint:disable-next-line:member-ordering
   @ViewChild('form') mytemplateForm: NgForm;
   submitInquiry(val: any) {
-
     this.sendValue = [
       {
+        'topic': this.topic,
         'title': val.title,
         'description': val.description,
         'email': val.email,

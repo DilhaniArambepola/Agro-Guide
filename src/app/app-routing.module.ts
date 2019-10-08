@@ -18,6 +18,7 @@ import { MoreDetailsComponent } from './more-details/more-details.component';
 import { UserProfilesComponent } from './user-profiles/user-profiles.component';
 import { AboutUsComponent } from './about-us/about-us.component';
 import { FertilizerComponent } from './fertilizer/fertilizer.component';
+import { AdminContactsComponent } from './admin-contacts/admin-contacts.component';
 
 const routes: Routes = [
   { path: 'cropdetails', component: AllCropsComponent },
@@ -29,6 +30,7 @@ const routes: Routes = [
   { path: 'admindashboard', component: AdminDashboardComponent, canActivate: [RoleGuardsService], data: {role: 'Admin'} },
   { path: 'farmer-home', component: FarmerHomeComponent, canActivate: [RoleGuardsService], data: {role: 'Farmer'}},
   { path: 'admindashboard/manageCrops', component: AdminAddCropsComponent, canActivate: [RoleGuardsService], data: {role: 'Admin'} },
+  { path: 'admindashboard/manageContacts', component: AdminContactsComponent, canActivate: [RoleGuardsService], data: {role: 'Admin'} },
   { path: 'admindashboard/moreDetails', component: MoreDetailsComponent, canActivate: [RoleGuardsService], data: {role: 'Admin'} },
   { path: 'admindashboard/users', component: UserProfilesComponent, canActivate: [RoleGuardsService], data: {role: 'Admin'} },
   // tslint:disable-next-line:max-line-length

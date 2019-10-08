@@ -38,9 +38,9 @@ export class RegisterComponent implements OnInit {
         private _locationService: LocationsService
     ) {
         // redirect to home if already logged in
-        if (this.authenticationService.currentUserValue) {
-            this.router.navigate(['/']);
-        }
+        // if (this.authenticationService.currentUserValue) {
+        //     this.router.navigate(['/']);
+        // }
     }
 
     ngOnInit() {

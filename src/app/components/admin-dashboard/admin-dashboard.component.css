@@ -1,3 +1,51 @@
-.container {
+@import url('https://fonts.googleapis.com/css?family=Roboto');
+
+.heading{
+  margin-top: 10px; 
+  font-family: 'Roboto', sans-serif;
+  font-size: 16px;
+}
+.subheading{
+    margin-top: 10px; 
+    font-family: 'Roboto', sans-serif;
+    font-size: 14px;
+}
+.coltxt{
+    font-family: 'Roboto', sans-serif;
+    font-size: 13px;
+}
+.large-container {
+    overflow-x: hidden;
     overflow-y: auto;
+   
+}
+.container {
+    width: 20%;
+    margin: 10px;
+    /* padding: 15px; */
+    padding-top: 15px;
+    padding-left: 15px;
+    padding-right: 15px;
+    background-color: rgb(255, 200, 118);
+    border-radius: 5px;
+}
+.badge {
+    float: right;
+    width: 20px;
+    margin: 5px;
+    margin-top: 10px;
+    font-size: 16px;
+}
+.sm {
+    /* border: 1px solid rgb(223, 160, 66); */
+    background-color: rgb(212, 240, 240);
+    border-radius: 4px;
+    padding: 3px;
+    margin-top: 10px;
+    margin-bottom: 0px;
+}
+.profile {
+    border: 1px solid rgb(28, 28, 61);
+    border-radius: 4px;
+    margin: 10px;
 }

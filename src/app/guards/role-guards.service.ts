@@ -29,17 +29,22 @@ export class RoleGuardsService implements CanActivate {
 
     const user = this._authService.decode();
     console.log("req back : " + user);
-    if (user != 1) {
-      if (user.loggedIn.userRole === next.data.role) {
-        console.log("expected rule : " + true);
+    if (user != 0) {
+      if (user === next.data.role) {
+        console.log("expected rule : " + user);
+        console.log("expected rule : " + next.data.role);
         console.log("can authenticate: " + state.url);
         console.log("return url from guard : " + state.url);
-     //   this._router.navigate([state.url], { queryParams: { userID: user.loggedIn.userID } });
+        // console.log("session: " + req.session.userid);
+        // this._router.navigate([state.url]);
+        // this._router.navigate([state.url], { queryParams: { userID: user.loggedIn.userID } });
+      //  console.log("url: " + state.url);
         return true;
       }
       console.log("expected rule : " + user);
       // navigate to not found page
-      this._router.navigate(['/404']);
+      
+      this._router.navigate(['/login'], { queryParams: { returnUrl: state.url } });
       return false;
     } else {
       console.log("return url from guard : " + state.url);

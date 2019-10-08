@@ -37,6 +37,7 @@ import { UserProfilesComponent } from './user-profiles/user-profiles.component';
 import { JwtHelperService, JWT_OPTIONS  } from '@auth0/angular-jwt';
 import { AboutUsComponent } from './about-us/about-us.component';
 import { FertilizerComponent } from './fertilizer/fertilizer.component';
+import { AdminContactsComponent } from './admin-contacts/admin-contacts.component';
 
 
 @NgModule({
@@ -57,7 +58,8 @@ import { FertilizerComponent } from './fertilizer/fertilizer.component';
     MoreDetailsComponent,
     UserProfilesComponent,
     AboutUsComponent,
-    FertilizerComponent
+    FertilizerComponent,
+    AdminContactsComponent
   ],
   imports: [
     BrowserModule,

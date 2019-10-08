@@ -1,0 +1,180 @@
+<div class="container">
+  <div class="row">
+    <ngb-alert style="margin-top: 5px; margin-left: 50px;" class="coltxt" *ngIf="successMessage" type="success" (close)="successMessage = null">{{ successMessage }}</ngb-alert>
+    <ngb-alert class="background coltxt" *ngIf="deleteMessage" type="delete" (close)="deleteMessage = null">{{ deleteMessage }}</ngb-alert>
+  </div>
+  <div class="row">
+    <div class="col-auto">
+      <select class="dropdown coltxt" (change)="getSelectedLabel($event.target.value)">
+        <option value="0">All</option>
+        <option *ngFor="let topic of topics" value={{topic.name}}>
+          {{topic.name}}
+        </option>
+      </select>
+    </div>
+  </div>
+  <div class="row">
+
+    <div class="col-auto column coltxt">
+      <h6>New inquiries
+        <div class="row">
+          <div style="margin-right: 0px; margin-left: 12px;">
+            Total:
+          </div>
+          <div style="margin-left: 1px;">
+            <span class="badge badge-danger d-none d-sm-block">{{newCount}}</span>
+          </div>
+        </div>
+
+      </h6>
+      <div *ngFor="let inquiry of pending">
+        <button (click)="more(inquiry.inquiryID)" onclick="document.getElementById('id02').style.display='block'" class="btn">{{inquiry.title}}</button>
+        <button class="remove" (click)="deleteInquiry(inquiry.inquiryID)">Delete</button>
+      </div>
+    </div>
+    <div id="id01" class="modal coltxt">
+
+      <form #form="ngForm" (ngSubmit)="sendResponse(form.value);" class="modal-content animate" enctype="multipart/form-data">
+
+        <div class="imgcontainer">
+          <span onclick="document.getElementById('id01').style.display='none'" class="close" title="Close Modal">&times;</span>
+        </div>
+
+        <div class="container">
+
+          <div *ngFor="let n of inquiry">
+
+            <label for="id">
+              <b>Inquiry ID: </b>{{n.inquiryID}}
+            </label>
+            <br>
+
+            <label for="date">
+              <b>Created date: </b>{{n.created_date}}
+            </label>
+            <br>
+
+            <label for="name">
+              <b>Sender: </b>{{n.name}}
+            </label>
+            <br>
+
+            <label for="email">
+              <b>Sender's email: </b>{{n.email}}
+            </label>
+            <br>
+
+            <label for="topic">
+              <b>Related topic: </b>{{n.topic}}
+            </label>
+            <br>
+
+            <label for="title">
+              <b>Title: </b>{{n.title}}
+            </label>
+            <br>
+
+            <label for="description">
+              <b>Description</b>
+            </label>
+            <p>{{n.description}}</p>
+            <br>
+
+            <label for="response">
+                <b>Response</b>
+              </label>
+              <p>{{n.respond}}</p>
+              <br>
+          </div>
+        </div>
+
+        <div class="container" style="background-color:#f1f1f1">
+          <button type="button" (click)="cancel()" onclick="document.getElementById('id01').style.display='none'" class="cancelbtn">Cancel</button>
+          <input onclick="document.getElementById('id01').style.display='none'" class="btn btn-primary coltxt" type="submit">
+        </div>
+
+      </form>
+    </div>
+
+
+    <div class="col-auto column coltxt">
+      <h6>Responded inquiries
+        <div class="row">
+          <div style="margin-right: 0px; margin-left: 12px;">
+            Total:
+          </div>
+          <div style="margin-left: 1px;">
+            <span class="badge badge-danger d-none d-sm-block">{{respondedCount}}</span>
+          </div>
+        </div>
+      </h6>
+      <div *ngFor="let inquiry of sent">
+        <button (click)="more(inquiry.inquiryID)" onclick="document.getElementById('id01').style.display='block'" class="btn">{{inquiry.title}}</button>
+        <button class="remove" (click)="deleteInquiry(inquiry.inquiryID)">Delete</button>
+      </div>
+    </div>
+
+    <div id="id02" class="modal coltxt">
+
+      <form #form="ngForm" (ngSubmit)="sendResponse(form.value);" class="modal-content animate" enctype="multipart/form-data">
+        <div class="imgcontainer">
+          <span onclick="document.getElementById('id02').style.display='none'" class="close" title="Close Modal">&times;</span>
+          <h4>Add a new crop</h4>
+        </div>
+
+        <div class="container">
+          <div *ngFor="let n of inquiry">
+            <label for="id">
+              <b>Inquiry ID: </b>{{n.inquiryID}}
+            </label>
+            <br>
+
+            <label for="date">
+              <b>Created date: </b>{{n.created_date}}
+            </label>
+            <br>
+
+            <label for="name">
+              <b>Sender: </b>{{n.name}}
+            </label>
+            <br>
+
+            <label for="email">
+              <b>Sender's email: </b>{{n.email}}
+            </label>
+            <br>
+
+            <label for="topic">
+              <b>Related topic: </b>{{n.topic}}
+            </label>
+            <br>
+
+            <label for="title">
+              <b>Title: </b>{{n.title}}
+            </label>
+            <br>
+
+            <label for="description">
+              <b>Description</b>
+            </label>
+            <p>{{n.description}}</p>
+            <br>
+
+            <label for="response">
+              <b>Response</b>
+            </label>
+            <br>
+            <textarea placeholder="Enter the response" name="res" ngModel rows="8" cols="100"></textarea>
+            <br>
+
+            <div class="container" style="background-color:#f1f1f1">
+              <button type="button" (click)="cancel()" onclick="document.getElementById('id02').style.display='none'" class="cancelbtn">Cancel</button>
+              <input onclick="document.getElementById('id02').style.display='none'" class="btn btn-primary coltxt" type="submit">
+            </div>
+          </div>
+        </div>
+      </form>
+    </div>
+
+  </div>
+</div>

@@ -1,16 +1,105 @@
-<div class="container">
-  <a class="txt" [routerLink]="['/admindashboard/manageCrops']">
-    Manage crops
+<div class="large-container">
+  <div class="row">
+    <div class="col-auto heading" style="width: 20%;">
+      Admindashboard
+    </div>
+    <div class="col-auto subheading" style="float: rignt; text-align: right; width: 80%;">
+      <i class="material-icons">
+        account_circle
+      </i> Admin
+    </div>
+  </div>
+  <div class="row coltxt">
 
-  </a>
-  <br>
-  <a class="txt" [routerLink]="['/admindashboard/users']">User Profiles
-  </a>
-  <br>
-  <a class="txt" [routerLink]="['/admindashboard/manageCropDisease']">Seller Profile Manage Crop Diseases
-  </a>
-  <div class="col-auto">
-    <h2>Send mail</h2>
-    <button (click)="checkMail()">Check mail</button>
+    <div class="col-auto container" style="margin-left: 40px;">
+      <div class="row">
+        <div class="col-auto" style="width: 20%;">
+          <i class="material-icons" style="font-size: 50px">
+            markunread
+          </i>
+        </div>
+        <div class="col-auto" style="width: 80%; float: right; text-align: right;">
+          <span class="badge badge-danger d-none d-sm-block">4</span>
+          <br>
+          <br> New Inquiries
+        </div>
+      </div>
+      <div class="row sm">
+        <a href="/admindashboard/manageContacts">More Details</a>
+      </div>
+    </div>
+
+    <div class="col-auto container" style="margin-left: 20px; background-color: rgb(101, 170, 101);">
+      <div class="row">
+        <div class="col-auto" style="width: 20%;">
+          <i class="material-icons" style="font-size: 50px">
+            nature_people
+          </i>
+        </div>
+        <div class="col-auto" style="width: 80%; float: right; text-align: right;">
+          <span class="badge badge-danger d-none d-sm-block">4</span>
+          <br>
+          <br> Farmers
+        </div>
+      </div>
+      <div class="row sm">
+        <a href="/admindashboard/users">More Details</a>
+      </div>
+    </div>
+
+    <div class="col-auto container" style="margin-left: 20px; background-color: rgb(157, 211, 150);">
+      <div class="row">
+        <div class="col-auto" style="width: 20%;">
+          <i class="material-icons" style="font-size: 50px">
+            group
+          </i>
+        </div>
+        <div class="col-auto" style="width: 80%; float: right; text-align: right;">
+          <span class="badge badge-danger d-none d-sm-block">4</span>
+          <br>
+          <br> Vegetable sellers
+        </div>
+      </div>
+      <div class="row sm">
+        <a href="/admindashboard/users">More Details</a>
+      </div>
+    </div>
+
+    <div class="col-auto container" style="margin-left: 20px; background-color: rgb(143, 167, 168);">
+      <div class="row">
+        <div class="col-auto" style="width: 20%;">
+          <i class="material-icons" style="font-size: 50px">
+            store
+          </i>
+        </div>
+        <div class="col-auto" style="width: 80%; float: right; text-align: right;">
+          <span class="badge badge-danger d-none d-sm-block">4</span>
+          <br>
+          <br> Seeds shops
+        </div>
+      </div>
+      <div class="row sm">
+        <a href="/admindashboard/users">More Details</a>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="row coltxt" style="margin-top: 10px;">
+    <div class="col-auto" style="width: 70%;">
+        <div class="view view-cascade py-3 gradient-card-header info-color-dark mb-4">
+
+            <canvas id="lineChart"></canvas>
+
+        </div>
+    </div>
+    <div class="col-auto profile" style="width: 25%;">
+      <div class="row" style="margin: auto;">
+          <i class="material-icons" style="font-size: 30px">
+              account_circle
+            </i> <p class="subheading">Change Admin details</p>
+      </div>
+      
+    </div>
   </div>
 </div>

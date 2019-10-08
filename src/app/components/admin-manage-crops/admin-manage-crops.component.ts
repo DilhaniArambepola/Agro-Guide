@@ -1,8 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { CropsService } from '../../services/crops.service';
 import { FormsModule, FormControl, NgForm } from '@angular/forms';
-// import { HttpClient } from '@angular/common/http';
-// import { Http, Headers, RequestOptions } from '@angular/http';
 import { Observable } from 'rxjs/internal/Observable';
 import { Router } from '@angular/router';
 import { Subject } from 'rxjs';
@@ -44,8 +42,8 @@ export class AdminManageCropsComponent implements OnInit {
   zones = [
     { id: 1, name: 'DryZone' },
     { id: 2, name: 'Intermediate' },
-    { id: 2, name: 'LowCountryWet' },
-    { id: 2, name: 'UpCountryWet' }
+    { id: 3, name: 'LowCountryWet' },
+    { id: 4, name: 'UpCountryWet' }
   ];
 
   constructor(private router: Router, private _cropsService: CropsService) { }
@@ -152,6 +150,9 @@ export class AdminManageCropsComponent implements OnInit {
   // tslint:disable-next-line:member-ordering
   @ViewChild('form') mytemplateForm: NgForm;
   addCrops(val: any) {
+
+    console.log("test: " + val.test);
+    console.log("test: " + val.diseaseDes);
 
     this.sendCrop = [
       {

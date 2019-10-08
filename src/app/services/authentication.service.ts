@@ -79,7 +79,9 @@ export class AuthenticationService {
                     console.log('print userId inner: ' + user.loggedIn.userID);
                     console.log('token from auth service : ' + user.accessToken);
                     // store user details and jwt token in local storage to keep user logged in between page refreshes
-                    localStorage.setItem('currentUser', JSON.stringify(user));
+                    localStorage.setItem('currentUser', user.loggedIn.userID);
+                    localStorage.setItem(user.loggedIn.userID, user.loggedIn.userRole);
+                    console.log("repeat: " + localStorage.getItem(user.loggedIn.userID));
                     this.currentUserSubject.next(user);
                     return user;
 
@@ -91,15 +93,21 @@ export class AuthenticationService {
     decode() {
         console.log("call this");
         console.log("call this current: " + localStorage.getItem('currentUser'));
-        if (localStorage.getItem('currentUser') != null) {
+        // tslint:disable-next-line:radix
+        if (parseInt(localStorage.getItem('currentUser')) > 0) {
             this.value = localStorage.getItem('currentUser');
-            this.isAuthenticated(this.value.accessToken);
-            const val = JSON.parse(localStorage.getItem('currentUser'));
-            console.log("has a val : ");
-            return val;
+            
+            // this.isAuthenticated(this.value.accessToken);
+            console.log("Value: " + this.value);
+            const role = localStorage.getItem(this.value);
+            console.log("has a val : " + role);
+            if(role != '') {
+
+            }
+            return role;
         }
         console.log("return 1");
-        return 1;
+        return 0;
     }
 
     logout() {

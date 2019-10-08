@@ -6,7 +6,7 @@
     margin-left: 20px;
 }
 .container {
-    width: 30%;
+    width: 60%;
     height: 60%;
     margin: 80px auto;
     opacity: 0.9;
@@ -24,4 +24,7 @@
 .coltxt{
     font-family: 'Roboto', sans-serif;
     font-size: 13px;
+}
+h3 {
+    margin-top: 10px;
 }
