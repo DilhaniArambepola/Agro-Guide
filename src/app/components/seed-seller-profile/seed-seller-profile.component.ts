@@ -21,7 +21,7 @@ export class SeedSellerProfileComponent implements OnInit {
   edit = false;
   editQuantity  = false;
   editPrice = false;
-  userDetails: any[] = [];
+  userDetails: any;
   sendSeed: any[];
   errorMsg: string;
 
@@ -36,11 +36,19 @@ export class SeedSellerProfileComponent implements OnInit {
     private _userService: UserService) { }
 
   ngOnInit() {
+    // this.activatedRoute.queryParams.subscribe(params => {
+    //   const userID = params['userID'];
+    //   this.getSales(userID);
+    //   this.getSeedSales(userID);
+    //   this.getPlantSales(userID);
+    // });
+
     this.activatedRoute.queryParams.subscribe(params => {
-      const userID = params['userID'];
+      const userID: any = localStorage.getItem('currentUser');
       this.getSales(userID);
       this.getSeedSales(userID);
       this.getPlantSales(userID);
+      // this.seedSeller(userID);
     });
 
     this._success.subscribe((message) => this.successMessage = message);
@@ -83,9 +91,21 @@ export class SeedSellerProfileComponent implements OnInit {
     this._seedService.getSeedSellerById(userID)
     .subscribe(resData => {
       this.userDetails = resData;
+      console.log("seller: " + this.userDetails);
       this.shopID = this.userDetails[0].shopID;
       this.userId = this.userDetails[0].userID;
-      console.log("shop: " + this.shopID);
+    },
+      resError => this.errorMsg = resError);
+  }
+
+  seedSeller(userID: any) {
+    this._seedService.getSeedSeller(userID)
+    .subscribe(resData => {
+      this.userDetails = resData;
+      console.log("data: " + this.userDetails);
+      console.log("more data: " + this.userDetails[0].userName);
+      this.shopID = this.userDetails[0].shopID;
+      this.userId = this.userDetails[0].userID;
     },
       resError => this.errorMsg = resError);
   }

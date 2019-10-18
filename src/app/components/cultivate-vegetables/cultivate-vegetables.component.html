@@ -1,220 +1,220 @@
-
-<div class="row">
-  <div class="col-auto" style="width:50%;">
-    <div class="row">
-      <h5>Crop details</h5>
-    </div>
-    <div class="row">
-      <div class="col-auto">
-        <p class="coltxt">Select climate zone</p>
+<div class="container-large">
+  <div class="row">
+    <div class="col-auto" style="width:50%;">
+      <div class="row">
+        <h5>Crop details</h5>
       </div>
-    </div>
-    <div class="row">
-      <div class="col-auto">
-        <select class="dropdown coltxt" (change)="getSelectedLabelZone($event.target.value)">
-          <option value="0">All</option>
-          <option *ngFor="let zone of zones" value={{zone.zoneID}}>
-            {{zone.zone}}
-          </option>
-        </select>
+      <div class="row">
+        <div class="col-auto">
+          <p class="coltxt">Select climate zone</p>
+        </div>
+     
+        <div class="col-auto">
+          <select class="dropdown coltxt" (change)="getSelectedLabelZone($event.target.value)">
+            <option value="0">All</option>
+            <option *ngFor="let zone of zones" value={{zone.zoneID}}>
+              {{zone.zone}}
+            </option>
+          </select>
+        </div>
       </div>
-    </div>
 
-    <div class="row">
-      <div class="col-auto">
-        <div class="card mb-1" style="width: 100%">
-          <div class="card-header bg-transparent">
-            <div class="table">
-              <div class="row">
-                <div class="subheading" style="width: auto; margin-left:15px; text-align:left;">Crop</div>
-                <!-- <div class="subheading" style="width: 8rem; text-align:left;">Climate zone</div> -->
-                <div class="subheading" style="width: auto; margin-left:20px; text-align:left;">More details</div>
+      <div class="row">
+        <div class="col-auto">
+          <div class="card mb-1" style="width: 100%">
+            <div class="card-header bg-transparent">
+              <div class="table">
+                <div class="row">
+                  <div class="subheading" style="width: auto; margin-left:15px; text-align:left;">Crop</div>
+                  <!-- <div class="subheading" style="width: 8rem; text-align:left;">Climate zone</div> -->
+                  <div class="subheading" style="width: auto; margin-left:20px; text-align:left;">More details</div>
+                </div>
               </div>
             </div>
-          </div>
-          <div *ngFor="let c of crops; let i = index;">
-            <div style="width: 100%; margin: 0px; padding-left:0px;">
-              <div class="bg-transparent">
-                <label class="coltxt" style="width: 5rem; text-align:left; padding-left:10px;">{{c.cropName}}</label>
-                <!-- <label class="coltxt" style="width: 8rem; text-align:left; padding-left:10px;">{{this.mapZone.get(c.cropID)}}</label> -->
-                <button onclick="document.getElementById('id01').style.display='block'" style="width:100px;" (click)="getDetails(c.cropID)">More...</button>
-                <div id="id01" class="modal coltxt">
+            <div *ngFor="let c of crops; let i = index;">
+              <div style="width: 100%; margin: 0px; padding-left:0px;">
+                <div class="bg-transparent">
+                  <label class="coltxt" style="width: 5rem; text-align:left; padding-left:10px;">{{c.cropName}}</label>
+                  <!-- <label class="coltxt" style="width: 8rem; text-align:left; padding-left:10px;">{{this.mapZone.get(c.cropID)}}</label> -->
+                  <button onclick="document.getElementById('id01').style.display='block'" style="width:100px;" (click)="getDetails(c.cropID)">More...</button>
+                  <div id="id01" class="modal coltxt">
 
-                  <form #form="ngForm" class="modal-content animate" enctype="multipart/form-data">
-                    <div *ngFor="let crop of cropDetails; let i = index;">
-                    <div class="imgcontainer">
-                      <span onclick="document.getElementById('id01').style.display='none'" class="close" title="Close Modal">&times;</span>
-                      <h4>More details about {{crop.cropName}} cultivation</h4>
-                    </div>
+                    <form #form="ngForm" class="modal-content animate" enctype="multipart/form-data">
+                      <div *ngFor="let crop of cropDetails; let i = index;">
+                        <div class="imgcontainer">
+                          <span onclick="document.getElementById('id01').style.display='none'" class="close" title="Close Modal">&times;</span>
+                          <h4>More details about {{crop.cropName}} cultivation</h4>
+                        </div>
 
-                    <div class="container">
-                      
-                        <label for="details">
-                          <b>Climate Zones</b>
-                        </label>
-                        <p>{{this.mapZone.get(crop.cropID)}}</p>
-                        <br>
+                        <div class="container">
 
-                        <label for="details">
-                          <b>Details</b>
-                        </label>
-                        <p>{{crop.details}}</p>
-                        <br>
+                          <label for="details">
+                            <b>Climate Zones</b>
+                          </label>
+                          <p>{{this.mapZone.get(crop.cropID)}}</p>
+                          <br>
 
-                        <label for="diseases">
-                          <b>Pests diseases</b>
-                        </label>
-                        <p>{{crop.disease}}</p>
-                        <br>
+                          <label for="details">
+                            <b>Details</b>
+                          </label>
+                          <p>{{crop.step1}}</p>
+                          <br>
 
-                        <label for="diseasesDes">
-                          <b>Diseases description</b>
-                        </label>
-                        <p>{{crop.description}}</p>
-                        <br>
+                          <label for="diseases">
+                            <b>Diseases</b>
+                          </label>
+                          <p>{{crop.disease}}</p>
+                          <br>
 
+                          <label for="diseasesDes">
+                            <b>Diseases description</b>
+                          </label>
+                          <p>{{crop.description}}</p>
+                          <br>
+
+                        </div>
                       </div>
-                    </div>
-                  </form>
+                    </form>
+                  </div>
                 </div>
               </div>
             </div>
           </div>
         </div>
       </div>
+
     </div>
 
-  </div>
-
-  <div class="col-auto" style="width:50%;">
-    <div class="row">
-        <button *ngIf="showBtn" style="float: right; width: 200px;" (click)="redirect()">Back to profile</button>
-    </div>
-    <div class="row">
-      <h5>Places to buy seeds and plants</h5>
-    </div>
-        <div class="row">
-          <div class="col-auto">
-            <p class="coltxt">Select district</p>
-          </div>
-          <div class="col-auto">
-            <select class="dropdown coltxt" (change)="getSelectedLabelDistrict($event.target.value)">
-              <option value="0">All</option>
-              <option *ngFor="let d of districts" value={{d.districtName}}>
-                {{d.districtName}}
-              </option>
-            </select>
-          </div>
+    <div class="col-auto" style="width:50%;">
+      <div class="row">
+        <button class="btn btn-warn" *ngIf="showBtn" style="float: right; width: 200px;" (click)="redirect()">Back to profile</button>
+      </div>
+      <div class="row">
+        <h5>Places to buy seeds and plants</h5>
+      </div>
+      <div class="row">
+        <div class="col-auto">
+          <p class="coltxt">Select district</p>
         </div>
-        <div class="row">
+        <div class="col-auto">
+          <select class="dropdown coltxt" (change)="getSelectedLabelDistrict($event.target.value)">
+            <option value="0">All</option>
+            <option *ngFor="let d of districts" value={{d.districtName}}>
+              {{d.districtName}}
+            </option>
+          </select>
+        </div>
+      </div>
+      <!-- <div class="row">
             <div class="col-auto">
               <p class="coltxt">Select Seed</p>
             </div>
-            <!-- <div class="col-auto">
+            <div class="col-auto">
               <select class="dropdown coltxt" (change)="getSelectedLabelDistrict($event.target.value)">
                 <option value="0">All</option>
                 <option *ngFor="let d of districts" value={{d.districtName}}>
                   {{d.districtName}}
                 </option>
               </select>
-            </div> -->
-          </div>
+            </div>
+          </div> -->
 
-        <div class="row">
-          <div class="col-auto">
-            <div class="card mb-1" style="width: 100%">
-              <div class="card-header bg-transparent">
-                <div class="table">
-                  <div class="row">
-                     <div class="subheading" style="width: auto; text-align:left;">District</div>
-                    <div class="subheading" style="width: 10rem; text-align:center;">Address</div>
-                    <div class="subheading" style="width: auto; margin-left:100px; text-align:right; padding-right:10px;">More details</div>
-                  </div>
+      <div class="row">
+        <div class="col-auto">
+          <div class="card mb-1" style="width: 100%">
+            <div class="card-header bg-transparent">
+              <div class="table">
+                <div class="row">
+                  <div class="subheading" style="width: auto; text-align:left;">District</div>
+                  <div class="subheading" style="width: 10rem; text-align:center;">Address</div>
+                  <div class="subheading" style="width: auto; margin-left:100px; text-align:right; padding-right:10px;">More details</div>
                 </div>
               </div>
-              <div *ngFor="let shop of seedShops; let i = index;">
-                <div style="width: 100%; margin: 0px; padding-left:0px;">
-                  <div class="bg-transparent">
-                    <label class="coltxt" style="width: 5rem; text-align:left; padding-left:10px;">{{shop.districtName}}</label>
-                    <label class="coltxt" style="width: auto; text-align:left; padding-left:10px;">{{shop.AddressLine1}}</label>
-                    <label class="coltxt" style="width: auto; text-align:left; padding-left:10px;">{{shop.AddressLine2}}</label>
-                    <label class="coltxt" style="width: auto; text-align:left; padding-left:10px;">{{shop.AddressLine3}}</label>
-                    <button onclick="document.getElementById('id02').style.display='block'" style="width:100px; float: right;" (click)="getSeedDetails(shop.userID)">More...</button>
-                    <div id="id02" class="modal coltxt">
+            </div>
+            <div *ngFor="let shop of seedShops; let i = index;">
+              <div style="width: 100%; margin: 0px; padding-left:0px;">
+                <div class="bg-transparent">
+                  <label class="coltxt" style="width: 5rem; text-align:left; padding-left:10px;">{{shop.districtName}}</label>
+                  <label class="coltxt" style="width: auto; text-align:left; padding-left:10px;">{{shop.AddressLine1}}</label>
+                  <label class="coltxt" style="width: auto; text-align:left; padding-left:10px;">{{shop.AddressLine2}}</label>
+                  <label class="coltxt" style="width: auto; text-align:left; padding-left:10px;">{{shop.AddressLine3}}</label>
+                  <button onclick="document.getElementById('id02').style.display='block'" style="width:100px; float: right;" (click)="getSeedDetails(shop.userID)">More...</button>
+                  <div id="id02" class="modal coltxt">
 
-                      <form #form="ngForm" class="modal-content animate">
-                        <div class="imgcontainer">
-                          <span onclick="document.getElementById('id02').style.display='none'" class="close" title="Close Modal">&times;</span>
-                          <h4>More details about seeds and plant sellers</h4>
-                        </div>
+                    <form #form="ngForm" class="modal-content animate">
+                      <div class="imgcontainer">
+                        <span onclick="document.getElementById('id02').style.display='none'" class="close" title="Close Modal">&times;</span>
+                        <h4>More details about seeds and plant sellers</h4>
+                      </div>
 
-                        <div class="container">
-                          <label for="details">
-                            <b>Contact details</b>
-                          </label>
-                          <p>{{shop.userName}}, {{shop.AddressLine1}}, {{shop.AddressLine2}}, {{shop.AddressLine3}}
-                          </p>
-                          <p>Tel: {{shop.contact}}</p>
-                          <br>
-                          <div class="row">
-                            <div class="col-auto">
-                              <div class="row" style="margin-left:10px;">
-                                <h6>Seeds</h6>
-                              </div>
-                                <div class="table">
-                                    <div class="row">
-                                      <div class="subheading" style="width: 5rem; margin-left:15px; text-align:left;">Seeds</div>
-                                      <div class="subheading" style="width: 8rem; text-align:left;">Available Quantity (kg)</div>
-                                      <div class="subheading" style="width: 6rem; text-align:right; padding-right:10px;">Price
-                                        <br>(100g)</div>
-                                    </div>
-                                  </div>
-                                  <div *ngFor="let seed of seeds; let i = index;">
-                                    <div style="width: 100%; margin: 0px; padding-left:0px;">
-                                      <div class="bg-transparent">
-                                        <label class="coltxt" style="width: 5rem; text-align:left; padding-left:10px;">{{seed.seedName}}</label>
-                                        <label class="coltxt" style="width: 8rem; text-align:left; padding-left:10px;">{{seed.quantity}}</label>
-                                        <label class="coltxt" style="width: 6rem; text-align:left; padding-left:10px;">{{seed.price}}</label>
-                                      </div>
-                                    </div>
-                                  </div>
+                      <div class="container">
+                        <label for="details">
+                          <b>Contact details</b>
+                        </label>
+                        <p>{{shop.userName}}, {{shop.AddressLine1}}, {{shop.AddressLine2}}, {{shop.AddressLine3}}
+                        </p>
+                        <p>Tel: {{shop.contact}}</p>
+                        <br>
+                        <div class="row">
+                          <div class="col-auto">
+                            <div class="row" style="margin-left:10px;">
+                              <h6>Seeds</h6>
                             </div>
-                            <div class="col-auto" style="width: 50%; margin-left:30px;">
-                                <div class="row" style="margin-left: 10px;">
-                                  <h6>Plants</h6>
-                                  </div>
-                                <div class="table">
-                                    <div class="row">
-                                      <div class="subheading" style="width: 5rem; margin-left:15px; text-align:left;">Seeds</div>
-                                      <div class="subheading" style="width: 8rem; text-align:left;">Available Quantity</div>
-                                      <div class="subheading" style="width: 6rem; text-align:right; padding-right:10px;">Price
-                                        <br>(50 plants)</div>
-                                    </div>
-                                  </div>
-                                  <div *ngFor="let plant of plants; let i = index;">
-                                    <div style="width: 100%; margin: 0px; padding-left:0px;">
-                                      <div class="bg-transparent">
-                                        <label class="coltxt" style="width: 5rem; text-align:left; padding-left:10px;">{{plant.seedName}}</label>
-                                        <label class="coltxt" style="width: 8rem; text-align:left; padding-left:10px;">{{plant.quantity}}</label>
-                                        <label class="coltxt" style="width: 6rem; text-align:left; padding-left:10px;">{{plant.price}}</label>
-                                      </div>
-                                    </div>
-                                  </div>
+                            <div class="table">
+                              <div class="row">
+                                <div class="subheading" style="width: 5rem; margin-left:15px; text-align:left;">Seeds</div>
+                                <div class="subheading" style="width: 8rem; text-align:left;">Available Quantity (kg)</div>
+                                <div class="subheading" style="width: 6rem; text-align:right; padding-right:10px;">Price
+                                  <br>(100g)</div>
+                              </div>
+                            </div>
+                            <div *ngFor="let seed of seeds; let i = index;">
+                              <div style="width: 100%; margin: 0px; padding-left:0px;">
+                                <div class="bg-transparent">
+                                  <label class="coltxt" style="width: 5rem; text-align:left; padding-left:10px;">{{seed.seedName}}</label>
+                                  <label class="coltxt" style="width: 8rem; text-align:left; padding-left:10px;">{{seed.quantity}}</label>
+                                  <label class="coltxt" style="width: 6rem; text-align:left; padding-left:10px;">{{seed.price}}</label>
+                                </div>
+                              </div>
                             </div>
                           </div>
-                          
+                          <div class="col-auto" style="width: 50%; margin-left:30px;">
+                            <div class="row" style="margin-left: 10px;">
+                              <h6>Plants</h6>
+                            </div>
+                            <div class="table">
+                              <div class="row">
+                                <div class="subheading" style="width: 5rem; margin-left:15px; text-align:left;">Seeds</div>
+                                <div class="subheading" style="width: 8rem; text-align:left;">Available Quantity</div>
+                                <div class="subheading" style="width: 6rem; text-align:right; padding-right:10px;">Price
+                                  <br>(50 plants)</div>
+                              </div>
+                            </div>
+                            <div *ngFor="let plant of plants; let i = index;">
+                              <div style="width: 100%; margin: 0px; padding-left:0px;">
+                                <div class="bg-transparent">
+                                  <label class="coltxt" style="width: 5rem; text-align:left; padding-left:10px;">{{plant.seedName}}</label>
+                                  <label class="coltxt" style="width: 8rem; text-align:left; padding-left:10px;">{{plant.quantity}}</label>
+                                  <label class="coltxt" style="width: 6rem; text-align:left; padding-left:10px;">{{plant.price}}</label>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
                         </div>
-                      </form>
-                    </div>
+
+                      </div>
+                    </form>
                   </div>
                 </div>
               </div>
             </div>
           </div>
         </div>
+      </div>
       <!-- </div> -->
 
 
-  </div>
+    </div>
 
+  </div>
 </div>

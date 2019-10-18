@@ -13,6 +13,12 @@ export class FarmerService {
   private _URL = 'http://localhost:3000/api/getCropDetails';
   private _Url = 'http://localhost:3000/api/selectedEmails';
 
+  // private _url = '/api/userDetails';
+  // private url = '/api/cropDetails';
+  // private URL = '/api/selectedCropDetails';
+  // private _URL = '/api/getCropDetails';
+  // private _Url = '/api/selectedEmails';
+
   constructor(private _http: Http) { }
 
   getUserDetails(userId: number): Observable<any> {
@@ -34,14 +40,12 @@ export class FarmerService {
   }
 
   getMoreDetails(crop: any): Observable<any> {
-    console.log("crop from service: " + crop);
     return this._http.get(`${this._URL}/${crop}`)
       .map((response: Response) => response.json())
       .catch((error: any) => Observable.throw(error.json().error || 'Server error'));
   }
 
   getEmailAddresses(cropName: number): Observable<any> {
-    console.log("crop : " + cropName);
     return this._http.get(`${this._Url}/${cropName}`)
       .map((response: Response) => response.json())
       .catch((error: any) => Observable.throw(error.json().error || 'Server error'));
@@ -58,7 +62,6 @@ export class FarmerService {
   }
 
   removeSelectedCrop(cropName: any): Observable<any[]> {
-    console.log("veg: " + cropName);
     return this._http.delete(`${this.URL}/${cropName}`) // ...using put request
       .map((res: Response) => res.json()) // ...and calling .json() on the response to return data
       .catch((error: any) => Observable.throw(error.json().error || 'Server error')); // ...errors if any

@@ -44,7 +44,7 @@ export class CultivateVegetablesComponent implements OnInit {
 
     this.activatedRoute.queryParams.subscribe(params => {
       const userId = params['userID'];
-      if(userId > 0){
+      if (userId > 0) {
         this.showBtn = true;
       }
     });
@@ -76,19 +76,20 @@ export class CultivateVegetablesComponent implements OnInit {
     this._cropsService.getAllCrops()
       .subscribe(resData => {
         this.crops = resData;
-
+        console.log("zone: " + this.crops[0].cropName);
         for (const c of this.crops) {
+          console.log("zone inner: " + c.disease);
           this.crop.push(c.cropID);
           if (c.DryZone == 1) {
             this.arrayZone.push('DryZone');
           }
-          if (c.Intermediate == 2) {
+          if (c.Intermediate == 1) {
             this.arrayZone.push('Intermediate');
           }
-          if (c.LowCountryWet == 3) {
+          if (c.LowCountryWet == 1) {
             this.arrayZone.push('LowCountryWet');
           }
-          if (c.UpCountryWet == 4) {
+          if (c.UpCountryWet == 1) {
             this.arrayZone.push('UpCountryWet');
           }
 
@@ -120,12 +121,10 @@ export class CultivateVegetablesComponent implements OnInit {
   }
 
   getSeedShops() {
-    console.log("Seedshops: ");
     this._seedsService.getSeedSellers()
       .subscribe(resData => {
         this.seedShops = resData;
-        this.mapSeeds.set(this.seedShops[0].districtName, this.seedShops[0]);
-        console.log("seeds : " + this.seedShops[0].districtName);
+        // this.mapSeeds.set(this.seedShops[0].districtName, this.seedShops[0]);
       },
         resError => this.errorMsg = resError);
   }
@@ -133,7 +132,6 @@ export class CultivateVegetablesComponent implements OnInit {
   // get list of questions according to the label entered
   labelZone(zone: any) {
     if (zone != 0) {
-      console.log("zone val1 : " + zone);
       this._cropsService.getZoneCrops(zone)
         .subscribe(resNewSellers => {
           this.crops = resNewSellers;
@@ -145,7 +143,6 @@ export class CultivateVegetablesComponent implements OnInit {
         );
 
     } if (zone == 0) {
-      console.log("zone val2 : " + zone);
       this.getCrops();
     }
   }
@@ -166,7 +163,6 @@ export class CultivateVegetablesComponent implements OnInit {
   }
 
   getPlnats(userID: number) {
-    console.log("call plants : " + userID);
     this._seedsService.getPlants(userID)
       .subscribe(resData => {
         this.plants = resData;
@@ -175,7 +171,6 @@ export class CultivateVegetablesComponent implements OnInit {
   }
 
   getSeeds(userID: number) {
-    console.log("user : " + userID);
     this._seedsService.getSeeds(userID)
       .subscribe(resData => {
         this.seeds = resData;
@@ -189,18 +184,15 @@ export class CultivateVegetablesComponent implements OnInit {
   }
 
   getDetails(cropID: any) {
-    console.log("crop: " + cropID);
-    this._cropsService.getCropDetails(cropID)
+    this._cropsService.getCropMoreDetails(cropID)
       .subscribe(resData => {
         this.cropDetails = resData;
-        console.log("cropDetails : " + this.cropDetails[0].details);
       },
         resError => this.errorMsg = resError);
   }
 
   labelDistrict(district: any) {
     if (district != 0) {
-      console.log("d1 " + district);
       this._seedsService.getDistrictSeedSellers(district)
         .subscribe(resData => {
           this.seedShops = resData;
@@ -208,7 +200,6 @@ export class CultivateVegetablesComponent implements OnInit {
           resError => this.errorMsg = resError);
 
     } else if (district == 0) {
-      console.log("d2 " + district);
       this.getSeedShops();
     }
   }

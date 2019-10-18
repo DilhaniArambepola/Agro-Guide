@@ -86,15 +86,17 @@ export class AdminManageCropsComponent implements OnInit {
     this._delete.next(`Removed a crop`);
   }
 
+  duplicate() {
+    this._delete.next('This crop item is already added');
+  }
+
   onZoneChangeUpdate(cropName: any, zone: string, isChecked: boolean) {
-    console.log("crop: " + cropName + "zone : "+ zone);
     this.zoneList = [];
     if (isChecked) {
       if (this.mapZone.has(cropName)) {
         this.zoneList = this.mapZone.get(cropName);
         this.zoneList.push(zone);
       } else {
-        // this.locationList = [];
         this.zoneList.push(zone);
       }
       this.mapZone.set(cropName, this.zoneList);
@@ -151,13 +153,13 @@ export class AdminManageCropsComponent implements OnInit {
   @ViewChild('form') mytemplateForm: NgForm;
   addCrops(val: any) {
 
-    console.log("test: " + val.test);
-    console.log("test: " + val.diseaseDes);
-
     this.sendCrop = [
       {
         'crop': val.crop,
-        'description': val.description,
+        'step1': val.step1,
+        'step2': val.step2,
+        'step3': val.step3,
+        'step4': val.step4,
         'disease': val.disease,
         'diseaseDes': val.diseaseDes,
         'zone': this.zoneList
@@ -166,14 +168,15 @@ export class AdminManageCropsComponent implements OnInit {
 
     this._cropsService.addCrops(this.sendCrop)
       .subscribe(resData => {
-       // console.log('res data : ' + resData);
-        // this.crops = resData;
-
         this.mytemplateForm.reset();
         this.getCrops();
         this.CropAddedMsg();
       },
-        resError => this.errorMsg = resError);
+        resError => {
+          this.errorMsg = resError;
+          console.log("Error: " + this.errorMsg);
+          this.duplicate();
+        });
   }
 
   // tslint:disable-next-line:member-ordering
@@ -195,7 +198,6 @@ export class AdminManageCropsComponent implements OnInit {
 
           this.myUpdateForm.reset();
           this.getCrops();
-          // this.zoneArray = [];
 
         }, error => {
           return Observable.throw(error);
@@ -203,13 +205,11 @@ export class AdminManageCropsComponent implements OnInit {
   }
 
   editCrops(crop: any) {
-     console.log("crop details : "+ crop.cropName);
     this.selectedCrop = crop;
   }
 
   checkZone(crop, name) {
     this.data = this.mapZone.get(crop.cropID);
-    // console.log("crop : " + crop.cropID + name +"****" + this.data);
     if (this.data != null) {
       if (this.data.find(x => x == name)) {
         this.zoneSelected = true;
@@ -226,7 +226,6 @@ export class AdminManageCropsComponent implements OnInit {
 
    // Delete crops
    deleteCrop(cropName: any) {
-     console.log("delete : " + cropName);
     this._cropsService.removeCrop(cropName)
       .subscribe(resDeleteQuestion => {
         this.getCrops();
@@ -241,7 +240,6 @@ export class AdminManageCropsComponent implements OnInit {
    }
 
   moreDetails(cropID: number) {
-    console.log("crop: " + cropID);
     // tslint:disable-next-line:max-line-length
     this.router.navigate(['/admindashboard/moreDetails'], {queryParams: { redirectFrom: '/admindashboard/manageCrops', crop: cropID }});
   }

@@ -41,6 +41,15 @@
                         </div>
                     </div>
                     <div class="form-group">
+                        <label for="contact">Contact Number</label>
+                        <input type="text" formControlName="contact" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.contact.errors }"
+                        />
+                        <div *ngIf="submitted && f.contact.errors" class="invalid-feedback">
+                            <div *ngIf="f.contact.errors.required">Contact number is required</div>
+                            <div *ngIf="f.contact.errors.pattern">Contact number must contain 10 digits and should not contain any letters</div>
+                        </div>
+                    </div>
+                    <div class="form-group">
                         <div class="row">
                             <div class="col-auto">
                                 <p class="coltxt">Select district</p>
@@ -95,7 +104,7 @@
                 <div [style.display]="isVisible ? 'block' : 'none'" class="col-auto" style="width:50%">
                     <div class="form-group">
                         <label for="adL1">Address Line 1</label>
-                        <input type="text" formControlName="adL1" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.firstName.errors }"
+                        <input type="text" formControlName="adL1" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.adL1.errors }"
                         />
                         <div *ngIf="submitted && f.adL2.errors" class="invalid-feedback">
                             <div *ngIf="f.adL1.errors.required">Address Line 1 is required</div>
@@ -103,7 +112,7 @@
                     </div>
                     <div class="form-group">
                         <label for="adL2">Address Line 2</label>
-                        <input type="text" formControlName="adL2" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.firstName.errors }"
+                        <input type="text" formControlName="adL2" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.adL2.errors }"
                         />
                         <div *ngIf="submitted && f.adL2.errors" class="invalid-feedback">
                             <div *ngIf="f.adL2.errors.required">Address Line 2 is required</div>
@@ -111,20 +120,13 @@
                     </div>
                     <div class="form-group">
                         <label for="adL3">Address Line 3</label>
-                        <input type="text" formControlName="adL3" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.firstName.errors }"
+                        <input type="text" formControlName="adL3" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.adL3.errors }"
                         />
                         <div *ngIf="submitted && f.adL3.errors" class="invalid-feedback">
                             <div *ngIf="f.adL3.errors.required">Address Line 3 is required</div>
                         </div>
                     </div>
-                    <div class="form-group">
-                        <label for="firstName">Contact Number</label>
-                        <input type="text" formControlName="contact" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.firstName.errors }"
-                        />
-                        <div *ngIf="submitted && f.contact.errors" class="invalid-feedback">
-                            <div *ngIf="f.contact.errors.required">First Name is required</div>
-                        </div>
-                    </div>
+                   
                 </div>
             </div>
         </form>

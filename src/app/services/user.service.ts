@@ -17,40 +17,30 @@ export class UserService {
     private _url = 'http://localhost:3000/api/shop';
     private URL = 'http://localhost:3000/api/sendMail';
 
+    // private url = '/api/register';
+    // private _url = '/api/shop';
+    // private URL = '/api/sendMail';
+
     constructor(private http: Http) { }
-
-    // getAll() {
-    //     return this.http.get<User[]>(this.url);
-    // }
-
-    getById(id: number) {
-        return this.http.get(`${this.url}/${id}`);
-    }
-
-    
 
     // Add a new applicant_rating
     register(body: any): Observable<any> {
         const bodyString = JSON.stringify(body); // Stringify payload
         const headers = new Headers({ 'Content-Type': 'application/json' }); // ... Set content type to JSON
-        // const options = new RequestOptions({ headers: headers }); // Create a request option
 
         return this.http.post(this.url, body) // ...using post request
-            // tslint:disable-next-line:max-line-length
-            // .map((res: Response) => res.json(), console.log('successfully registered' + Response)) // ...and calling .json() on the response to return data
-            // tslint:disable-next-line:max-line-length
             .map((res: Response) => res.json()) // ...and calling .json() on the response to return data
             .catch((error: any) => Observable.throw(error.json().error || 'Server error')); // ...errors if any
     }
 
     sendMail(body: any): Observable<any> {
+        console.log("Mail sent");
         const bodyString = JSON.stringify(body); // Stringify payload
         const headers = new Headers({ 'Content-Type': 'application/json' }); // ... Set content type to JSON
-        // const options = new RequestOptions({ headers: headers }); // Create a request option
 
         return this.http.post(this.URL, body) // ...using post request
             // tslint:disable-next-line:max-line-length
-            .map((res: Response) => res.json(), console.log('successfully registered' + Response)) // ...and calling .json() on the response to return data
+            .map((res: Response) => res.json()) // ...and calling .json() on the response to return data
             .catch((error: any) => Observable.throw(error.json().error || 'Server error')); // ...errors if any
     }
 
@@ -68,7 +58,6 @@ export class UserService {
     }
 
     updateShopDetails(shopId: any, body: any): Observable<any> {
-        console.log("update : " + shopId + " " + body);
         const headers = new Headers({ 'Content-Type': 'application/json' }); // ... Set content type to JSON
         const options = new RequestOptions({ headers: headers }); // Create a request option
 

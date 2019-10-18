@@ -39,11 +39,9 @@ export class OrganicFoodSellerComponent implements OnInit {
   }
 
   getSellers() {
-    console.log("load sellers");
     this._organicSellerService.getAllOrganicSellers()
       .subscribe(resData => {
         this.sellers = resData;
-        console.log("sellers: " + this.sellers);
       },
         resError => this.errorMsg = resError);
   }
@@ -60,7 +58,6 @@ export class OrganicFoodSellerComponent implements OnInit {
     this._organicSellerService.getFoodItems(sellerID)
       .subscribe(resData => {
         this.foodItems = resData;
-        console.log("food items : " + this.foodItems[0].itemName);
       },
         resError => this.errorMsg = resError);
   }
@@ -74,7 +71,6 @@ export class OrganicFoodSellerComponent implements OnInit {
 
       },
         error => {
-          console.error('Error get label question!');
           return Observable.throw(error);
         }
       );

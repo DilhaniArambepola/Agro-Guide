@@ -5,6 +5,7 @@ import { Subject } from 'rxjs';
 import { debounceTime } from 'rxjs/internal/operators/debounceTime';
 import { FormsModule, FormControl, NgForm } from '@angular/forms';
 import { ViewChild } from '@angular/core';
+import * as moment from 'moment';
 
 @Component({
   selector: 'app-admin-contact',
@@ -28,6 +29,8 @@ export class AdminContactComponent implements OnInit {
   Cultivate: any;
   errorMsg: string;
   allInquiries: any;
+
+  currentYear: any;
 
   mapInquiry = new Map();
   mapByID = new Map();
@@ -63,6 +66,7 @@ export class AdminContactComponent implements OnInit {
   constructor(private _generalService: GeneralService, private _userService: UserService) { }
 
   ngOnInit() {
+    this.currentYear = moment(new Date()).format('YYYY');
     this._success.subscribe((message) => this.successMessage = message);
     this._success.pipe(
       debounceTime(5000)
@@ -91,13 +95,11 @@ export class AdminContactComponent implements OnInit {
   }
 
   removeMsg() {
-    console.log("remove msg");
     this._delete.next(`Removed an inquiry`);
   }
 
   sentMsg() {
-    console.log("remove msg");
-    this._delete.next(`Responded to the inquiry`);
+    this._success.next(`Responded to the inquiry`);
   }
 
   getInquiries() {
@@ -173,7 +175,6 @@ export class AdminContactComponent implements OnInit {
 
   // Delete crops
   deleteInquiry(inquiryID: any) {
-    console.log("delete : " + inquiryID);
     this._generalService.deleteInquiry(inquiryID)
       .subscribe(resDeleteQuestion => {
         this.sentList = [];
@@ -196,14 +197,11 @@ export class AdminContactComponent implements OnInit {
     this.inquiry = [
       this.mapByID.get(id)
     ];
-    console.log("id: " + this.inquiry[0].inquiryID);
   }
 
   // tslint:disable-next-line:member-ordering
   @ViewChild('form') mytemplateForm: NgForm;
   sendResponse(val: any) {
-    console.log("res t: " + val);
-    console.log("res: " + val.res);
     this.body = [
       {
         id: this.inquiry[0].inquiryID,

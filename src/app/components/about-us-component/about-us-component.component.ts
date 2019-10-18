@@ -33,7 +33,6 @@ export class AboutUsComponentComponent implements OnInit {
   }
 
   getSelectedTopic(topic) {
-    console.log("topic: " + topic);
     this.topic = topic;
   }
 
@@ -52,8 +51,6 @@ export class AboutUsComponentComponent implements OnInit {
 
     this._generalService.addInquiry(this.sendValue)
       .subscribe(resData => {
-        // console.log('res data : ' + resData);
-        // this.crops = resData;
         this.InquirySentMsg();
         this.mytemplateForm.reset();
       },

@@ -39,14 +39,8 @@ export class VegSellerProfileComponent implements OnInit {
 
   ngOnInit() {
     this.activatedRoute.queryParams.subscribe(params => {
-      // const userID = params['userID'];
       const userID: any = localStorage.getItem('currentUser');
-      console.log("UserID : " + userID);
       this.getSellerDetails(userID);
-      console.log("session: " + localStorage.getItem('currentUser'));
-   
-      console.log("val1: " + userID);
-      // console.log("val: cannot" + val.userID);
     });
 
     this._success.subscribe((message) => this.successMessage = message);
@@ -59,7 +53,6 @@ export class VegSellerProfileComponent implements OnInit {
       debounceTime(5000)
     ).subscribe(() => this.deleteMessage = null);
 
-   // this.getSellers();
     // tslint:disable-next-line:prefer-const
     let modal = document.getElementById('id01');
 
@@ -95,7 +88,6 @@ export class VegSellerProfileComponent implements OnInit {
   }
 
   getSales(sellerID) {
-    console.log("sellerID: " + sellerID);
     this._organicSellerService.getSales(sellerID)
     .subscribe(resData => {
       this.salesDetails = resData;

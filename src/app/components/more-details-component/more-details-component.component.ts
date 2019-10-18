@@ -17,11 +17,17 @@ export class MoreDetailsComponentComponent implements OnInit {
   cropId: any;
   description: any;
   disease: any;
-  detail: any;
+  step1: any;
+  step2: any;
+  step3: any;
+  step4: any;
   crops: any;
   message = 0;
   errorMsg: string;
-  editD = false;
+  editD1 = false;
+  editD2 = false;
+  editD3 = false;
+  editD4 = false;
   editDis = false;
   editDes = false;
   editCrop: any[];
@@ -48,6 +54,7 @@ export class MoreDetailsComponentComponent implements OnInit {
     this.activatedRoute.queryParams.subscribe(params => {
       const cropID = params['crop'];
       this.getCrops(cropID);
+      this.getMoreCrops(cropID);
     });
   }
 
@@ -55,13 +62,43 @@ export class MoreDetailsComponentComponent implements OnInit {
     this._success.next(`Successfully updated crop`);
   }
 
-  getCrops(cropID) {
-    console.log("cropID : " + cropID);
-    this._cropsService.getCropDetails(cropID)
+getCrops(cropID) {
+  this._cropsService.getCropDetails(cropID)
       .subscribe(resData => {
         this.crops = resData;
-        this.detail = this.crops[0].details;
-        console.log("details : " + this.detail);
+
+        if (this.crops[0].DryZone == 1) {
+          this.arrayZone.push('DryZone');
+        }
+        if (this.crops[0].Intermediate == 1) {
+          this.arrayZone.push('Intermediate');
+        }
+        if (this.crops[0].LowCountryWet == 1) {
+          this.arrayZone.push('LowCountryWet');
+        }
+        if (this.crops[0].UpCountryWet == 1) {
+          this.arrayZone.push('UpCountryWet');
+        }
+
+        this.step1 = '';
+        this.step2 = '';
+        this.step3 = '';
+        this.step4 = '';
+        this.disease = '';
+        this.description = '';
+      },
+        resError => this.errorMsg = resError);
+}
+
+  getMoreCrops(cropID) {
+    this._cropsService.getCropMoreDetails(cropID)
+      .subscribe(resData => {
+        this.crops = resData;
+        console.log("Crop: "+this.crops[0]);
+        this.step1 = this.crops[0].step1;
+        this.step2 = this.crops[0].step2;
+        this.step3 = this.crops[0].step3;
+        this.step4 = this.crops[0].step4;
         this.disease = this.crops[0].disease;
         this.description = this.crops[0].description;
 
@@ -81,12 +118,36 @@ export class MoreDetailsComponentComponent implements OnInit {
         resError => this.errorMsg = resError);
   }
 
-  editDetail() {
-    this.editD = true;
+  editStep1() {
+    this.editD1 = true;
   }
-  updateDetails(val: any) {
-    this.editD = false;
-    this.detail = val.details;
+  updateStep1(val: any) {
+    this.editD1 = false;
+    this.step1 = val.step1;
+    this.cropId = val.cropID;
+  }
+  editStep2() {
+    this.editD2 = true;
+  }
+  updateStep2(val: any) {
+    this.editD2 = false;
+    this.step2 = val.step2;
+    this.cropId = val.cropID;
+  }
+  editStep3() {
+    this.editD3 = true;
+  }
+  updateStep3(val: any) {
+    this.editD3 = false;
+    this.step3 = val.step3;
+    this.cropId = val.cropID;
+  }
+  editStep4() {
+    this.editD4 = true;
+  }
+  updateStep4(val: any) {
+    this.editD4 = false;
+    this.step4 = val.step4;
     this.cropId = val.cropID;
   }
 
@@ -94,6 +155,7 @@ export class MoreDetailsComponentComponent implements OnInit {
     this.editDis = true;
   }
   updateDisease(val: any) {
+    console.log("val: " + val);
     this.message = 1;
 
     this.getEmails(this.crops[0].cropName);
@@ -139,24 +201,18 @@ export class MoreDetailsComponentComponent implements OnInit {
       .subscribe(resData => {
         this.emails = resData;
         this.count++;
-        console.log("email count : " + this.count);
       },
         resError => this.errorMsg = resError);
-    //     console.log("Outer email : " + this.emails);
-    //     for (let i = 0; i < this.count; i++) {
-    //       console.log("run this loop " + this.count);
-    //       console.log("Outer email : " + this.emails[i].email);
-    //       this.emailArray.push(this.emails[i].email);
-    //     }
-    // console.log("email Array final: " + this.emailArray);
-    // this.checkMail(this.emailArray);
   }
 
   updateCrop() {
     this.editCrop = [
       {
         'cropID': this.cropId,
-        'details': this.detail,
+        'step1': this.step1,
+        'step2': this.step2,
+        'step3': this.step3,
+        'step4': this.step4,
         'disease': this.disease,
         'description': this.description,
       }
@@ -165,12 +221,9 @@ export class MoreDetailsComponentComponent implements OnInit {
       .subscribe(resData => {
         this.CropUpdateMsg();
         if (this.message == 1 && this.emails != []) {
-          console.log("Emails: back " + this.count + this.emails);
           for (let i = 0; i < this.count; i++) {
-            console.log("emails: " + this.emails[0].email);
             this.emailArray.push(this.emails[i].email);
           }
-          console.log("Array: " + this.emailArray);
           this.checkMail(this.emailArray);
         }
       },

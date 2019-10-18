@@ -111,13 +111,11 @@ export class UsersComponent implements OnInit {
 
   getSelectedSeedSellers(userID: any) {
     this.available = false;
-    console.log("seed: " + userID);
     this._seedsSellerService.getSeedSellerById(userID)
       .subscribe(resData => {
         this.selectedfoodSellerDetails = resData;
         this.sellingPlants(userID);
         this.sellingSeeds(userID);
-        console.log("seed2: " + this.selectedfoodSellerDetails);
       },
         resError => this.errorMsg = resError);
   }
@@ -126,9 +124,7 @@ export class UsersComponent implements OnInit {
     this._seedsSellerService.getSeeds(userID)
       .subscribe(resData => {
         this.seedSales = resData;
-        console.log("seed: " + this.seedSales);
         if (this.seedSales >= '[object Object]' || this.plantSales >= '[object Object]') {
-          console.log("inside");
           this.available = true;
         }
       },
@@ -139,22 +135,11 @@ export class UsersComponent implements OnInit {
     this._seedsSellerService.getPlants(userID)
       .subscribe(resData => {
         this.plantSales = resData;
-        console.log("seed1: " + this.plantSales);
       },
         resError => this.errorMsg = resError);
   }
 
-  // getFarmerCount() {
-  //   this._profileService.getNumOfFarmers()
-  //     .subscribe(resData => {
-  //       this.fCount = resData;
-  //       console.log("res: " + this.fCount);
-  //     },
-  //       resError => this.errorMsg = resError);
-  // }
-
   getFarmerDetails(userId: number) {
-    console.log("user: " + userId);
     this.available = false;
     this._farmerService.getUserDetails(userId)
       .subscribe(resData => {
@@ -280,7 +265,6 @@ export class UsersComponent implements OnInit {
   // tslint:disable-next-line:member-ordering
   @ViewChild('form') mytemplateForm: NgForm;
   cancel() {
-    console.log("nav");
     this.mytemplateForm.reset();
   }
 

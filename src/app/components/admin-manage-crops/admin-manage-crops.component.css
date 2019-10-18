@@ -4,6 +4,7 @@
   margin-top: 10px; 
   font-family: 'Roboto', sans-serif;
   font-size: 16px;
+  margin-left: 220px;
 }
 .subheading{
     margin-top: 10px; 
@@ -65,6 +66,10 @@ button:hover {
 }
 
 .container {
+  padding: 16px;
+  margin-left: 200px;
+}
+.container1 {
   padding: 16px;
 }
 

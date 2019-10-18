@@ -11,6 +11,7 @@ import 'rxjs/add/observable/throw';
 export class LocationsService {
 
   private _url = 'http://localhost:3000/api/district';
+  // private _url = '/api/district';
 
   constructor(private _http: Http) { }
 

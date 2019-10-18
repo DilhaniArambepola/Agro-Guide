@@ -15,6 +15,11 @@ export class ProfilesService {
   private url = 'http://localhost:3000/api/rSeedSeller';
   private _URL = 'http://localhost:3000/api/rvegSeller';
 
+  // private _url = '/api/farmers';
+  // private _Url = '/api/farmerCount';
+  // private url = '/api/rSeedSeller';
+  // private _URL = '/api/rvegSeller';
+
   constructor(private _http: Http) { }
 
   getFarmers(): Observable<any> {
@@ -30,7 +35,6 @@ export class ProfilesService {
   }
 
   removeFarmers(id: any): Observable<any[]> {
-    console.log("id: " + id);
     return this._http.delete(`${this._url}/${id}`) // ...using put request
       .map((res: Response) => res.json()) // ...and calling .json() on the response to return data
       .catch((error: any) => Observable.throw(error.json().error || 'Server error')); // ...errors if any
@@ -43,7 +47,6 @@ export class ProfilesService {
   }
 
   removeFoodSellers(body: any): Observable<any[]> {
-    console.log("sellerID service: " + body.sellerID);
     return this._http.delete(`${this._URL}/${body.sellerID}/${body.userID}`) // ...using put request
       .map((res: Response) => res.json()) // ...and calling .json() on the response to return data
       .catch((error: any) => Observable.throw(error.json().error || 'Server error')); // ...errors if any

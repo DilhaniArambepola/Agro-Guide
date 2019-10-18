@@ -17,7 +17,7 @@
 .container {
     overflow-y: auto;
     overflow-x: hidden;
-    padding: 10px;
+    padding: 20px;
 }
 .column {
     width: 50%;
@@ -48,6 +48,12 @@ h6 {
 button:hover {
     opacity: 0.8;
   }
+  .cancelbtn {
+    background-color: red;
+    width: 60px;
+    border-radius: 5px;
+    padding: 7px;
+ }
   
   /* Center the image and position the close button */
   .imgcontainer {

@@ -16,6 +16,12 @@ export class OrganicSellerService {
   private url = 'http://localhost:3000/api/foodItems';
   private _Url = 'http://localhost:3000/api/sales';
 
+  // private _url = '/api/vegetableSellers';
+  // private _URL = '/api/organicSellers';
+  // private URL = '/api/sellerDetails';
+  // private url = '/api/foodItems';
+  // private _Url = '/api/sales';
+
   constructor(private _http: Http) { }
 
   // Get all organic seller details

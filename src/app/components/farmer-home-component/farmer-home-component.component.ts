@@ -24,8 +24,14 @@ export class FarmerHomeComponentComponent implements OnInit {
     private _farmerService: FarmerService) { }
 
   ngOnInit() {
+    // this.activatedRoute.queryParams.subscribe(params => {
+    //   const userID = params['userID'];
+    //   this.getUserDetails(userID);
+    //   this.getFarmerSelectedCrops(userID);
+    // });
+
     this.activatedRoute.queryParams.subscribe(params => {
-      const userID = params['userID'];
+      const userID: any = localStorage.getItem('currentUser');
       this.getUserDetails(userID);
       this.getFarmerSelectedCrops(userID);
     });
@@ -57,11 +63,9 @@ export class FarmerHomeComponentComponent implements OnInit {
 
   // get the list of crops according to the climatezone
   getCrops(district: number) {
-    console.log("district: " + district);
     this._farmerService.getCropDetails(district)
       .subscribe(resData => {
         this.cropDetails = resData;
-        console.log("crops: " + this.cropDetails);
       },
         resError => this.errorMsg = resError);
   }

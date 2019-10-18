@@ -1,5 +1,5 @@
 <div class="container-large">
-<button style="float: right;" (click)="redirect()">Back</button>
+<button class="btn btn-warning" style="float: right;" (click)="redirect()">Back</button>
 
 <div class="row">
     <ngb-alert style="margin-top: 5px; margin-left: 50px;" class="coltxt" *ngIf="successMessage" type="success" (close)="successMessage = null">{{ successMessage }}</ngb-alert>
@@ -23,24 +23,83 @@
             </label>
             <label for="crop"> {{arrayZone}}</label>
         </div>
+        <br>
+        <div class="row">
+            <h6>Description</h6>
+        </div>
 
         <div class="row">
             <div class="col-auto" style="width: 70%">
                 <label for="description">
-                    <b>Description :- </b>
-                </label>
-                <label *ngIf="!editD" for="crop"> {{crops[0].details}}</label>
-                <form *ngIf="editD" #form="ngForm" (ngSubmit)="updateDetails(form.value, user)" class="change">
-                    <textarea placeholder="Enter description" name="details" [(ngModel)]="crops[0].details" ngModel rows="8" cols="100"></textarea>
+                    <b>Step1 :- </b>
+                </label><br>
+                <label *ngIf="!editD1" for="crop"> {{step1}}</label>
+                <form *ngIf="editD1" #form="ngForm" (ngSubmit)="updateStep1(form.value, user)" class="change">
+                    <textarea placeholder="Enter description" name="step1" [(ngModel)]="crops[0].step1" ngModel rows="8" cols="100"></textarea>
                     <!-- <input class="coltxt" [(ngModel)]="crops.details" type="text" name="details" ngModel style="width:5rem;"> -->
                     <input type="text" name="cropID" ngModel="{{crops[0].cropID}}" style="display: none;">
                     <button class="btn btn-primary submitBtn coltxt" type="submit">Save</button>
                 </form>
             </div>
             <div class="col-auto" style="width: 30%">
-                <button (click)="editDetail()">Update</button>
+                <button class="btn btn-info coltxt" (click)="editStep1()">Update step1</button>
             </div>
         </div>
+
+        <div class="row">
+            <div class="col-auto" style="width: 70%">
+                <label for="description">
+                    <b>Step2 :- </b>
+                </label><br>
+                <label *ngIf="!editD2" for="crop"> {{step2}}</label>
+                <form *ngIf="editD2" #form="ngForm" (ngSubmit)="updateStep2(form.value, user)" class="change">
+                    <textarea placeholder="Enter description" name="step2" [(ngModel)]="crops[0].step2" ngModel rows="8" cols="100"></textarea>
+                    <!-- <input class="coltxt" [(ngModel)]="crops.details" type="text" name="details" ngModel style="width:5rem;"> -->
+                    <input type="text" name="cropID" ngModel="{{crops[0].cropID}}" style="display: none;">
+                    <button class="btn btn-primary submitBtn coltxt" type="submit">Save</button>
+                </form>
+            </div>
+            <div class="col-auto" style="width: 30%">
+                <button class="btn btn-info coltxt" (click)="editStep2()">Update step2</button>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-auto" style="width: 70%">
+                <label for="description">
+                    <b>Step3 :- </b>
+                </label><br>
+                <label *ngIf="!editD3" for="crop"> {{crops[0].step3}}</label>
+                <form *ngIf="editD3" #form="ngForm" (ngSubmit)="updateStep3(form.value, user)" class="change">
+                    <textarea placeholder="Enter description" name="step3" [(ngModel)]="crops[0].step3" ngModel rows="8" cols="100"></textarea>
+                    <!-- <input class="coltxt" [(ngModel)]="crops.details" type="text" name="details" ngModel style="width:5rem;"> -->
+                    <input type="text" name="cropID" ngModel="{{crops[0].cropID}}" style="display: none;">
+                    <button class="btn btn-primary submitBtn coltxt" type="submit">Save</button>
+                </form>
+            </div>
+            <div class="col-auto" style="width: 30%">
+                <button class="btn btn-info coltxt" (click)="editStep3()">Update step3</button>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-auto" style="width: 70%">
+                <label for="description">
+                    <b>Step4 :- </b>
+                </label><br>
+                <label *ngIf="!editD4" for="crop"> {{crops[0].step4}}</label>
+                <form *ngIf="editD4" #form="ngForm" (ngSubmit)="updateStep4(form.value, user)" class="change">
+                    <textarea placeholder="Enter description" name="step4" [(ngModel)]="crops[0].step4" ngModel rows="8" cols="100"></textarea>
+                    <!-- <input class="coltxt" [(ngModel)]="crops.details" type="text" name="details" ngModel style="width:5rem;"> -->
+                    <input type="text" name="cropID" ngModel="{{crops[0].cropID}}" style="display: none;">
+                    <button class="btn btn-primary submitBtn coltxt" type="submit">Save</button>
+                </form>
+            </div>
+            <div class="col-auto" style="width: 30%">
+                <button class="btn btn-info coltxt" (click)="editStep4()">Update step4</button>
+            </div>
+        </div>
+        <br>
 
         <div class="row">
             <div class="col-auto" style="width: 70%">
@@ -53,7 +112,7 @@
                             <div class="col-auto">
                                 <label *ngIf="!editDis" for="crop"> {{crops[0].disease}}</label>
                                 <form *ngIf="editDis" #form="ngForm" (ngSubmit)="updateDisease(form.value, user)" class="change">
-                                    <input class="coltxt" [(ngModel)]="crops[0].disease" type="text" name="disease" ngModel style="width:5rem;">
+                                    <input class="coltxt" [(ngModel)]="crops[0].disease" type="text" name="disease" ngModel style="width:15rem;">
                                     <input type="text" name="cropID" ngModel="{{crops[0].cropID}}" style="display: none;">
                                     <button class="btn btn-primary submitBtn coltxt" style="display: none;" type="submit">Save</button>
                                 </form>
@@ -62,9 +121,10 @@
                 
             </div>
             <div class="col-auto" style="width: 30%">
-                <button (click)="editDisease()">Update</button>
+                <button class="btn btn-info coltxt" (click)="editDisease()">Update disease</button>
             </div>
         </div>
+        <br>
 
         <div class="row">
             <div class="col-auto" style="width: 70%">
@@ -80,11 +140,11 @@
                 </form>
             </div>
             <div class="col-auto" style="width: 30%">
-                <button (click)="editDescription()">Update</button>
+                <button class="btn btn-info coltxt" (click)="editDescription()">Update description</button>
             </div>
 
         </div>
-        <button style="float: right;" (click)="updateCrop()">Save changes</button>
+        <button class="btn btn-success" style="float: right;" (click)="updateCrop()">Save changes</button>
 
 
 

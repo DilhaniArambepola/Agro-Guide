@@ -19,7 +19,7 @@
           </i>
         </div>
         <div class="col-auto" style="width: 80%; float: right; text-align: right;">
-          <span class="badge badge-danger d-none d-sm-block">4</span>
+          <span class="badge badge-danger d-none d-sm-block">{{iCount}}</span>
           <br>
           <br> New Inquiries
         </div>
@@ -37,7 +37,7 @@
           </i>
         </div>
         <div class="col-auto" style="width: 80%; float: right; text-align: right;">
-          <span class="badge badge-danger d-none d-sm-block">4</span>
+          <span class="badge badge-danger d-none d-sm-block">{{farmerCount}}</span>
           <br>
           <br> Farmers
         </div>
@@ -55,7 +55,7 @@
           </i>
         </div>
         <div class="col-auto" style="width: 80%; float: right; text-align: right;">
-          <span class="badge badge-danger d-none d-sm-block">4</span>
+          <span class="badge badge-danger d-none d-sm-block">{{vegSellerCount}}</span>
           <br>
           <br> Vegetable sellers
         </div>
@@ -73,7 +73,7 @@
           </i>
         </div>
         <div class="col-auto" style="width: 80%; float: right; text-align: right;">
-          <span class="badge badge-danger d-none d-sm-block">4</span>
+          <span class="badge badge-danger d-none d-sm-block">{{seedSellerCount}}</span>
           <br>
           <br> Seeds shops
         </div>
@@ -86,20 +86,98 @@
   </div>
 
   <div class="row coltxt" style="margin-top: 10px;">
+      <div class="coltxt">
+          <ngb-alert style="margin-top: 5px; margin-left: 50px;" class="coltxt" *ngIf="successMessage" type="success" (close)="successMessage = null">{{ successMessage }}</ngb-alert>
+        </div>
     <div class="col-auto" style="width: 70%;">
-        <div class="view view-cascade py-3 gradient-card-header info-color-dark mb-4">
+      <div class="view view-cascade py-3 gradient-card-header info-color-dark mb-4">
 
-            <canvas id="lineChart"></canvas>
+        <canvas id="lineChart"></canvas>
+
+      </div>
+    </div>
+    <div class="col-auto profile">
+      <div class="row admin">
+        <i class="material-icons" style="font-size: 30px; margin-top: 10px;">
+          account_circle
+        </i>
+        <button onclick="document.getElementById('id01').style.display='block'" class="subheading btn btn-success">Change Admin details</button>
+        
+        <div id="id01" class="modal coltxt">
+
+          <div class="col-auto">
+            <ngb-alert style="margin-top: 5px; margin-left: 50px;" class="coltxt" *ngIf="successMessage" type="success" (close)="successMessage = null">{{ successMessage }}</ngb-alert>
+            <ngb-alert class="background coltxt" *ngIf="deleteMessage" type="delete" (close)="deleteMessage = null">{{ deleteMessage }}</ngb-alert>
+          </div>
+
+          <form *ngIf="!show" #form="ngForm" (click)="getAdminPwd()" (ngSubmit)="confirmAdmin(form.value);" class="modal-content animate"
+            enctype="multipart/form-data">
+            <div class="imgcontainer">
+              <span onclick="document.getElementById('id01').style.display='none'" class="close" title="Close Modal">&times;</span>
+              <h4>Change admin password</h4>
+            </div>
+
+            <div class="container1">
+              <label style="width: 130px;" for="email1">
+                <b>Enter email: </b>
+              </label>
+              <input type="text" name="email1" ngModel required>
+              <br>
+
+              <label style="width: 130px;" for="password1">
+                <b>Current password: </b>
+              </label>
+              <input type="password" name="pwd1" ngModel required>
+              <br>
+            </div>
+
+            <div class="container1" style="background-color:#f1f1f1">
+              <button type="button" (click)="cancel()" onclick="document.getElementById('id01').style.display='none'" class="cancelbtn">Cancel</button>
+              <input class="btn btn-primary coltxt" type="submit">
+            </div>
+          </form>
+
+          <form [formGroup]="registerForm" *ngIf="show" #form="ngForm" (ngSubmit)="changePassword(form.value);" class="modal-content animate"
+            enctype="multipart/form-data">
+            <div class="imgcontainer">
+              <span onclick="document.getElementById('id01').style.display='none'" class="close" title="Close Modal">&times;</span>
+              <h4>Change admin password</h4>
+            </div>
+
+            <div class="container1">
+              <div class="form-group">
+                <label for="password">Password</label>
+                <input type="password" formControlName="password" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.password.errors }"
+                />
+                <div *ngIf="submitted && f.password.errors" class="invalid-feedback">
+                  <div *ngIf="f.password.errors.required">Password is required</div>
+                  <div *ngIf="f.password.errors.minlength">Password must be at least 6 characters</div>
+                </div>
+              </div>
+              <div class="form-group">
+                <label>Confirm Password</label>
+                <input type="password" formControlName="confirmPassword" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.confirmPassword.errors }"
+                />
+                <div *ngIf="submitted && f.confirmPassword.errors" class="invalid-feedback">
+                  <div *ngIf="f.confirmPassword.errors.required">Confirm Password is required</div>
+                  <div *ngIf="f.confirmPassword.errors.mustMatch">Passwords must match</div>
+                </div>
+              </div>
+            </div>
+
+            <div class="container1" style="background-color:#f1f1f1">
+              <button type="button" (click)="cancel()" onclick="document.getElementById('id01').style.display='none'" class="cancelbtn">Cancel</button>
+              <input class="btn btn-primary coltxt" type="submit">
+            </div>
+          </form>
 
         </div>
-    </div>
-    <div class="col-auto profile" style="width: 25%;">
-      <div class="row" style="margin: auto;">
-          <i class="material-icons" style="font-size: 30px">
-              account_circle
-            </i> <p class="subheading">Change Admin details</p>
       </div>
-      
+      <div class="row subheading" style="margin-top: 20px; margin-left: 10px;">
+        Main agro-climatic zones in Sri Lanka
+        <img src="../../../assets/images/crops/climate.png" style="width:230px; height: 300px;">
+      </div>
+
     </div>
   </div>
 </div>

@@ -14,20 +14,26 @@ export class SeedsService {
   private _URL = 'http://localhost:3000/api/districtSeedShops';
   private url = 'http://localhost:3000/api/seeds';
   private URL = 'http://localhost:3000/api/plants';
-  private _Url = 'http://localhost:3000/api/seedSellerDetails';
+  private _Url = 'http://localhost:3000/api/seedSellerMoreDetails';
+  private _Url2 = 'http://localhost:3000/api/seedSellerDetails';
+
+  // private _url = '/api/seedShops';
+  // private _URL = '/api/districtSeedShops';
+  // private url = '/api/seeds';
+  // private URL = '/api/plants';
+  // private _Url = '/api/seedSellerMoreDetails';
+  // private _Url2 = '/api/seedSellerDetails';
 
   constructor(private _http: Http) { }
 
   // Get seed shops
   getSeedSellers(): Observable<any> {
-    console.log("came this");
     return this._http.get(this._url)
       .map((response: Response) => response.json())
       .catch((error: any) => Observable.throw(error.json().error || 'Server error'));
   }
 
   getDistrictSeedSellers(district: any): Observable<any> {
-    console.log(" serivice : " + district);
     return this._http.get(`${this._URL}/${district}`)
       .map((response: Response) => response.json())
       .catch((error: any) => Observable.throw(error.json().error || 'Server error'));
@@ -41,8 +47,13 @@ export class SeedsService {
   }
 
   getSeedSellerById(userID) {
-    console.log("call new method : " + userID);
     return this._http.get(`${this._Url}/${userID}`)
+      .map((response: Response) => response.json())
+      .catch((error: any) => Observable.throw(error.json().error || 'Server error'));
+  }
+
+  getSeedSeller(userID) {
+    return this._http.get(`${this._Url2}/${userID}`)
       .map((response: Response) => response.json())
       .catch((error: any) => Observable.throw(error.json().error || 'Server error'));
   }

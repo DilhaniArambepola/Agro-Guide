@@ -11,9 +11,16 @@ import 'rxjs/add/observable/throw';
 export class CropsService {
 
   private _url = 'http://localhost:3000/api/crops';
-  private _URL = 'http://localhost:3000/api/cutivate';
+  private _URL = 'http://localhost:3000/api/cultivate';
+  private _URL2 = 'http://localhost:3000/api/cultivateMore';
   private URL = 'http://localhost:3000/api/selectedCrop';
   private url = 'http://localhost:3000/api/cropZone';
+
+  // private _url = '/api/crops';
+  // private _URL = '/api/cultivate';
+  // private _URL2 = '/api/cultivateMore';
+  // private URL = '/api/selectedCrop';
+  // private url = '/api/cropZone';
 
   constructor(private _http: Http) { }
 
@@ -72,13 +79,10 @@ export class CropsService {
       .catch((error: any) => Observable.throw(error.json().error || 'Server error'));
   }
 
-  // addZone(body: Object): Observable<any> {
-  //   const bodyString = JSON.stringify(body); // Stringify payload
-  //   const headers = new Headers({ 'Content-Type': 'application/json' }); // ... Set content type to JSON
-  //   const options = new RequestOptions({ headers: headers }); // Create a request option
-
-  //   return this._http.post(this.url, body, options) // ...using post request
-  //     .map((res: Response) => res.json()) // ...and calling .json() on the response to return data
-  //     .catch((error: any) => Observable.throw(error.json().error || 'Server error')); // ...errors if any
-  // }
+  getCropMoreDetails(id: number): Observable<any> {
+    return this._http.get(`${this._URL2}/${id}`)
+    .map((response: Response) => response.json() )
+      // .map((response: Response) => {response.json(), console.log(response.json()); } )
+      .catch((error: any) => Observable.throw(error.json().error || 'Server error'));
+  }
 }

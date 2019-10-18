@@ -55,7 +55,7 @@ export class RegisterComponent implements OnInit {
             adL1: [''],
             adL2: [''],
             adL3: [''],
-            contact: [''],
+            contact: ['', [Validators.required, Validators.pattern('[0-9]{10}')]],
             district: ['', Validators.required],
             role: ['', Validators.required]
         }, {
@@ -86,6 +86,7 @@ export class RegisterComponent implements OnInit {
         if (this.registerForm.invalid) {
             return;
         }
+        console.log("No errors");
 
         this.sendVal = [
             {
@@ -95,8 +96,8 @@ export class RegisterComponent implements OnInit {
                 'userRole': this.selectedRole,
                 'districtName': this.selectedDistrict,
                 'adL1': this.registerForm.value.adL1,
-                'adL2': this.registerForm.value.adL1,
-                'adL3': this.registerForm.value.adL1,
+                'adL2': this.registerForm.value.adL2,
+                'adL3': this.registerForm.value.adL3,
                 'contact': this.registerForm.value.contact,
             }
         ];

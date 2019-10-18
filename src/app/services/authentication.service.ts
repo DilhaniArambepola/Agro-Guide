@@ -19,6 +19,8 @@ export class AuthenticationService {
     value: any;
     private url = 'http://localhost:3000/api/users/authenticate';
 
+    // private url = '/api/users/authenticate';
+
     private currentUserSubject: BehaviorSubject<User>;
     public currentUser: Observable<User>;
 
@@ -101,12 +103,8 @@ export class AuthenticationService {
             console.log("Value: " + this.value);
             const role = localStorage.getItem(this.value);
             console.log("has a val : " + role);
-            if(role != '') {
-
-            }
             return role;
         }
-        console.log("return 1");
         return 0;
     }
 

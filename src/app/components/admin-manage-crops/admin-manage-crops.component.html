@@ -5,10 +5,7 @@
   <div class="col-auto">
     <div class="heading">Manage Crops</div>
   </div>
-  <div class="col-auto">
-    <ngb-alert style="margin-top: 5px; margin-left: 50px;" class="coltxt" *ngIf="successMessage" type="success" (close)="successMessage = null">{{ successMessage }}</ngb-alert>
-    <ngb-alert class="background coltxt" *ngIf="deleteMessage" type="delete" (close)="deleteMessage = null">{{ deleteMessage }}</ngb-alert>
-  </div>
+
 </div>
 
 <div class="container">
@@ -20,7 +17,7 @@
           <div class="table">
             <div class="row">
               <div class="subheading" style="width: 4rem; margin-left:25px; text-align:center;">Crop</div>
-              <div class="subheading" style="width: 8rem; text-align:center;">Image</div>
+              <!-- <div class="subheading" style="width: 8rem; text-align:center;">Image</div> -->
               <div class="subheading" style="width: 12rem; text-align:center;">Climate zone</div>
             </div>
           </div>
@@ -28,11 +25,11 @@
         <div *ngFor="let c of crops; let i = index;">
           <div class="card mb-1" style="width: 100%; margin: 0px; padding-left:0px;">
             <div class="card-header bg-transparent">
-              <label class="coltxt" style="width: 4rem; text-align:left;">{{c.cropName}}</label>
-              <label class="coltxt" style="width: 8rem; text-align:center;">
+              <label class="coltxt" style="width: 6rem; text-align:left;">{{c.cropName}}</label>
+              <!-- <label class="coltxt" style="width: 8rem; text-align:center;">
                 <img src="../../../assets/images/crops/{{c.image}}" style="height:60px;">
-              </label>
-              <label class="coltxt" style="width: 12rem; text-align:left;">{{this.mapZone.get(c.cropID)}}</label>
+              </label> -->
+              <label class="coltxt" style="width: 20rem; text-align:left;">{{this.mapZone.get(c.cropID)}}</label>
 
               <button style="float:right; width:100px; background-color:red;" (click)="deleteCrop(c.cropName)">Delete</button>
               <button style="float:right; width:100px;" (click)="moreDetails(c.cropID)">More Details</button>
@@ -40,6 +37,10 @@
             </div>
           </div>
 
+        </div>
+        <div class="col-auto">
+          <ngb-alert style="margin-top: 5px; margin-left: 50px;" class="coltxt" *ngIf="successMessage" type="success" (close)="successMessage = null">{{ successMessage }}</ngb-alert>
+          <ngb-alert class="background coltxt" *ngIf="deleteMessage" type="delete" (close)="deleteMessage = null">{{ deleteMessage }}</ngb-alert>
         </div>
         <!-- First card in here-->
 
@@ -53,7 +54,7 @@
               <h4>Add a new crop</h4>
             </div> 
 
-            <div class="container">
+            <div class="container1">
               <label for="crop">
                 <b>Crop</b>
               </label>
@@ -72,7 +73,17 @@
                 <b>Description</b>
               </label>
               <br>
-              <textarea placeholder="Enter description" name="description" ngModel rows="8" cols="100"></textarea>
+              <b>step1:</b><br>
+              <textarea placeholder="Enter description" name="step1" ngModel rows="3" cols="100"></textarea>
+              <br>
+              <b>step2:</b><br>
+              <textarea placeholder="Enter description" name="step2" ngModel rows="3" cols="100"></textarea>
+              <br>
+              <b>step3:</b><br>
+              <textarea placeholder="Enter description" name="step3" ngModel rows="3" cols="100"></textarea>
+              <br>
+              <b>step4:</b><br>
+              <textarea placeholder="Enter description" name="step4" ngModel rows="3" cols="100"></textarea>
               <br>
               <label for="diseases">
                 <b>Diseases and insect Pests</b>
