@@ -71,6 +71,13 @@ export class CultivateVegetablesComponent implements OnInit {
     };
   }
 
+  compute(num: any) {
+    if(num < 0){
+      return 0;
+    }
+    return 1;
+  }
+
   // Get list of crops
   getCrops() {
     this._cropsService.getAllCrops()

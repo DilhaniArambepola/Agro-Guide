@@ -4,6 +4,7 @@ import { HeaderComponent } from './header/header.component';
 import { FooterComponent } from './footer/footer.component';
 import { AllCropsLayoutComponent } from './all-crops-layout/all-crops-layout.component';
 import { NO_ERRORS_SCHEMA } from '@angular/core';
+import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { ComponentsModule } from './../components/components.module';
 import { AdminAddCropsLayoutComponent } from './admin-add-crops-layout/admin-add-crops-layout.component';
 import { AdminCropDiseaseLayoutComponent } from './admin-crop-disease-layout/admin-crop-disease-layout.component';
@@ -30,7 +31,7 @@ import { UiAdminContactComponent } from './ui-admin-contact/ui-admin-contact.com
       RouterModule,
       NgbModule.forRoot()
     ],
-    schemas: [ NO_ERRORS_SCHEMA],
+    schemas: [NO_ERRORS_SCHEMA, CUSTOM_ELEMENTS_SCHEMA],
     declarations: [
       HeaderComponent,
       FooterComponent,

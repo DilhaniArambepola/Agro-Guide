@@ -37,6 +37,7 @@ export class AuthenticationService {
         localStorage.clear();
     }
 
+    // Check whether the user is authenticated
     isAuthenticated(token: any): boolean {
         console.log("Authenticated");
         return localStorage.getItem('currentUser') != null && !this.isTokenExpired(token);
@@ -58,51 +59,27 @@ export class AuthenticationService {
         console.log("val: " + val);
         return this.http.post<any>(this.url, val)
             .pipe(map(user => {
-                //  console.log('print user : ' + user.loggedIn.accessToken);
-                console.log('print code : ' + user.code);
-                console.log('print error : ' + user.error);
-                // console.log('print userId : ' + user.loggedIn.userID);
-                // console.log('print user role : ' + user.loggedIn.userRole);
-
                 if (user.code == 204) {
-                    console.log("came to this");
-                    console.log("msg 204: " + user.error);
                     return user;
-                    // this._alert.error(user.error)
                 } else if (user.code == 208) {
-                    console.log("came to this2");
-                    console.log("msg 208: " + user.error);
-                return user;
-                    // this._alert.error(user.error);
-
-
+                    return user;
                     // login successful if there's a jwt token in the response
                 } else if (user.loggedIn.userID && user.accessToken) {
-                    console.log('print userId inner: ' + user.loggedIn.userID);
-                    console.log('token from auth service : ' + user.accessToken);
                     // store user details and jwt token in local storage to keep user logged in between page refreshes
                     localStorage.setItem('currentUser', user.loggedIn.userID);
                     localStorage.setItem(user.loggedIn.userID, user.loggedIn.userRole);
-                    console.log("repeat: " + localStorage.getItem(user.loggedIn.userID));
                     this.currentUserSubject.next(user);
                     return user;
-
                 }
 
             }));
     }
 
     decode() {
-        console.log("call this");
-        console.log("call this current: " + localStorage.getItem('currentUser'));
         // tslint:disable-next-line:radix
         if (parseInt(localStorage.getItem('currentUser')) > 0) {
             this.value = localStorage.getItem('currentUser');
-            
-            // this.isAuthenticated(this.value.accessToken);
-            console.log("Value: " + this.value);
             const role = localStorage.getItem(this.value);
-            console.log("has a val : " + role);
             return role;
         }
         return 0;
@@ -114,9 +91,4 @@ export class AuthenticationService {
         this.currentUserSubject.next(null);
         //  this._router.navigate(['/login'], { queryParams: { returnUrl: state.url } });
     }
-
-    // logout(): void {
-    //     this.clear();
-    //     this._router.navigate(['/login']);
-    //   }
 }

@@ -1,7 +1,7 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { inject, async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { CultivateVegetablesComponent } from './cultivate-vegetables.component';
-import { expect } from 'jasmine';
+import {} from 'jasmine';
 
 describe('CultivateVegetablesComponent', () => {
   let component: CultivateVegetablesComponent;
@@ -23,4 +23,10 @@ describe('CultivateVegetablesComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+
+  it('should check if specified crops are in the getCrops function', () => {
+    const crops = component.getCrops();
+    expect(crops).toContain([]);
+  });
+
 });

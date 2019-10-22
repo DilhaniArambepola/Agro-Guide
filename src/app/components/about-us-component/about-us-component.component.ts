@@ -28,10 +28,12 @@ export class AboutUsComponentComponent implements OnInit {
     ).subscribe(() => this.successMessage = null);
   }
 
-  InquirySentMsg() {
-    this._success.next(`We received your inquiry. We'll respond you soon`);
+  // alert message for success
+  Success(msg) {
+    this._success.next(msg);
   }
 
+  // select relevent topic
   getSelectedTopic(topic) {
     this.topic = topic;
   }
@@ -51,12 +53,13 @@ export class AboutUsComponentComponent implements OnInit {
 
     this._generalService.addInquiry(this.sendValue)
       .subscribe(resData => {
-        this.InquirySentMsg();
+        this.Success(`We received your inquiry. We'll respond you soon`);
         this.mytemplateForm.reset();
       },
         resError => this.errorMsg = resError);
   }
 
+  // reset the form
   cancel() {
     this.mytemplateForm.reset();
   }

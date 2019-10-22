@@ -22,30 +22,28 @@ export class ProfilesService {
 
   constructor(private _http: Http) { }
 
+  // Get farmers
   getFarmers(): Observable<any> {
     return this._http.get(this._url)
       .map((response: Response) => response.json())
       .catch((error: any) => Observable.throw(error.json().error || 'Server error'));
   }
 
-  getNumOfFarmers() {
-    return this._http.get(this._Url)
-    .map((response: Response) => response.json())
-    .catch((error: any) => Observable.throw(error.json().error || 'Server error'));
-  }
-
+  // Remove farmers
   removeFarmers(id: any): Observable<any[]> {
     return this._http.delete(`${this._url}/${id}`) // ...using put request
       .map((res: Response) => res.json()) // ...and calling .json() on the response to return data
       .catch((error: any) => Observable.throw(error.json().error || 'Server error')); // ...errors if any
   }
 
+  // Remove seed sellers
   removeSeedSellers(body: any): Observable<any[]> {
     return this._http.delete(`${this.url}/${body.sellerID}/${body.userID}`) // ...using put request
       .map((res: Response) => res.json()) // ...and calling .json() on the response to return data
       .catch((error: any) => Observable.throw(error.json().error || 'Server error')); // ...errors if any
   }
 
+  // Remove food sellers
   removeFoodSellers(body: any): Observable<any[]> {
     return this._http.delete(`${this._URL}/${body.sellerID}/${body.userID}`) // ...using put request
       .map((res: Response) => res.json()) // ...and calling .json() on the response to return data

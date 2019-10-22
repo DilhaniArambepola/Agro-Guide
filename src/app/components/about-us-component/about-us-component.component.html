@@ -82,7 +82,7 @@
         <form #form="ngForm" (ngSubmit)="submitInquiry(form.value);" class="coltxt" enctype="multipart/form-data">
           <div>
             
-              <select class="dropdown coltxt" (change)="getSelectedTopic($event.target.value)" required>
+              <select style="width: 250px;" class="dropdown coltxt" (change)="getSelectedTopic($event.target.value)" required>
                 <option value="All">Select a topic related to your inquiry</option>
                 <option value="Cultivate">Cultivate</option>
                 <option value="Sellings">Sellings</option>

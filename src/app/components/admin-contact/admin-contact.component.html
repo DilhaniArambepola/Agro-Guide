@@ -3,16 +3,7 @@
     <ngb-alert style="margin-top: 5px; margin-left: 50px;" class="coltxt" *ngIf="successMessage" type="success" (close)="successMessage = null">{{ successMessage }}</ngb-alert>
     <ngb-alert class="background coltxt" *ngIf="deleteMessage" type="delete" (close)="deleteMessage = null">{{ deleteMessage }}</ngb-alert>
   </div>
-  <!-- <div class="row">
-    <div class="col-auto">
-      <select class="dropdown coltxt" (change)="getSelectedLabel($event.target.value)">
-        <option value="0">All</option>
-        <option *ngFor="let topic of topics" value={{topic.name}}>
-          {{topic.name}}
-        </option>
-      </select>
-    </div>
-  </div> -->
+  
   <div class="row">
 
     <div class="col-auto column coltxt">

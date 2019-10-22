@@ -797,8 +797,10 @@ async function sendMail(user, callback) {
         port: 587,
         secure: false,
         auth: {
-            user: 'nimdilhani21@gmail.com',
-            pass: '72snmndk@K'
+            // user: 'nimdilhani21@gmail.com',
+            // pass: '72snmndk@K'
+            user: 'agroguide.mailer@gmail.com',
+            pass: 'agro123@'
         }
     });
 

@@ -31,19 +31,21 @@ export class OrganicSellerService {
       .catch((error: any) => Observable.throw(error.json().error || 'Server error'));
   }
 
+  // Get organic sellers according to the selected district
   getSelectedOrganicSellers(district: any): Observable<any> {
     return this._http.get(`${this._URL}/${district}`)
       .map((response: Response) => response.json())
       .catch((error: any) => Observable.throw(error.json().error || 'Server error'));
   }
 
-  // Get all organic seller details
+  // Get vegetables which are selling by the selected user
   getFoodItems(id: number): Observable<any> {
     return this._http.get(`${this.url}/${id}`)
       .map((response: Response) => response.json())
       .catch((error: any) => Observable.throw(error.json().error || 'Server error'));
   }
 
+  // Get selected seller details
   getSellerDetails(userID: number) {
     return this._http.get(`${this.URL}/${userID}`)
       .map((response: Response) => response.json())
@@ -51,12 +53,14 @@ export class OrganicSellerService {
       .catch((error: any) => Observable.throw(error.json().error || 'Server error'));
   }
 
+  // Get sales
   getSales(sellerID: number) {
     return this._http.get(`${this._Url}/${sellerID}`)
       .map((response: Response) => response.json())
       .catch((error: any) => Observable.throw(error.json().error || 'Server error'));
   }
 
+  // Add vegetables for seller
   addVeg(body: any): Observable<any> {
     const bodyString = JSON.stringify(body); // Stringify payload
     const headers = new Headers({ 'Content-Type': 'application/json' }); // ... Set content type to JSON
@@ -67,6 +71,7 @@ export class OrganicSellerService {
       .catch((error: any) => Observable.throw(error.json().error || 'Server error')); // ...errors if any
   }
 
+  // Update quantity of selling vegetables
   updateQuantity(q: any, vegID: number) {
     const headers = new Headers({ 'Content-Type': 'application/json' }); // ... Set content type to JSON
     const options = new RequestOptions({ headers: headers }); // Create a request option
@@ -76,6 +81,7 @@ export class OrganicSellerService {
       .catch((error: any) => Observable.throw(error.json().error || 'Server error')); // ...errors if any
   }
 
+  // Update prices of selling vegetables
   updatePrice(p: any, vegID: number) {
     const headers = new Headers({ 'Content-Type': 'application/json' }); // ... Set content type to JSON
     const options = new RequestOptions({ headers: headers }); // Create a request option
@@ -85,7 +91,7 @@ export class OrganicSellerService {
       .catch((error: any) => Observable.throw(error.json().error || 'Server error')); // ...errors if any
   }
 
-  // Delete a question
+  // Delete a vegetable
   removeItem(id: any): Observable<any[]> {
     return this._http.delete(`${this.url}/${id}`) // ...using put request
       .map((res: Response) => res.json()) // ...and calling .json() on the response to return data

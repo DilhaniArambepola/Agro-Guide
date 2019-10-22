@@ -33,6 +33,7 @@ export class SeedsService {
       .catch((error: any) => Observable.throw(error.json().error || 'Server error'));
   }
 
+  // Get seed sellers according to the districts
   getDistrictSeedSellers(district: any): Observable<any> {
     return this._http.get(`${this._URL}/${district}`)
       .map((response: Response) => response.json())
@@ -46,25 +47,28 @@ export class SeedsService {
       .catch((error: any) => Observable.throw(error.json().error || 'Server error'));
   }
 
+  // Get seed seller's username and contact details by userID
   getSeedSellerById(userID) {
     return this._http.get(`${this._Url}/${userID}`)
       .map((response: Response) => response.json())
       .catch((error: any) => Observable.throw(error.json().error || 'Server error'));
   }
 
+  // Get more information about seed sellers
   getSeedSeller(userID) {
     return this._http.get(`${this._Url2}/${userID}`)
       .map((response: Response) => response.json())
       .catch((error: any) => Observable.throw(error.json().error || 'Server error'));
   }
 
-  // Get seeds
+  // Get plants
   getPlants(userId: number): Observable<any> {
     return this._http.get(`${this.URL}/${userId}`)
       .map((response: Response) => response.json())
       .catch((error: any) => Observable.throw(error.json().error || 'Server error'));
   }
 
+  // Add selling item
   addItem(body: any): Observable<any> {
     const bodyString = JSON.stringify(body); // Stringify payload
     const headers = new Headers({ 'Content-Type': 'application/json' }); // ... Set content type to JSON
@@ -75,6 +79,7 @@ export class SeedsService {
       .catch((error: any) => Observable.throw(error.json().error || 'Server error')); // ...errors if any
   }
 
+  // Update quantity of the selling item
   updateQuantity(q: any, seedID: number) {
     const headers = new Headers({ 'Content-Type': 'application/json' }); // ... Set content type to JSON
     const options = new RequestOptions({ headers: headers }); // Create a request option
@@ -84,6 +89,7 @@ export class SeedsService {
       .catch((error: any) => Observable.throw(error.json().error || 'Server error')); // ...errors if any
   }
 
+  // Update price of the selling item
   updatePrice(p: any, seedID: number) {
     const headers = new Headers({ 'Content-Type': 'application/json' }); // ... Set content type to JSON
     const options = new RequestOptions({ headers: headers }); // Create a request option
@@ -93,7 +99,7 @@ export class SeedsService {
       .catch((error: any) => Observable.throw(error.json().error || 'Server error')); // ...errors if any
   }
 
-  // Delete a question
+  // Delete a selling item
   removeItem(id: any): Observable<any[]> {
     return this._http.delete(`${this.url}/${id}`) // ...using put request
       .map((res: Response) => res.json()) // ...and calling .json() on the response to return data

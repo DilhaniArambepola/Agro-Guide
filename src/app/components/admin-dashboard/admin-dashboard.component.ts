@@ -350,6 +350,7 @@ export class AdminDashboardComponent implements OnInit {
         // tslint:disable-next-line:max-line-length
         this.seedSellers.push(this.amsCount, this.ansCount, this.basCount, this.btsCount, this.csCount, this.gsCount, this.gmsCount, this.hsCount, this.jsCount, this.klsCount, this.kysCount, this.kesCount, this.kisCount, this.kusCount, this.mannrsCount, this.mtrsCount, this.mlsCount, this.mosCount, this.musCount, this.nesCount, this.posCount, this.pusCount, this.rsCount, this.tsCount, this.vsCount);
 
+        // Line chart
         const canvas = <HTMLCanvasElement>document.getElementById('lineChart');
         const ctxL = canvas.getContext('2d');
         let myLineChart = new Chart(ctxL, {
@@ -400,6 +401,7 @@ export class AdminDashboardComponent implements OnInit {
       }, resError => this.errorMsg = resError);
   }
 
+  // Get Admin password
   getAdminPwd() {
     this._generalService.getAdminPwd()
       .subscribe(resPassword => {
@@ -407,6 +409,7 @@ export class AdminDashboardComponent implements OnInit {
       }, resError => this.errorMsg = resError);
   }
 
+  // Get number of new inquiries
   getInquiriesCount() {
     this._generalService.getAllInquiry()
       .subscribe(resInquiries => {
@@ -434,6 +437,7 @@ export class AdminDashboardComponent implements OnInit {
 
   }
 
+  // reset forms
   cancel() {
     this.mytemplateForm.reset();
   }

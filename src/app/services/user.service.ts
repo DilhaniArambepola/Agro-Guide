@@ -23,7 +23,7 @@ export class UserService {
 
     constructor(private http: Http) { }
 
-    // Add a new applicant_rating
+    // Register a new user
     register(body: any): Observable<any> {
         const bodyString = JSON.stringify(body); // Stringify payload
         const headers = new Headers({ 'Content-Type': 'application/json' }); // ... Set content type to JSON
@@ -33,8 +33,8 @@ export class UserService {
             .catch((error: any) => Observable.throw(error.json().error || 'Server error')); // ...errors if any
     }
 
+    // Send emails
     sendMail(body: any): Observable<any> {
-        console.log("Mail sent");
         const bodyString = JSON.stringify(body); // Stringify payload
         const headers = new Headers({ 'Content-Type': 'application/json' }); // ... Set content type to JSON
 
@@ -44,10 +44,7 @@ export class UserService {
             .catch((error: any) => Observable.throw(error.json().error || 'Server error')); // ...errors if any
     }
 
-    update(user: User) {
-        return this.http.put(`${this.url}/${user.id}`, user);
-    }
-
+    // Update vegetable seller details
     updateSellerDetails(sellerId: any, body: any): Observable<any> {
         const headers = new Headers({ 'Content-Type': 'application/json' }); // ... Set content type to JSON
         const options = new RequestOptions({ headers: headers }); // Create a request option
@@ -57,6 +54,7 @@ export class UserService {
             .catch((error: any) => Observable.throw(error.json().error || 'Server error')); // ...errors if any
     }
 
+    // Update seed shop details
     updateShopDetails(shopId: any, body: any): Observable<any> {
         const headers = new Headers({ 'Content-Type': 'application/json' }); // ... Set content type to JSON
         const options = new RequestOptions({ headers: headers }); // Create a request option
@@ -64,9 +62,5 @@ export class UserService {
         return this.http.put(`${this._url}/${body}/${shopId}`, options) // ...using put request
             .map((res: Response) => res.json()) // ...and calling .json() on the response to return data
              // ...errors if any
-    }
-
-    delete(id: number) {
-        return this.http.delete(`${this.url}/${id}`);
     }
 }

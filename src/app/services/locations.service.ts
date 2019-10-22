@@ -15,7 +15,7 @@ export class LocationsService {
 
   constructor(private _http: Http) { }
 
-   // Get District
+   // Get Districts
    getDistrict(): Observable<any> {
       return this._http.get(this._url)
       .map((response: Response) => response.json())

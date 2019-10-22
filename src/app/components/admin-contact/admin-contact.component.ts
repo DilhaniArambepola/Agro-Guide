@@ -102,6 +102,7 @@ export class AdminContactComponent implements OnInit {
     this._success.next(`Responded to the inquiry`);
   }
 
+  // get all inquiries
   getInquiries() {
     this._generalService.getAllInquiry()
       .subscribe(resData => {
@@ -173,7 +174,7 @@ export class AdminContactComponent implements OnInit {
         resError => this.errorMsg = resError);
   }
 
-  // Delete crops
+  // Delete inquiry
   deleteInquiry(inquiryID: any) {
     this._generalService.deleteInquiry(inquiryID)
       .subscribe(resDeleteQuestion => {
@@ -188,12 +189,8 @@ export class AdminContactComponent implements OnInit {
       });
   }
 
-  getSelectedLabel(value: any) {
-    this.topicSelected = value;
-  }
-
+  // Get more details about selected inquiry
   more(id: number) {
-
     this.inquiry = [
       this.mapByID.get(id)
     ];
@@ -222,12 +219,8 @@ export class AdminContactComponent implements OnInit {
       });
   }
 
+  // Send email response for inquiry
   checkMail(response) {
-    // const user = {
-    //   name: 'Dilhani',
-    //   // email: 'nimashandk94@gmail.com'
-    //   email: emailAddresses
-    // };
     const user = {
       subject: 'Agro Guide - Response for the inquiry ' + this.inquiry[0].title,
       // tslint:disable-next-line:max-line-length
