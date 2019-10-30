@@ -18,13 +18,20 @@
     "importHelpers": true,
     "target": "es5",
     "typeRoots": [
-      "node_modules/@types"
+      "node_modules/@types",
     ],
     "allowSyntheticDefaultImports": true,
     "lib": [
       "es2018",
       "dom"
+    ],
+    "types": [
+      "jasmine"
     ]
     
-  }
+  },
+  "include": [
+    "src/**/*.ts",
+    "node_modules/@types"
+],
 }
