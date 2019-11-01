@@ -49,7 +49,9 @@ Password : admin123 <br />
 
 You can signup and login to other profiles (Farmer, Seller) <br />
 
-
+<kbd><img src="https://user-images.githubusercontent.com/37530901/67908847-10b43f80-fba3-11e9-980d-210fbd567544.JPG" width="400px;" height="250px;"/></kbd>&nbsp;&nbsp;&nbsp;&nbsp;<kbd><img src="https://user-images.githubusercontent.com/37530901/67909497-73a6d600-fba5-11e9-9ed4-77542b04f3d5.JPG" width="400px;" height="250px;"/></kbd><br/>
+   
+<kbd><img src="https://user-images.githubusercontent.com/37530901/67909816-9dacc800-fba6-11e9-81cf-c2d7c6fe6c85.JPG" width="400px;" height="250px;"/></kbd>&nbsp;&nbsp;&nbsp;&nbsp;<kbd><img src="https://user-images.githubusercontent.com/37530901/67909858-c7fe8580-fba6-11e9-8217-29079495ec4d.JPG" width="400px;" height="250px;"/></kbd><br/>
 
 ## Code scaffolding
 
